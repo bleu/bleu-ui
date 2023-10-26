@@ -1,4 +1,3 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 import { expect, it } from 'vitest';
 import { Example } from '../src';
