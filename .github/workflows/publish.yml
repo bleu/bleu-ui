@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: lts/*
           cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@bleu'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -30,11 +32,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Build and publish to npm
-      #   if: github.ref == 'refs/tags/v*' # Only run on version tags
-      #   run: |
-      #     yarn build
-      #     npm login --registry=https://registry.npmjs.org/ --scope=your-scope
-      #     npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.YOUR_NPM_AUTH_TOKEN }}
+      - name: Build and publish to npm
+        if: github.ref == 'refs/tags/v*'
+        run: |
+          yarn build
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

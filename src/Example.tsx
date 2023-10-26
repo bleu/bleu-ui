@@ -1,3 +1,5 @@
+import 'client-only';
+
 import './Example.css';
 
 import React from 'react';
@@ -13,6 +15,7 @@ export function Example(props: ExampleProps) {
       onClick={() => setCount(count + 1)}
       type="button"
       id="example-button"
+      className="ui-bg-blue-500 ui-font-bold"
     >
       {`${props.text} ${count}`}
     </button>
