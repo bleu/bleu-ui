@@ -10,6 +10,14 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     '@storybook/addon-styling-webpack',
     {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
+    {
       name: '@storybook/addon-styling-webpack',
 
       options: {

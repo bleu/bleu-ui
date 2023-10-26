@@ -1,4 +1,4 @@
-import '../dist/index.css';
+import '!style-loader!css-loader!postcss-loader!tailwindcss/tailwind.css';
 
 import type { Preview } from '@storybook/react';
 
