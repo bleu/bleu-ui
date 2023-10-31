@@ -25,7 +25,7 @@ jobs:
           node-version: lts/*
           cache: 'yarn'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@bleu'
+          scope: '@bleu-fi'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile

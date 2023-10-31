@@ -2938,9 +2938,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bleu/ui@workspace:.":
+"@bleu-fi/ui@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@bleu/ui@workspace:."
+  resolution: "@bleu-fi/ui@workspace:."
   dependencies:
     "@babel/core": "npm:7.23.2"
     "@babel/preset-env": "npm:7.23.2"
