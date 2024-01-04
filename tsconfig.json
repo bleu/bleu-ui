@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "outDir": "./dist",
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true
-  }
+    "strict": true
+  },
+  "exclude": ["tests", "stories", "dist", "node_modules"]
 }
