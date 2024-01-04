@@ -6,6 +6,9 @@ module.exports = {
   // prefix: CLASSES_PREFIX,
   important: '#bleu-ui',
   content: ['src/**/*.{ts,tsx}'],
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     container: {
       center: true,
