@@ -1,24 +1,24 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
+import type { StorybookConfig } from "@storybook/react-webpack5";
 
-import { withThemeByDataAttribute } from '@storybook/addon-themes';
+import { withThemeByDataAttribute } from "@storybook/addon-themes";
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-styling-webpack',
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/addon-styling-webpack",
     {
-      name: '@storybook/addon-postcss',
+      name: "@storybook/addon-postcss",
       options: {
         postcssLoaderOptions: {
-          implementation: require('postcss'),
+          implementation: require("postcss"),
         },
       },
     },
     {
-      name: '@storybook/addon-styling-webpack',
+      name: "@storybook/addon-styling-webpack",
 
       options: {
         rules: [
@@ -26,9 +26,9 @@ const config: StorybookConfig = {
             test: /\.css$/,
             sideEffects: true,
             use: [
-              require.resolve('style-loader'),
+              require.resolve("style-loader"),
               {
-                loader: require.resolve('css-loader'),
+                loader: require.resolve("css-loader"),
                 options: {},
               },
             ],
@@ -38,22 +38,22 @@ const config: StorybookConfig = {
     },
   ],
   framework: {
-    name: '@storybook/react-webpack5',
+    name: "@storybook/react-webpack5",
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: "tag",
   },
 };
 
 export const decorators = [
   withThemeByDataAttribute({
     themes: {
-      light: 'light',
-      dark: 'dark',
+      light: "light",
+      dark: "dark",
     },
-    defaultTheme: 'light',
-    attributeName: 'data-mode',
+    defaultTheme: "light",
+    attributeName: "data-mode",
   }),
 ];
 

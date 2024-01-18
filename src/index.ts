@@ -1,4 +1,4 @@
-import './tailwind.css';
+import "./tailwind.css";
 
-export * from './Button';
-export * from './Example';
+export * from "./components/Tooltip";
+export * from "./Example";

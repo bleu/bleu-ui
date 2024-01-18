@@ -1,13 +1,23 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "react": ["./node_modules/react"],
+      "react-dom": ["./node_modules/react-dom"],
+      "tslib": ["./node_modules/tslib/tslib.d.ts"],
+    },
+    "declarationMap": true,
     "outDir": "./dist",
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
   },
-  "exclude": ["tests", "stories", "dist", "node_modules"]
+  "exclude": ["./src/tests", "./src/stories", "dist", "node_modules"],
 }

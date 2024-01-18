@@ -1,8 +1,8 @@
-import renderer from 'react-test-renderer';
-import { expect, it } from 'vitest';
-import { Example } from '../src';
+import renderer from "react-test-renderer";
+import { expect, it } from "vitest";
+import { Example } from "../src/Example";
 
-it('renders correctly', () => {
+it("renders correctly", () => {
   const tree = renderer
     .create(<Example text="Clicked this many times" />)
     .toJSON();
