@@ -48,14 +48,6 @@ module.exports = {
     "typescript-sort-keys/interface": "error",
     "typescript-sort-keys/string-enum": "error",
     "unused-imports/no-unused-imports": "error",
-    "prefer-arrow/prefer-arrow-functions": [
-      "error",
-      {
-        disallowPrototype: true,
-        singleReturnOnly: true,
-        classPropertiesAllowed: false,
-      },
-    ],
     "sort-class-members/sort-class-members": [
       "error",
       {
