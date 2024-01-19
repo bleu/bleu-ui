@@ -26,7 +26,7 @@ export default [
         format: "esm",
       },
     ],
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "react-router-dom"],
     plugins: [
       peerDepsExternal(),
       resolve(),

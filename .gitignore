@@ -40,3 +40,6 @@ storybook-static
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.yalc/*
+yalc.lock

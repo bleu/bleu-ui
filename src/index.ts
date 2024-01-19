@@ -1,4 +1,4 @@
 import "./tailwind.css";
 
-export * from "./components/Tooltip";
 export * from "./Example";
+export * from "./components";
