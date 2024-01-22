@@ -58,6 +58,12 @@ const renderCell = ({ filters, column, row }) => {
   switch (column.columnDef.type) {
     case "text":
       return <div>{value}</div>;
+    case "boolean":
+      return (
+        <Badge variant={value ? "default" : "secondary"}>
+          {value ? "True" : "False"}
+        </Badge>
+      );
     case "badge":
       // TODO: needs to be refactored
       switch (value) {
