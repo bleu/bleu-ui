@@ -1,11 +1,9 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
-const CLASSES_PREFIX = "bleu-ui-";
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  prefix: CLASSES_PREFIX,
+  prefix: "",
   // important: "#bleu-ui",
   content: ["src/**/*.{ts,tsx}"],
   corePlugins: {

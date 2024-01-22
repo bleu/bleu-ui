@@ -72,10 +72,10 @@
 
 @layer base {
   * {
-    @apply bleu-ui-border-border;
+    @apply border-border;
   }
   body {
-    @apply bleu-ui-bg-background bleu-ui-text-foreground;
+    @apply bg-background text-foreground;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
