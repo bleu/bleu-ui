@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
+import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import {
   Badge,
   Table,
@@ -59,10 +60,10 @@ const renderCell = ({ filters, column, row }) => {
     case "text":
       return <div className="max-w-[400px] truncate">{value}</div>;
     case "boolean":
-      return (
-        <Badge variant={value ? "default" : "secondary"}>
-          {value ? "True" : "False"}
-        </Badge>
+      return value ? (
+        <CheckIcon className="size-4 bg-primary text-primary-foreground rounded-full" />
+      ) : (
+        <Cross2Icon className="size-4 text-muted-foreground" />
       );
     case "badge":
       // TODO: needs to be refactored
