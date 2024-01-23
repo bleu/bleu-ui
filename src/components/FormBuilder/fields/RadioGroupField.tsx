@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/Form";
 import { Label } from "@/components/ui/Label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/RadioGroup";
-import { Button } from "@/components/ui/Button";
 import { BaseField, withConditional } from "../fields";
 
 export interface RadioGroupFieldProps extends BaseField {
@@ -43,67 +42,44 @@ const radioGroupVariants = cva("w-full", {
   },
 });
 
-const RadioGroupWithoutSection = ({ form, field }) => {
-  const hasClearButton = field.show_clear_button;
-  const [selectedValue, setSelectedValue] = React.useState(
-    form.getValues(field.name)
-  );
-
-  React.useEffect(() => {
-    setSelectedValue(form.getValues(field.name));
-  }, [form, field.name]);
-
-  const handleChange = (value) => {
-    setSelectedValue(value);
-    form.setValue(field.name, value);
-  };
-
-  const clearSelection = () => {
-    setSelectedValue(null);
-    form.setValue(field.name, null);
-  };
-
-  return (
-    <FormField
-      control={form.control}
-      name={field.name}
-      rules={field.required ? { required: true } : {}}
-      render={() => (
-        <FormItem className="space-y-0 w-full">
-          <FormLabel>{field.label}</FormLabel>
-          <FormDescription>{field.description}</FormDescription>
-          <FormControl>
-            <RadioGroup
-              onValueChange={handleChange}
-              value={selectedValue}
-              className={cn(radioGroupVariants(field), "py-2")}
-            >
-              {field.options.map((option, optionIdx) => (
-                <FormItem
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={optionIdx}
-                  className="flex items-center space-x-1 space-y-0"
+const RadioGroupWithoutSection = ({ form, field }) => (
+  <FormField
+    control={form.control}
+    name={field.name}
+    rules={field.required ? { required: true } : {}}
+    render={({ field: rcfField }) => (
+      <FormItem className="space-y-0 w-full">
+        <FormLabel>{field.label}</FormLabel>
+        <FormDescription>{field.description}</FormDescription>
+        <FormControl>
+          <RadioGroup
+            value={rcfField.value}
+            className={cn(radioGroupVariants(field), "py-2")}
+          >
+            {field.options.map((option) => (
+              <FormItem
+                key={option.value}
+                className="flex items-center space-x-1 space-y-0"
+              >
+                <FormControl
+                  onClick={() => {
+                    rcfField.onChange(
+                      rcfField.value === option.value ? null : option.value
+                    );
+                  }}
                 >
-                  <FormControl>
-                    <RadioGroupItem value={option.value} />
-                  </FormControl>
-                  <FormLabel className="font-normal">{option.label}</FormLabel>
-                </FormItem>
-              ))}
-            </RadioGroup>
-          </FormControl>
-          <FormMessage />
-
-          {hasClearButton && (
-            <Button type="button" onClick={clearSelection}>
-              Clear
-            </Button>
-          )}
-        </FormItem>
-      )}
-    />
-  );
-};
+                  <RadioGroupItem value={option.value} />
+                </FormControl>
+                <FormLabel className="font-normal">{option.label}</FormLabel>
+              </FormItem>
+            ))}
+          </RadioGroup>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+);
 
 export const RadioGroupField = withConditional<RadioGroupFieldProps>(
   ({ form, field }) => {
