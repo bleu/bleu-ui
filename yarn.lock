@@ -3383,6 +3383,7 @@ __metadata:
     concurrently: "npm:8.2.2"
     copy-to-clipboard: "npm:^3.3.3"
     css-loader: "npm:^6.9.0"
+    date-fns: "npm:^3.3.1"
     esbuild: "npm:^0.19.11"
     eslint: "npm:8.56.0"
     eslint-config-airbnb: "npm:19.0.4"
@@ -11622,6 +11623,13 @@ __metadata:
   dependencies:
     "@babel/runtime": "npm:^7.21.0"
   checksum: e4b521fbf22bc8c3db332bbfb7b094fd3e7627de0259a9d17c7551e2d2702608a7307a449206065916538e384f37b181565447ce2637ae09828427aed9cb5581
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1"
+  checksum: e04ff79244010e03b912d791cd3250af5f18866ce868604958d76bd87e5fb0b79f0a810b8e7066248452b41779b288c4fd21de1cac2cd4b6d384e9dd931c9674
   languageName: node
   linkType: hard
 
