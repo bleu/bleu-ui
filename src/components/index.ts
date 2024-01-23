@@ -6,3 +6,4 @@ export * from "./DataTable";
 export * from "./FormBuilder";
 export * from "./ui";
 export * from "./RailsApp";
+export * from "./SectionTitle";
