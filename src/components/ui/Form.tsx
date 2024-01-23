@@ -11,6 +11,7 @@ import {
 } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/Label";
+import { useRailsApp } from "@/components/RailsApp/context";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -25,17 +26,15 @@ const Form = ({
   action,
   method,
   encType = "application/x-www-form-urlencoded",
-  csrfToken,
   ...props
 }: React.ComponentProps<typeof FormProvider> & {
   action: string;
   children: React.ReactNode;
   className?: string;
-  csrfToken?: string;
   encType?: string;
   method?: "post" | "get";
 }) => {
-  // const csrfToken = ReactOnRails.authenticityToken();
+  const csrfToken = useRailsApp();
 
   if (!csrfToken) {
     throw new Error("Missing authenticity_token");
@@ -55,7 +54,6 @@ const Form = ({
     </FormProvider>
   );
 };
-
 const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue
 );
@@ -112,15 +110,12 @@ const FormItemContext = React.createContext<FormItemContextValue>(
 const FormItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const id = React.useMemo(() => ({ id: React.useId() }), []);
-
-  return (
-    <FormItemContext.Provider value={id}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
-    </FormItemContext.Provider>
-  );
-});
+>(({ className, ...props }, ref) => (
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  <FormItemContext.Provider value={{ id: React.useId() }}>
+    <div ref={ref} className={cn("space-y-2", className)} {...props} />
+  </FormItemContext.Provider>
+));
 FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef<
