@@ -58,21 +58,3 @@ export function withConditional<T extends BaseField>(
     return <Component {...props} />;
   };
 }
-
-export const parseFields = (fields, index) => {
-  const updatedFields = fields.map((field) => {
-    if (field.type === "field_array") {
-      return {
-        ...field,
-        name: field.name.replace("RESOURCE_ID", index),
-        fields: field.fields.map((f) => ({
-          ...f,
-          name: f.name.replace("RESOURCE_ID", index),
-        })),
-      };
-    }
-    return { ...field, name: field.name.replace("RESOURCE_ID", index) };
-  });
-
-  return updatedFields;
-};

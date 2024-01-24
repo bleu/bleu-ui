@@ -17,6 +17,7 @@ import { SearchableSelectField } from "./fields/selects/SearchableSelectField";
 import { SelectField } from "./fields/selects/SelectField";
 import { SwitchField } from "./fields/SwitchField";
 import { TextAreaField } from "./fields/TextAreaField";
+import { BaseField, CommonFieldProps } from ".";
 
 export const fieldComponents = {
   input: InputField,
@@ -38,8 +39,11 @@ export const fieldComponents = {
   radius_select: RadiusSelect,
 } as const;
 
-// @ts-ignore
-export function buildForm(fields, form, index = 0) {
+export function buildForm(
+  fields: CommonFieldProps<BaseField>["field"][],
+  form: CommonFieldProps<BaseField>["form"],
+  index = 0
+) {
   // @ts-ignore
   const formElements = fields.map((field) => {
     // @ts-ignore
@@ -48,7 +52,7 @@ export function buildForm(fields, form, index = 0) {
       throw new Error(`Invalid field type: ${field.type}`);
     }
 
-    const name = field.name.replace("RESOURCE_ID", index);
+    const name = field.name.replace("RESOURCE_ID", String(index));
 
     return <FieldComponent field={{ ...field, name, index }} form={form} />;
   });
