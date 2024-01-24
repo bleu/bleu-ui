@@ -1,10 +1,10 @@
 import renderer from "react-test-renderer";
 import { expect, it } from "vitest";
-import { Example } from "../src/Example";
+import { SectionTitle } from "../src/components/SectionTitle";
 
 it("renders correctly", () => {
   const tree = renderer
-    .create(<Example text="Clicked this many times" />)
+    .create(<SectionTitle>Section Title Content</SectionTitle>)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

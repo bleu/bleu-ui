@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders correctly 1`] = `
+<h2
+  className="pt-8 text-2xl font-bold tracking-tigh text-foreground"
+>
+  Clicked this many times
+</h2>
+`;
+
+exports[`renders correctly w/o props 1`] = `
+<h2
+  className="pt-8 text-2xl font-bold tracking-tigh text-foreground"
+>
+  Clicked this many times
+</h2>
+`;
