@@ -22,10 +22,8 @@ const Root = React.forwardRef<HTMLDivElement, DivProps>(
 Root.displayName = "CardRoot";
 
 const Logo = React.forwardRef(
-  // @ts-expect-error TS(2339) FIXME: Property 'className' does not exist on type '{}'.
   ({ className = "", bgLogo = null, src, ...props }, ref) => (
     <div
-      // @ts-expect-error TS(2322) FIXME: Type 'ForwardedRef<unknown>' is not assignable to ... Remove this comment to see the full error message
       ref={ref}
       className={cn(
         "relative flex min-h-[10rem] items-center justify-center",
@@ -33,12 +31,9 @@ const Logo = React.forwardRef(
       )}
       {...props}
     >
-      {/* @ts-expect-error TS(2559) FIXME: Type '{ children: Element[]; }' has no properties ... Remove this comment to see the full error message */}
       <BlurredBackgroundLogo.Root>
-        {/* @ts-expect-error TS(2322) FIXME: Type '{ src: any; }' is not assignable to type 'In... Remove this comment to see the full error message */}
         <BlurredBackgroundLogo.Background src={bgLogo || src} />
         <BlurredBackgroundLogo.Logo
-          // @ts-expect-error TS(2322) FIXME: Type '{ src: any; className: string; }' is not ass... Remove this comment to see the full error message
           src={src}
           className="rounded-md bg-white p-1"
         />

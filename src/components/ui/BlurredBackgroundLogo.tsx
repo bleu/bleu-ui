@@ -1,10 +1,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-// @ts-expect-error TS(2339) FIXME: Property 'className' does not exist on type '{}'.
 const Root = React.forwardRef(({ className, children, ...props }, ref) => (
   <div
-    // @ts-expect-error TS(2322) FIXME: Type 'ForwardedRef<unknown>' is not assignable to ... Remove this comment to see the full error message
     ref={ref}
     className={cn(
       "relative flex h-full min-h-[10rem] w-full items-center justify-center overflow-hidden",
@@ -17,10 +15,8 @@ const Root = React.forwardRef(({ className, children, ...props }, ref) => (
 ));
 
 const Background = React.forwardRef(
-  // @ts-expect-error TS(2339) FIXME: Property 'className' does not exist on type '{}'.
   ({ className = "", src, ...props }, ref) => (
     <img
-      // @ts-expect-error TS(2322) FIXME: Type 'ForwardedRef<unknown>' is not assignable to ... Remove this comment to see the full error message
       ref={ref}
       src={src}
       alt="background"
@@ -34,10 +30,8 @@ const Background = React.forwardRef(
   )
 );
 
-// @ts-expect-error TS(2339) FIXME: Property 'className' does not exist on type '{}'.
 const Logo = React.forwardRef(({ className = "", src, ...props }, ref) => (
   <img
-    // @ts-expect-error TS(2322) FIXME: Type 'ForwardedRef<unknown>' is not assignable to ... Remove this comment to see the full error message
     ref={ref}
     src={src}
     alt="logo"
