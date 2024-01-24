@@ -63,18 +63,12 @@ const FormField = <
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
-}: ControllerProps<TFieldValues, TName>) => {
-  const name = React.useMemo(
-    () => ({ name: props.name as TName }),
-    [props.name]
-  );
-
-  return (
-    <FormFieldContext.Provider value={name}>
-      <Controller {...props} />
-    </FormFieldContext.Provider>
-  );
-};
+}: ControllerProps<TFieldValues, TName>) => (
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  <FormFieldContext.Provider value={{ name: props.name }}>
+    <Controller {...props} />
+  </FormFieldContext.Provider>
+);
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);

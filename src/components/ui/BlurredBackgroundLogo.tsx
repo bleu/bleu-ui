@@ -1,7 +1,10 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 
-const Root = React.forwardRef(({ className, children, ...props }, ref) => (
+const Root = React.forwardRef<
+  HTMLDivElement,
+  PropsWithChildren<{ className?: string }>
+>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
@@ -14,23 +17,30 @@ const Root = React.forwardRef(({ className, children, ...props }, ref) => (
   </div>
 ));
 
-const Background = React.forwardRef(
-  ({ className = "", src, ...props }, ref) => (
-    <img
-      ref={ref}
-      src={src}
-      alt="background"
-      style={{ filter: "blur(80px)", transform: "scale(2)" }}
-      className={cn(
-        "absolute h-[500%] w-[500%] max-w-[unset] object-cover opacity-100",
-        className
-      )}
-      {...props}
-    />
-  )
-);
+const Background = React.forwardRef<
+  HTMLImageElement,
+  { className?: string; src: string }
+>(({ className = "", src, ...props }, ref) => (
+  <img
+    ref={ref}
+    src={src}
+    alt="background"
+    style={{ filter: "blur(80px)", transform: "scale(2)" }}
+    className={cn(
+      "absolute h-[500%] w-[500%] max-w-[unset] object-cover opacity-100",
+      className
+    )}
+    {...props}
+  />
+));
 
-const Logo = React.forwardRef(({ className = "", src, ...props }, ref) => (
+const Logo = React.forwardRef<
+  HTMLImageElement,
+  {
+    className?: string;
+    src: string;
+  }
+>(({ className = "", src, ...props }, ref) => (
   <img
     ref={ref}
     src={src}

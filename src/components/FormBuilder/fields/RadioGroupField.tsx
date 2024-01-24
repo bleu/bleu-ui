@@ -55,6 +55,7 @@ const RadioGroupWithoutSection = ({ form, field }) => (
           // eslint-disable-next-line react/no-danger
           <div
             className="text-muted-foreground text-sm inner-html w-full"
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: field.tooltip }}
           />
         )}

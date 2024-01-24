@@ -7,14 +7,14 @@ export interface BaseField {
     value: string | Array<string>;
   }>;
   defaultValue?: string;
-  description: string;
+  description?: string;
   disabled?: boolean | ((data: FieldValues) => boolean);
   index?: number;
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
   required?: boolean;
-  type: string;
+  type?: string;
   value: string;
   // Other common properties...
 }

@@ -21,27 +21,28 @@ const Root = React.forwardRef<HTMLDivElement, DivProps>(
 );
 Root.displayName = "CardRoot";
 
-const Logo = React.forwardRef(
-  ({ className = "", bgLogo = null, src, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "relative flex min-h-[10rem] items-center justify-center",
-        className
-      )}
-      {...props}
-    >
-      <BlurredBackgroundLogo.Root>
-        <BlurredBackgroundLogo.Background src={bgLogo || src} />
-        <BlurredBackgroundLogo.Logo
-          src={src}
-          className="rounded-md bg-white p-1"
-        />
-      </BlurredBackgroundLogo.Root>
-      <div className="absolute left-[-10%] top-[-10%] h-[110%] w-[120%] max-w-[unset] border-2 border-dashed border-black/25" />
-    </div>
-  )
-);
+const Logo = React.forwardRef<
+  HTMLDivElement,
+  { bgLogo?: string; className?: string; src: string }
+>(({ className = "", bgLogo = null, src, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "relative flex min-h-[10rem] items-center justify-center",
+      className
+    )}
+    {...props}
+  >
+    <BlurredBackgroundLogo.Root>
+      <BlurredBackgroundLogo.Background src={bgLogo || src} />
+      <BlurredBackgroundLogo.Logo
+        src={src}
+        className="rounded-md bg-white p-1"
+      />
+    </BlurredBackgroundLogo.Root>
+    <div className="absolute left-[-10%] top-[-10%] h-[110%] w-[120%] max-w-[unset] border-2 border-dashed border-black/25" />
+  </div>
+));
 Logo.displayName = "CardLogo";
 
 const Header = React.forwardRef<HTMLDivElement, DivProps>(
