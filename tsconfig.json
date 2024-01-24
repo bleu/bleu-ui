@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["./src/components/*"],
@@ -11,11 +10,13 @@
       "tslib": ["./node_modules/tslib/tslib.d.ts"],
     },
     "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
     "outDir": "./dist",
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "noImplicitAny": false,
     "skipLibCheck": true,
     "strict": true,
