@@ -51,6 +51,13 @@ const RadioGroupWithoutSection = ({ form, field }) => (
       <FormItem className="space-y-0 w-full">
         <FormLabel>{field.label}</FormLabel>
         <FormDescription>{field.description}</FormDescription>
+        {field.tooltip && (
+          // eslint-disable-next-line react/no-danger
+          <div
+            className="text-muted-foreground text-sm inner-html w-full"
+            dangerouslySetInnerHTML={{ __html: field.tooltip }}
+          />
+        )}
         <FormControl>
           <RadioGroup
             value={rcfField.value}
