@@ -3398,6 +3398,7 @@ __metadata:
     quill-html-edit-button: "npm:^2.2.13"
     react-beautiful-dnd: "npm:^13.1.1"
     react-day-picker: "npm:^8.10.0"
+    react-dom: "npm:^18.2.0"
     react-hook-form: "npm:^7.49.3"
     react-quill: "npm:^2.0.0"
     react-router: "npm:^6.21.3"
@@ -19575,6 +19576,18 @@ __metadata:
     resolve: "npm:^1.22.1"
     strip-indent: "npm:^4.0.0"
   checksum: 870c1193211f14497bf7a96137f96840dc058842ca75ff7251d91e88c3c71d7a41d5f1a124cc1b53bfbf1f2b6b58bfccc4dd6e22592814a5155d3894953274be
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "react-dom@npm:18.2.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    scheduler: "npm:^0.23.0"
+  peerDependencies:
+    react: ^18.2.0
+  checksum: 66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
   languageName: node
   linkType: hard
 
