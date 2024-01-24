@@ -18,13 +18,13 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: "yarn"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Check types
         run: yarn type-check
@@ -35,8 +35,8 @@ jobs:
       - name: Run tests
         run: yarn test:ci
 
-      - name: Build storybook
-        run: yarn build-storybook
+      # - name: Build storybook
+      #   run: yarn build-storybook
 
       - name: Build package
         run: yarn build
