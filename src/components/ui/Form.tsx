@@ -36,10 +36,6 @@ const Form = ({
 }) => {
   const csrfToken = useRailsApp();
 
-  if (!csrfToken) {
-    throw new Error("Missing authenticity_token");
-  }
-
   return (
     <FormProvider {...props}>
       <form
@@ -49,7 +45,9 @@ const Form = ({
         encType={encType}
       >
         {children}
-        <input type="hidden" name="authenticity_token" value={csrfToken} />
+        {csrfToken && (
+          <input type="hidden" name="authenticity_token" value={csrfToken} />
+        )}
       </form>
     </FormProvider>
   );
