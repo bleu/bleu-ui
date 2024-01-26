@@ -11,7 +11,7 @@ import {
 } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/Label";
-import { useRailsApp } from "@/components/RailsApp/context";
+import { useRailsApp } from "../RailsApp/context";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -22,27 +22,31 @@ type FormFieldContextValue<
 
 const Form = ({
   children,
-  className,
-  action,
-  method,
+  className = "",
+  action = undefined,
+  method = undefined,
+  onSubmit = () => {},
   encType = "application/x-www-form-urlencoded",
   ...props
-}: React.ComponentProps<typeof FormProvider> & {
-  action: string;
+}: {
+  action?: string;
   children: React.ReactNode;
   className?: string;
-  encType?: string;
-  method?: "post" | "get";
+  encType?: "application/x-www-form-urlencoded" | "multipart/form-data";
+  method?: "get" | "post";
+  onSubmit?: React.FormEventHandler<HTMLFormElement> | (() => void);
 }) => {
   const csrfToken = useRailsApp();
 
   return (
+    // @ts-expect-error TS(2740) FIXME: Type '{ children: Element; }' is missing the follo... Remove this comment to see the full error message
     <FormProvider {...props}>
       <form
         action={action}
         method={method}
         className={className}
         encType={encType}
+        onSubmit={onSubmit}
       >
         {children}
         {csrfToken && (
