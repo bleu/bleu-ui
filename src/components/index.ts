@@ -7,3 +7,4 @@ export * from "./FormBuilder";
 export * from "./ui";
 export * from "./RailsApp";
 export * from "./SectionTitle";
+export * from "./OtpInput";
