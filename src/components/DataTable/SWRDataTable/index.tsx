@@ -141,6 +141,12 @@ export function SWRDataTable({
   defaultParams = {},
   hasDetails = false,
   action,
+}: {
+  action?: any;
+  defaultParams?: {} | undefined;
+  fetchPath: any;
+  hasDetails?: boolean | undefined;
+  searchKey?: string | undefined;
 }) {
   const navigate = useNavigate();
   const {
