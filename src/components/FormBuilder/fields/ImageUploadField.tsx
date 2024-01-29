@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import React, { useCallback, useEffect } from "react";
+import { Cross1Icon } from "@radix-ui/react-icons";
 import {
   FormControl,
   FormDescription,
@@ -56,6 +57,12 @@ export const ImageUploadField = withConditional<ImageUploadFieldProps>(
       if (hiddenFileInput.current) hiddenFileInput.current.click();
     };
 
+    const handleRemoveImage = (event) => {
+      event.stopPropagation();
+      setImagePreview("");
+      form.setValue(field.name, null);
+    };
+
     return (
       <FormField
         control={form.control}
@@ -65,12 +72,11 @@ export const ImageUploadField = withConditional<ImageUploadFieldProps>(
           <FormItem>
             <FormLabel>{field.label}</FormLabel>
             <FormDescription>{field.description}</FormDescription>
-
             <FormControl>
               <div
                 className={cn(
                   imagePreview
-                    ? "inline-block hover:cursor-pointer"
+                    ? "relative inline-block hover:cursor-pointer"
                     : "hover:border-primary focus:ring-primary relative flex w-full flex-col items-center rounded-lg border-2 border-dashed text-center focus:outline-none focus:ring-2 focus:ring-offset-2"
                 )}
               >
@@ -88,6 +94,14 @@ export const ImageUploadField = withConditional<ImageUploadFieldProps>(
                         alt="preview"
                         className="rounded-sm border size-full object-contain"
                       />
+                      <button
+                        type="button"
+                        className="absolute top-0 right-0 m-2 z-50"
+                        onClick={handleRemoveImage}
+                        aria-label="Remove Image"
+                      >
+                        <Cross1Icon className="text-2xl font-semibold size-4" />
+                      </button>
                       <div className="hover:ring-primary absolute inset-0 flex items-center justify-center rounded-sm bg-black/50 opacity-0 transition-opacity hover:opacity-100 hover:ring-2 hover:ring-offset-2">
                         <span className="text-lg font-semibold text-white">
                           Click to Upload
