@@ -1,6 +1,6 @@
 import React from "react";
 
-// import { FieldArray } from "./fields/ArrayField";
+import { FieldArray } from "./fields/FieldArray";
 import { CheckboxField } from "./fields/CheckboxField";
 import { DatePickerInput } from "./fields/DatePickerInput";
 import { HiddenField } from "./fields/HiddenField";
@@ -9,7 +9,7 @@ import { InputField } from "./fields/InputField";
 import { MultiSelectCheckboxes } from "./fields/MultiSelectCheckboxesField";
 
 import { RadioGroupField } from "./fields/RadioGroupField";
-// import { RichTextEditorField } from "./fields/RichTextEditorField";
+import { RichTextEditorField } from "./fields/RichTextEditorField";
 import { ColorPickerField } from "./fields/selects/ColorPickerField";
 import { MultiSelect } from "./fields/selects/MultiSelect";
 import { RadiusSelect } from "./fields/selects/RadiusSelect";
@@ -17,7 +17,9 @@ import { SearchableSelectField } from "./fields/selects/SearchableSelectField";
 import { SelectField } from "./fields/selects/SelectField";
 import { SwitchField } from "./fields/SwitchField";
 import { TextAreaField } from "./fields/TextAreaField";
+import { DelegateField } from "./fields/DelegateField";
 import { BaseField, CommonFieldProps } from ".";
+import { QuestionsField } from "./fields/QuestionsField";
 
 export const fieldComponents = {
   input: InputField,
@@ -30,13 +32,15 @@ export const fieldComponents = {
   switch: SwitchField,
   select: SelectField,
   multi_select: MultiSelect,
-  // field_array: FieldArray,
+  field_array: FieldArray,
   hidden: HiddenField,
-  // wysiwyg: RichTextEditorField,
+  questions: QuestionsField,
+  wysiwyg: RichTextEditorField,
   multi_select_checkbox: MultiSelectCheckboxes,
   color_picker: ColorPickerField,
   searchable_select: SearchableSelectField,
   radius_select: RadiusSelect,
+  delegate: DelegateField,
 } as const;
 
 export function buildForm(

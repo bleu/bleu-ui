@@ -1,0 +1,40 @@
+@import "react-quill/dist/quill.snow.css";
+
+.ql-container {
+  box-sizing: border-box;
+  font-family: inherit !important;
+  font-size: 13px;
+  height: 100%;
+  margin: 0px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+
+.ql-snow .ql-formats {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.ql-snow .ql-formats:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.ql-toolbar.ql-snow {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-top-right-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
+  font-family: inherit !important;
+  padding: 8px;
+}
+
+.ql-editor {
+  min-height: 20vh;
+  overflow: auto;
+  max-height: 24rem;
+}
