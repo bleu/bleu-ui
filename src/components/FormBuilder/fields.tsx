@@ -1,6 +1,17 @@
 import React from "react";
 import { FieldValues, UseFormReturn } from "react-hook-form";
 
+import { CheckboxFieldProps } from "./fields/CheckboxField";
+import { DatePickerInputProps } from "./fields/DatePickerInput";
+import { ImageUploadFieldProps } from "./fields/ImageUploadField";
+import { InputFieldProps } from "./fields/InputField";
+import { QuestionsFieldProps } from "./fields/QuestionsField";
+import { RadioGroupFieldProps } from "./fields/RadioGroupField";
+import { RichTextEditorFieldProps } from "./fields/RichTextEditorField";
+import { SelectFieldProps } from "./fields/selects/SelectField";
+import { TextAreaFieldProps } from "./fields/TextAreaField";
+import { FieldArrayFieldProps } from "./fields/FieldArray";
+
 export interface BaseField {
   conditions?: Array<{
     name: string;
@@ -58,3 +69,33 @@ export function withConditional<T extends BaseField>(
     return <Component {...props} />;
   };
 }
+
+export const parseFields = (fields, index) => {
+  const updatedFields = fields.map((field) => {
+    if (field.type === "field_array") {
+      return {
+        ...field,
+        name: field.name.replace("RESOURCE_ID", index),
+        fields: field.fields.map((f) => ({
+          ...f,
+          name: f.name.replace("RESOURCE_ID", index),
+        })),
+      };
+    }
+    return { ...field, name: field.name.replace("RESOURCE_ID", index) };
+  });
+
+  return updatedFields;
+};
+
+export type FormFieldProps =
+  | InputFieldProps
+  | TextAreaFieldProps
+  | CheckboxFieldProps
+  | DatePickerInputProps
+  | ImageUploadFieldProps
+  | SelectFieldProps
+  | RadioGroupFieldProps
+  | QuestionsFieldProps
+  | RichTextEditorFieldProps
+  | FieldArrayFieldProps;
