@@ -3,7 +3,7 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 
 import { CheckboxFieldProps } from "./fields/CheckboxField";
 import { DatePickerInputProps } from "./fields/DatePickerInput";
-import { ImageUploadFieldProps } from "./fields/ImageUploadField";
+import { FileUploadFieldProps } from "./fields/FileUploadField";
 import { InputFieldProps } from "./fields/InputField";
 import { QuestionsFieldProps } from "./fields/QuestionsField";
 import { RadioGroupFieldProps } from "./fields/RadioGroupField";
@@ -93,7 +93,7 @@ export type FormFieldProps =
   | TextAreaFieldProps
   | CheckboxFieldProps
   | DatePickerInputProps
-  | ImageUploadFieldProps
+  | FileUploadFieldProps
   | SelectFieldProps
   | RadioGroupFieldProps
   | QuestionsFieldProps

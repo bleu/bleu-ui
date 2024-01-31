@@ -8,7 +8,7 @@ export * from "./FieldArray";
 export * from "./CheckboxField";
 export * from "./DatePickerInput";
 export * from "./HiddenField";
-export * from "./ImageUploadField";
+export * from "./FileUploadField";
 export * from "./InputField";
 export * from "./MultiSelectCheckboxesField";
 export * from "./QuestionsField";
