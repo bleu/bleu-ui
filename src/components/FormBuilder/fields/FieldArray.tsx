@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { cva } from "class-variance-authority";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useFieldArray } from "react-hook-form";
@@ -37,6 +37,10 @@ export interface FieldArrayFieldProps extends BaseField {
   defaultValues: Record<string, unknown>;
   fields: Array<FormFieldProps>;
   hasSequence: boolean;
+  length?: {
+    maximum?: number;
+    minimum?: number;
+  };
   remove?: boolean;
   sequence_field?: string;
   style?: {
@@ -74,7 +78,7 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
     };
 
     const handleAppend = () => {
-      append({ ...field.defaultValues });
+      append({ ...field.defaultValues }, { shouldFocus: false });
       updateFieldSequences();
     };
 
@@ -93,6 +97,27 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
       }
     };
 
+    useEffect(() => {
+      adjustFieldsLenghtToMaximum();
+      adjustFieldsLenghtToMinimum();
+    }, [field?.length]);
+
+    function adjustFieldsLenghtToMaximum() {
+      if (field?.length?.maximum && fields.length > field?.length.maximum) {
+        const newFields = fields.slice(0, field?.length.maximum);
+        form.setValue(field.name, newFields);
+      }
+    }
+
+    function adjustFieldsLenghtToMinimum() {
+      if (field?.length?.minimum && fields.length < field?.length?.minimum) {
+        const emptyFields = new Array(
+          field.length.minimum - fields.length
+        ).fill(field.defaultValues);
+        append(emptyFields, { shouldFocus: false });
+      }
+    }
+
     return (
       <div className="w-full">
         <div className="mr-10">
@@ -104,7 +129,6 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {fields.map((rhfField, index) => {
-                      // @ts-expect-error
                       // eslint-disable-next-line no-underscore-dangle
                       if (rhfField._destroy) return null;
                       return (
