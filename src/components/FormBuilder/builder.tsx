@@ -4,7 +4,7 @@ import { FieldArray } from "./fields/FieldArray";
 import { CheckboxField } from "./fields/CheckboxField";
 import { DatePickerInput } from "./fields/DatePickerInput";
 import { HiddenField } from "./fields/HiddenField";
-import { ImageUploadField } from "./fields/ImageUploadField";
+import { FileUploadField } from "./fields/FileUploadField";
 import { InputField } from "./fields/InputField";
 import { MultiSelectCheckboxes } from "./fields/MultiSelectCheckboxesField";
 
@@ -28,7 +28,7 @@ export const fieldComponents = {
   textarea: TextAreaField,
   date: DatePickerInput,
   datetime: DatePickerInput,
-  image: ImageUploadField,
+  file: FileUploadField,
   switch: SwitchField,
   select: SelectField,
   multi_select: MultiSelect,
