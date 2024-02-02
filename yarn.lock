@@ -3524,6 +3524,7 @@ __metadata:
     quill-html-edit-button: "npm:^2.2.13"
     react-beautiful-dnd: "npm:^13.1.1"
     react-day-picker: "npm:^8.10.0"
+    react-hook-form: "npm:^7.50.0"
     react-quill: "npm:^2.0.0"
     react-router: "npm:^6.21.3"
     react-router-dom: "npm:^6.21.3"
@@ -19764,6 +19765,15 @@ __metadata:
     react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
     react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
   checksum: 0d60a0ea758529c32a706d0c69d70b69fb94de3c46442fffdee34f08f51ffceddbb5395b41dfd1565895653e9f60f98ca525835be9d5db1f16d6b22be12f4cd4
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.50.0":
+  version: 7.50.0
+  resolution: "react-hook-form@npm:7.50.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 632d02590bb912d5b1bb3102263be06cfef1918146a79925284c0874da48c5080132a819f4083682e8156956f88329ddc266eb4e5c75b6fcf3fe642dbd4db499
   languageName: node
   linkType: hard
 
