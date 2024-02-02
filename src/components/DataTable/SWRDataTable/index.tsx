@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
+
 import {
   Badge,
   Table,
@@ -20,9 +21,10 @@ import {
   TableRow,
 } from "@/components/ui";
 import { SectionTitle } from "@/components/SectionTitle";
-import { formatDate } from "@/lib/formatDate";
+import { formatDate, formatDateTime } from "@/lib/formatDate";
 import { serializeQuery } from "@/lib/serializeQuery";
 import { useTableState } from "./useTableState";
+import { Link } from "@/components/Link";
 
 import { DataTableColumnHeader } from "@/components/DataTable/DataTableColumnHeader";
 import { DataTablePagination } from "@/components/DataTable/DataTablePagination";
@@ -100,6 +102,8 @@ const renderCell = ({ filters, column, row }) => {
       }
     case "date":
       return <div>{formatDate(value)}</div>;
+    case "datetime":
+      return <div>{formatDateTime(value)}</div>;
     case "number":
       return <div>{value}</div>;
     case "actions":
@@ -107,10 +111,19 @@ const renderCell = ({ filters, column, row }) => {
     case "image":
       return (
         <img
-          className="aspect-ratio-1 h-16 w-16 rounded-sm"
+          className="aspect-ratio-1 size-16 rounded-sm object-contain"
           src={row.getValue("image").url}
           alt={row.getValue("name")}
         />
+      );
+    case "link":
+      // eslint-disable-next-line no-case-declarations
+      const url = row.getValue("details_url");
+      if (!url) return <div>{value}</div>;
+      return (
+        <Link to={url}>
+          <span className="underline">{value}</span>
+        </Link>
       );
 
     default:
@@ -142,11 +155,11 @@ export function SWRDataTable({
   hasDetails = false,
   action,
 }: {
-  action?: any;
-  defaultParams?: {} | undefined;
-  fetchPath: any;
-  hasDetails?: boolean | undefined;
-  searchKey?: string | undefined;
+  action?: React.ReactNode;
+  defaultParams?: Record<string, unknown>;
+  fetchPath: string;
+  hasDetails?: boolean;
+  searchKey?: string;
 }) {
   const navigate = useNavigate();
   const {

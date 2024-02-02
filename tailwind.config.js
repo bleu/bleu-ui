@@ -44,6 +44,12 @@ module.exports = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        orange: {
+          DEFAULT: "hsl(var(--orange))",
+        },
+        green: {
+          DEFAULT: "hsl(var(--green))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -70,10 +76,48 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        overlayShow: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        contentShow: {
+          from: { opacity: 0, transform: "translate(-50%, -48%) scale(0.96)" },
+          to: { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+        },
+        hide: {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
+        },
+        slideIn: {
+          from: {
+            transform: "translateX(calc(100% + var(--viewport-padding)))",
+          },
+          to: { transform: "translateX(0)" },
+        },
+        swipeOut: {
+          from: { transform: "translateX(var(--radix-toast-swipe-end-x))" },
+          to: { transform: "translateX(calc(100% + var(--viewport-padding)))" },
+        },
+        "fade-in-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in-up": "fade-in-up 0.5s ease-out",
+        overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        hide: "hide 100ms ease-in",
+        slideIn: "slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        swipeOut: "swipeOut 100ms ease-out",
       },
     },
   },

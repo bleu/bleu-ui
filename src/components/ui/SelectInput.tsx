@@ -29,4 +29,4 @@ const SelectInput = ({ label, name, options, onValueChange }) => (
   </div>
 );
 
-export default SelectInput;
+export { SelectInput };

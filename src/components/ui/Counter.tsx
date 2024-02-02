@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function CounterComponent({
-  duration,
-  toValue,
-  fromValue,
-  delimiter = ",",
-  ...props
-}) {
+function Counter({ duration, toValue, fromValue, delimiter = ",", ...props }) {
   const [currentValue, setCurrentValue] = useState(fromValue);
 
   useEffect(() => {
@@ -33,3 +27,5 @@ export default function CounterComponent({
     </span>
   );
 }
+
+export { Counter };

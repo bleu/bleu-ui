@@ -2,9 +2,9 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-const { Root } = TabsPrimitive;
+const { Root: TabsRoot } = TabsPrimitive;
 
-const List = React.forwardRef<
+const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => (
@@ -17,9 +17,9 @@ const List = React.forwardRef<
     {...props}
   />
 ));
-List.displayName = TabsPrimitive.List.displayName;
+TabsList.displayName = TabsPrimitive.List.displayName;
 
-const Trigger = React.forwardRef<
+const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, ...props }, ref) => (
@@ -32,9 +32,9 @@ const Trigger = React.forwardRef<
     {...props}
   />
 ));
-Trigger.displayName = TabsPrimitive.Trigger.displayName;
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
-const Content = React.forwardRef<
+const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
@@ -47,6 +47,6 @@ const Content = React.forwardRef<
     {...props}
   />
 ));
-Content.displayName = TabsPrimitive.Content.displayName;
+TabsContent.displayName = TabsPrimitive.Content.displayName;
 
-export default { Root, List, Trigger, Content };
+export { TabsRoot, TabsList, TabsTrigger, TabsContent };
