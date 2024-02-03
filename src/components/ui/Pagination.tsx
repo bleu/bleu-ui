@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "./Button";
 
-export default function Pagination({
+export function Pagination({
   page,
   pageSize,
   totalItems,

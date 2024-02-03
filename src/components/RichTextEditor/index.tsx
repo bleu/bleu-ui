@@ -1,41 +1,68 @@
-import "./quillOverride.css";
+import "./styles.css";
 
-import htmlEditButton from "quill-html-edit-button";
+import JoditEditor from "jodit-react";
 import React from "react";
-import ReactQuill, { Quill } from "react-quill";
+import { useTheme } from "@/components/ThemeToggle/context";
+
+const EDITOR_BUTTONS = [
+  "undo",
+  "redo",
+  "|",
+  "bold",
+  "strikethrough",
+  "underline",
+  "italic",
+  "|",
+  "superscript",
+  "subscript",
+  "|",
+  "align",
+  "|",
+  "ul",
+  "ol",
+  "outdent",
+  "indent",
+  "|",
+  "font",
+  "fontsize",
+  "brush",
+  "paragraph",
+  "|",
+  "image",
+  "link",
+  "table",
+  "|",
+  "hr",
+  "eraser",
+  "copyformat",
+  "|",
+  "fullsize",
+  "selectall",
+  "print",
+  "|",
+  "source",
+];
 
 export function RichTextEditor({ initialValue, onChange }) {
-  Quill.register({
-    "modules/htmlEditButton": htmlEditButton,
-  });
-
-  const toolbar = [
-    [{ font: [] }, { size: [] }],
-    [{ header: [] }, "blockquote", "code-block"],
-    ["bold", "italic", "underline", "strike"],
-    [{ color: [] }, { background: [] }],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["direction", { align: [] }],
-    [{ script: "super" }, { script: "sub" }],
-    ["link", "image", "video"],
-    ["clean"],
-  ];
+  const { theme } = useTheme();
 
   return (
-    <div className="bg-background max-w-[1336px] rounded-lg border shadow-sm">
-      <ReactQuill
-        theme="snow"
+    <div>
+      <JoditEditor
         value={initialValue}
-        onChange={onChange}
-        modules={{
-          htmlEditButton: {},
-          toolbar,
+        config={{
+          readonly: false,
+          height: 300,
+          theme,
+          toolbar: true,
+          buttons: EDITOR_BUTTONS,
+          // @ts-ignore
+          uploader: {
+            insertImageAsBase64URI: true,
+          },
         }}
+        onBlur={(content) => onChange(content)}
+        onChange={() => {}}
       />
     </div>
   );
