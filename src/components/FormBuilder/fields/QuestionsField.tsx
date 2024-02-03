@@ -54,7 +54,7 @@ export const QuestionsField = withConditional<QuestionsFieldProps>(
     };
 
     const handleAppend = () => {
-      append({ ...field.defaultValues });
+      append({ ...field.defaultValues }, { shouldFocus: false });
       updateFieldSequences();
     };
 
@@ -83,7 +83,6 @@ export const QuestionsField = withConditional<QuestionsFieldProps>(
                 {(provided) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {fieldsArray.map((rhfField, index) => {
-                      // @ts-expect-error
                       // eslint-disable-next-line no-underscore-dangle
                       if (rhfField._destroy) return null;
 
