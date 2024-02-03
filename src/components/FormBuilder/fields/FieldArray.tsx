@@ -129,6 +129,7 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {fields.map((rhfField, index) => {
+                      // @ts-expect-error
                       // eslint-disable-next-line no-underscore-dangle
                       if (rhfField._destroy) return null;
                       return (
