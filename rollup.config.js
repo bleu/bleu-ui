@@ -1,5 +1,4 @@
-import { DEFAULT_EXTENSIONS } from "@babel/core";
-import { babel } from "@rollup/plugin-babel";
+import { defineRollupSwcOption, swc } from "rollup-plugin-swc3";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
@@ -7,7 +6,6 @@ import svgr from "@svgr/rollup";
 import autoprefixer from "autoprefixer";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
-import typescript from "rollup-plugin-typescript2";
 import tailwind from "tailwindcss";
 
 const packageJson = require("./package.json");
@@ -32,12 +30,7 @@ export default [
       resolve(),
       commonjs(),
       svgr(),
-      typescript({ tsconfig: "./tsconfig.json" }),
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-        extensions: [...DEFAULT_EXTENSIONS, ".ts", "tsx"],
-      }),
+      swc(defineRollupSwcOption({})),
       postcss({
         extract: true,
         config: {
