@@ -181,7 +181,15 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
             </ul>
           </DragDropContext>
         </div>
-        <Button type="button" onClick={handleAppend} className="mt-3">
+        <Button
+          type="button"
+          onClick={handleAppend}
+          className="mt-3"
+          disabled={
+            field?.length?.maximum !== undefined &&
+            fields.length >= field?.length?.maximum
+          }
+        >
           Add {field.label}
         </Button>
       </div>
