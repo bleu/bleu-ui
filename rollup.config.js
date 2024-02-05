@@ -39,6 +39,7 @@ export default [
         extensions: [...DEFAULT_EXTENSIONS, ".ts", "tsx"],
       }),
       postcss({
+        extract: true,
         config: {
           path: "./postcss.config.js",
         },
