@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -13,6 +13,7 @@ import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
 import {
   Badge,
+  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -56,7 +57,7 @@ const fetcher = async ([url, paramsObject]) => {
   return response.json();
 };
 
-const renderCell = ({ filters, column, row }) => {
+const renderCell = ({ filters, column, row, selectedRows }) => {
   const value = row.getValue(column.columnDef.accessorKey);
 
   switch (column.columnDef.type) {
@@ -126,6 +127,15 @@ const renderCell = ({ filters, column, row }) => {
         </Link>
       );
 
+    case "selection":
+      return (
+        <Checkbox
+          checked={selectedRows.some((r) => r.id === row.original.id)}
+          onCheckedChange={(checkValue) => row.toggleSelected(!!checkValue)}
+          aria-label="Select row"
+        />
+      );
+
     default:
       return null;
   }
@@ -134,7 +144,7 @@ const renderCell = ({ filters, column, row }) => {
 const defaultFilterFn = (row, id, filterValue) =>
   row.getValue(id).includes(filterValue);
 
-const buildColumns = (columnsConfig, filters) => {
+const buildColumns = (columnsConfig, filters, selectedRows) => {
   if (!columnsConfig) return [];
 
   return columnsConfig.map((columnConfig) => ({
@@ -143,7 +153,7 @@ const buildColumns = (columnsConfig, filters) => {
       // @ts-expect-error TS(2741) FIXME: Property 'className' is missing in type '{ column:... Remove this comment to see the full error message
       <DataTableColumnHeader column={column} title={columnConfig.title} />
     ),
-    cell: (rest) => renderCell({ filters, ...rest }),
+    cell: (rest) => renderCell({ filters, ...rest, selectedRows }),
     filterFn: columnConfig.filterable ? defaultFilterFn : null,
   }));
 };
@@ -154,12 +164,16 @@ export function SWRDataTable({
   defaultParams = {},
   hasDetails = false,
   action,
+  setSelectedData,
+  selectedRows,
 }: {
   action?: React.ReactNode;
   defaultParams?: Record<string, unknown>;
   fetchPath: string;
   hasDetails?: boolean;
   searchKey?: string;
+  selectedRows?: any[];
+  setSelectedData?: (data: any[]) => void;
 }) {
   const navigate = useNavigate();
   const {
@@ -185,7 +199,7 @@ export function SWRDataTable({
     }
   );
 
-  const columns = buildColumns(data?.columns, data?.filters);
+  const columns = buildColumns(data?.columns, data?.filters, selectedRows);
   const filters = data?.filters;
 
   const table = useReactTable({
@@ -211,6 +225,15 @@ export function SWRDataTable({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
+  // TODO save selected rows independently of the table page
+
+  useEffect(() => {
+    if (setSelectedData)
+      setSelectedData(
+        table.getSelectedRowModel().flatRows.map((row) => row.original)
+      );
+  }, [rowSelection, table, setSelectedData]);
 
   if (error) {
     return (
