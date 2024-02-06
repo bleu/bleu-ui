@@ -61,7 +61,7 @@
       "release": true
     },
     "npm": {
-      "publish": false,
+      "publish": true,
       "publishArgs": "--registry=https://npm.pkg.github.com"
     }
   },
