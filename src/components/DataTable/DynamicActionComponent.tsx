@@ -1,7 +1,6 @@
 /* eslint-disable no-case-declarations */
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -15,21 +14,18 @@ import {
   Form,
 } from "@/components/ui";
 import { ClickToCopy } from "@/components/CopyClipboard";
+import { Link } from "../Link";
 
 export const DynamicActionComponent = ({ action, row }) => {
-  const navigate = useNavigate();
-
-  const handleLinkAction = () => {
-    navigate(action.url_path.replace("RESOURCE_ID", row.original.id));
-  };
-
   const renderActionButton = () => {
     switch (action.type) {
       case "link":
         return (
-          <Button variant="ghost" className="w-full" onClick={handleLinkAction}>
-            {action.name}
-          </Button>
+          <Link to={action.url_path.replace("RESOURCE_ID", row.original.id)}>
+            <Button variant="ghost" className="w-full text-sm">
+              {action.name}
+            </Button>
+          </Link>
         );
       case "copy":
         const key = action.content?.key;
