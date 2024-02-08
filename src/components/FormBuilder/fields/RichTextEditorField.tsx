@@ -40,7 +40,9 @@ export const RichTextEditorField = withConditional<RichTextEditorFieldProps>(
             <FormDescription>{field.description}</FormDescription>
             <input hidden {...formField} value={formField.value} />
             <RichTextEditor
-              initialValue={formField.value}
+              initialValue={
+                typeof formField.value === "string" ? formField.value : ""
+              }
               onChange={handleRichTextChange}
             />
             <FormMessage />
