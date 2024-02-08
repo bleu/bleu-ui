@@ -13,7 +13,11 @@ import {
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
-export function CommandMenu({ commands, ...props }) {
+export function CommandMenu({
+  commands,
+  placeholder = "Busca global",
+  ...props
+}) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
@@ -45,7 +49,7 @@ export function CommandMenu({ commands, ...props }) {
         onClick={() => setOpen(true)}
         {...props}
       >
-        <span className="inline-flex">Busca global</span>
+        <span className="inline-flex">{placeholder}</span>
         <kbd className="bg-muted top- pointer-events-none absolute right-1.5 hidden h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
