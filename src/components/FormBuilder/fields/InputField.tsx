@@ -29,6 +29,11 @@ export const InputField = withConditional<InputFieldProps>(
       .min(field.length?.minimum || 0)
       .max(field.length?.maximum || Infinity);
 
+    const numberInputOnWheelPreventChange = (e) => {
+      e.target.blur();
+      e.stopPropagation();
+    };
+
     return (
       <FormField
         control={form.control}
@@ -52,6 +57,10 @@ export const InputField = withConditional<InputFieldProps>(
                 placeholder={field.placeholder}
                 {...formField}
                 type={field.mode}
+                onWheel={(event) =>
+                  field.mode === "number" &&
+                  numberInputOnWheelPreventChange(event)
+                }
               />
             </FormControl>
             <FormMessage />
