@@ -23,6 +23,7 @@ export const CheckboxField = withConditional<CheckboxFieldProps>(
         <FormItem className="flex min-w-fit flex-row items-start space-x-3 space-y-0">
           <input
             type="hidden"
+            hidden
             name={field.name}
             value={String(formField.value)}
           />
