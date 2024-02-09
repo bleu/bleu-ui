@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useEffect } from "react";
 import {
   flexRender,
@@ -7,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useSWR from "swr";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
@@ -23,7 +24,11 @@ import {
 } from "@/components/ui";
 import { SectionTitle } from "@/components/SectionTitle";
 import { formatDate, formatDateTime } from "@/lib/formatDate";
-import { serializeQuery } from "@/lib/serializeQuery";
+import {
+  serializeQuery,
+  serializeQueryObject,
+  deserializeQuery,
+} from "@/lib/serializeQuery";
 import { useTableState } from "./useTableState";
 import { Link } from "@/components/Link";
 
@@ -41,6 +46,36 @@ function formatRequestParams(originalObj) {
     }, {}),
   };
 }
+
+const formatParamsToDataTable = (params, searchKey) => {
+  const { columnFilters = {}, pageIndex, pageSize, sorting } = params;
+
+  const sortingObj = sorting ? { sorting: [sorting] } : {};
+  const columnFiltersObj =
+    Object.keys(columnFilters).length > 0
+      ? {
+          columnFilters: Object.entries(columnFilters).map(([id, value]) => ({
+            id,
+            value: Array.isArray(value)
+              ? value
+              : id === searchKey
+                ? value
+                : [value],
+          })),
+        }
+      : {};
+
+  const to = {
+    ...sortingObj,
+    pagination: {
+      pageIndex: pageIndex || 0,
+      pageSize: !pageSize ? 10 : pageSize > 50 ? 50 : pageSize,
+    },
+    ...columnFiltersObj,
+  };
+
+  return to;
+};
 
 const fetcher = async ([url, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
@@ -176,6 +211,15 @@ export function SWRDataTable({
   setSelectedData?: (data: any[]) => void;
 }) {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialSearch = {
+    ...formatParamsToDataTable(
+      deserializeQuery(searchParams.toString()),
+      searchKey
+    ),
+    ...defaultParams,
+  };
+
   const {
     pagination,
     rowSelection,
@@ -187,9 +231,21 @@ export function SWRDataTable({
     setColumnVisibility,
     setColumnFilters,
     setSorting,
-  } = useTableState(defaultParams);
+  } = useTableState({ ...initialSearch });
 
   const { pageIndex, pageSize } = pagination;
+
+  useEffect(() => {
+    const formattedParams = formatRequestParams({
+      columnFilters,
+      sorting,
+      pageIndex,
+      pageSize,
+    });
+
+    const params = serializeQueryObject(formattedParams);
+    setSearchParams(params);
+  }, [pageIndex, pageSize, sorting, columnFilters]);
 
   const { data, error } = useSWR(
     [fetchPath, { pageIndex, pageSize, sorting, columnFilters }],
