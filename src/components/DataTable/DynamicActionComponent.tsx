@@ -88,7 +88,11 @@ const ActionForm = ({ action, row }) => {
         </AlertDialog>
       )}
       {!action?.trigger_confirmation && (
-        <Form action={action.url_path} method="post" {...form}>
+        <Form
+          action={action.url_path.replace("RESOURCE_ID", row.original.id)}
+          method="post"
+          {...form}
+        >
           {action.method === "delete" && (
             <input type="hidden" name="_method" value="delete" />
           )}
