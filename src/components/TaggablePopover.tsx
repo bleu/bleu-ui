@@ -78,27 +78,34 @@ export const TaggablePopover = ({ tags, selectedTags, onSelect }) => (
       <Command>
         <CommandInput placeholder="tags" />
         <CommandList>
-          {tags.map((option) => {
-            const isSelected = selectedTags.includes(option.value);
-            return (
-              <CommandItem
-                key={option.value}
-                onSelect={(tag) => onSelect({ tag })}
-              >
-                <div
-                  className={cn(
-                    "border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
-                    isSelected
-                      ? "bg-primary text-primary-foreground"
-                      : "opacity-50 [&_svg]:invisible"
-                  )}
+          {tags
+            .sort(
+              (a, b) =>
+                selectedTags.includes(b.value) -
+                  selectedTags.includes(a.value) ||
+                a.label.localeCompare(b.label)
+            )
+            .map((option) => {
+              const isSelected = selectedTags.includes(option.value);
+              return (
+                <CommandItem
+                  key={option.value}
+                  onSelect={(tag) => onSelect({ tag })}
                 >
-                  <CheckIcon className={cn("h-4 w-4")} />
-                </div>
-                <span>{option.label}</span>
-              </CommandItem>
-            );
-          })}
+                  <div
+                    className={cn(
+                      "border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
+                      isSelected
+                        ? "bg-primary text-primary-foreground"
+                        : "opacity-50 [&_svg]:invisible"
+                    )}
+                  >
+                    <CheckIcon className={cn("h-4 w-4")} />
+                  </div>
+                  <span>{option.label}</span>
+                </CommandItem>
+              );
+            })}
           <SubItem tags={tags} onSelect={onSelect} />
         </CommandList>
       </Command>
