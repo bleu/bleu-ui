@@ -1,5 +1,5 @@
 import { Cross2Icon } from "@radix-ui/react-icons";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Input } from "@/components/ui";
 
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
@@ -16,6 +16,25 @@ export function DataTableToolbar({
   }
 
   const isFiltered = table.getState().columnFilters.length > 0;
+
+  const initialFilterSet = useRef(false);
+
+  useEffect(() => {
+    if (filters && !initialFilterSet.current) {
+      filters.map((filter) => {
+        const column = table.getColumn(filter.value);
+        if (column) {
+          column.setFilterValue(
+            filter.options
+              .filter((option) => option.defaultSelected)
+              .map((option) => option.value)
+          );
+        }
+        return null;
+      });
+      initialFilterSet.current = true;
+    }
+  }, [filters, table]);
 
   return (
     <div className="flex items-center justify-between">
