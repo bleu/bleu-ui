@@ -54,11 +54,19 @@ function Calendar({
 
   const handleTimeChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const time = e.target.value;
+    let [hours, minutes] = time.split(":").map((str) => parseInt(str, 10));
+
+    hours = !Number.isFinite(hours) || hours < 0 || hours > 23 ? 0 : hours;
+    minutes =
+      !Number.isFinite(minutes) || minutes < 0 || minutes > 59 ? 0 : minutes;
+
+    const validatedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+
     if (!selected) {
-      setTimeValue(time);
+      setTimeValue(validatedTime);
       return;
     }
-    const [hours, minutes] = time.split(":").map((str) => parseInt(str, 10));
+
     const selectedDate = new Date(selected);
     const newSelectedDate = new Date(
       selectedDate.getFullYear(),
@@ -68,7 +76,7 @@ function Calendar({
       minutes
     );
     setSelected(newSelectedDate);
-    setTimeValue(time);
+    setTimeValue(validatedTime);
   };
 
   const handleDaySelect = (date: Date | undefined) => {
