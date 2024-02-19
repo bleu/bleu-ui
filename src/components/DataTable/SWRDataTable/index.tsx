@@ -256,6 +256,11 @@ export function SWRDataTable({
   );
 
   const columns = buildColumns(data?.columns, data?.filters, selectedRows);
+  const hiddenColumns = columns
+    .filter((c) => c.hide)
+    .map((c) => ({ [c.accessorKey]: false }))
+    .reduce((acc, obj) => Object.assign(acc, obj), {});
+
   const filters = data?.filters;
 
   const table = useReactTable({
@@ -264,7 +269,10 @@ export function SWRDataTable({
     columns,
     state: {
       sorting,
-      columnVisibility,
+      columnVisibility: {
+        ...columnVisibility,
+        ...hiddenColumns,
+      },
       rowSelection,
       columnFilters,
       pagination,
