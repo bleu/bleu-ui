@@ -56,6 +56,8 @@ function Calendar({
     const time = e.target.value;
     let [hours, minutes] = time.split(":").map((str) => parseInt(str, 10));
 
+    // If the input is not a valid time, set the time to 00:00
+    // This will handle 00 being inputed on 12h format
     hours = !Number.isFinite(hours) || hours < 0 || hours > 23 ? 0 : hours;
     minutes =
       !Number.isFinite(minutes) || minutes < 0 || minutes > 59 ? 0 : minutes;
