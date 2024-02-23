@@ -62,7 +62,7 @@ export function ThemeProvider({
         setTheme(newTheme);
       },
     }),
-    []
+    [theme, storageKey]
   );
 
   return (
