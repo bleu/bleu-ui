@@ -18,8 +18,8 @@ export function DataTableToolbar({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center space-x-2">
+    <div className="flex items-start justify-between">
+      <div className="flex flex-1 items-start space-x-2">
         <Input
           placeholder="Search..."
           value={table.getColumn(searchKey)?.getFilterValue() ?? ""}
@@ -28,17 +28,19 @@ export function DataTableToolbar({
           }
           className="h-8 w-[150px] lg:w-[250px] dark:border-2"
         />
-        {filters.map(
-          (filter) =>
-            table.getColumn(filter.value) && (
-              <DataTableFacetedFilter
-                key={filter.title}
-                column={table.getColumn(filter.value)}
-                title={filter.title}
-                options={filter.options}
-              />
-            )
-        )}
+        <div className="flex flex-wrap gap-1">
+          {filters.map(
+            (filter) =>
+              table.getColumn(filter.value) && (
+                <DataTableFacetedFilter
+                  key={filter.title}
+                  column={table.getColumn(filter.value)}
+                  title={filter.title}
+                  options={filter.options}
+                />
+              )
+          )}
+        </div>
         {isFiltered && (
           <Button
             variant="ghost"
