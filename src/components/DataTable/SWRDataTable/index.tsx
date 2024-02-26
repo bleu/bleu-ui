@@ -170,7 +170,8 @@ const renderCell = ({ filters, column, row, selectedRows }) => {
           aria-label="Select row"
         />
       );
-
+    case "select":
+      return value;
     default:
       return null;
   }
