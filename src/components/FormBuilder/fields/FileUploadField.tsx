@@ -16,9 +16,9 @@ import { BaseField, withConditional } from "../fields";
 const imageUploadVariants = cva("w-full", {
   variants: {
     size: {
-      small: "size-24 p-0",
-      medium: "size-48 p-0",
-      large: "size-80 p-0",
+      small: "size-24 p-0 max-w-24",
+      medium: "size-48 p-0 max-w-48",
+      large: "size-80 p-0 max-w-80",
     },
   },
   defaultVariants: {
@@ -129,7 +129,8 @@ export const FileUploadField = withConditional<FileUploadFieldProps>(
                     "relative border-2 rounded-lg overflow-hidden border-dashed",
                     state.imagePreview
                       ? "inline-block cursor-pointer bg-cover"
-                      : "w-full flex-col items-center"
+                      : "w-full flex-col items-center",
+                    imageUploadVariants(field.style)
                   )}
                 >
                   {state.contentUploaded && (
