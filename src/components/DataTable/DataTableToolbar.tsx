@@ -15,7 +15,9 @@ export function DataTableToolbar({
     return null;
   }
 
-  const isFiltered = table.getState().columnFilters.length > 0;
+  const isFiltered =
+    table.getState().columnFilters.filter((filter) => filter.value.length > 0)
+      .length > 0;
 
   const initialFilterSet = useRef(false);
 
