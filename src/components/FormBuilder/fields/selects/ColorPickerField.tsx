@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { HexAlphaColorPicker } from "react-colorful";
+import { cva } from "class-variance-authority";
 import {
   FormControl,
   FormDescription,
@@ -16,6 +17,7 @@ import {
 
 import { withConditional } from "../../fields";
 import { SelectFieldProps } from "./SelectField";
+import { cn } from "@/lib/utils";
 
 function hexToBrightness(hexColor) {
   // ensure the hex color is valid and in the proper format
@@ -36,7 +38,22 @@ function hexToBrightness(hexColor) {
 export interface ColorPickerFieldProps extends SelectFieldProps {
   color_content_key?: string;
   set_content?: boolean;
+  style?: {
+    size?: "small" | "full";
+  };
 }
+
+const colorPickerVariants = cva("w-full", {
+  variants: {
+    size: {
+      small: "w-64 max-w-64",
+      full: "w-full",
+    },
+  },
+  defaultVariants: {
+    size: "small",
+  },
+});
 
 export const ColorPickerField = withConditional<ColorPickerFieldProps>(
   ({ form, field }) => {
@@ -68,7 +85,12 @@ export const ColorPickerField = withConditional<ColorPickerFieldProps>(
             <FormItem className="grid grid-flow-row auto-rows-min content-end">
               <FormLabel>{field.label}</FormLabel>
               <FormDescription>{field.description}</FormDescription>
-              <div className="bg-background ring-offset-background placeholder:text-muted-foreground focus-within:ring-ring flex h-10 items-center rounded-md border text-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+              <div
+                className={cn(
+                  "bg-background ring-offset-background placeholder:text-muted-foreground focus-within:ring-ring flex h-10 items-center rounded-md border text-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                  colorPickerVariants(field.style)
+                )}
+              >
                 {color && <span className="ml-3">#</span>}
                 <input
                   type="text"
