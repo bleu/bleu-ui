@@ -43,3 +43,5 @@ storybook-static
 
 .yalc/*
 yalc.lock
+
+.swc/

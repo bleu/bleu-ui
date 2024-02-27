@@ -5,9 +5,10 @@
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/hooks/*": ["./src/hooks/*"],
+      "@/locales/*": ["./src/locales/*"],
       "react": ["./node_modules/react"],
       "react-dom": ["./node_modules/react-dom"],
-      "tslib": ["./node_modules/tslib/tslib.d.ts"],
+      "tslib": ["./node_modules/tslib/tslib.d.ts"]
     },
     "declarationMap": true,
     "emitDeclarationOnly": true,
@@ -20,7 +21,7 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "strict": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "exclude": ["./src/tests", "./src/stories", "dist", "node_modules"],
+  "exclude": ["./src/tests", "./src/stories", "dist", "node_modules"]
 }

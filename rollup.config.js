@@ -7,6 +7,7 @@ import autoprefixer from "autoprefixer";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import tailwind from "tailwindcss";
+import json from "@rollup/plugin-json";
 
 const packageJson = require("./package.json");
 
@@ -26,11 +27,33 @@ export default [
     ],
     external: ["react", "react-dom", "react-router-dom"],
     plugins: [
+      json(),
       peerDepsExternal(),
       resolve(),
       commonjs(),
       svgr(),
-      swc(defineRollupSwcOption({})),
+      swc(
+        defineRollupSwcOption({
+          jsc: {
+            experimental: {
+              plugins: [
+                [
+                  "@lingui/swc-plugin",
+                  {
+                    // Optional
+                    // Unlike the JS version this option must be passed as object only.
+                    // Docs https://lingui.dev/ref/conf#runtimeconfigmodule
+                    runtimeModules: {
+                      i18n: ["@lingui/core", "i18n"],
+                      trans: ["@lingui/react", "Trans"],
+                    },
+                  },
+                ],
+              ],
+            },
+          },
+        })
+      ),
       postcss({
         extract: true,
         config: {

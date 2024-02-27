@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/macro";
 import React from "react";
 import {
   ChevronLeftIcon,
@@ -12,7 +13,9 @@ export function DataTablePagination({ table }) {
     <div className="flex items-center justify-end px-2">
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Rows per page</p>
+          <p className="text-sm font-medium">
+            <Trans>Items per page</Trans>
+          </p>
           <Select.SelectRoot
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -34,7 +37,7 @@ export function DataTablePagination({ table }) {
           </Select.SelectRoot>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          <Trans>Page {table.getState().pagination.pageIndex + 1} of</Trans>{" "}
           {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">
