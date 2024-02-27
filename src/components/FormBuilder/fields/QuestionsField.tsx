@@ -5,7 +5,7 @@ import { useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import { StrictModeDroppable } from "@/components/StrictModeDroppable";
 
-import { buildForm } from "../builder";
+import { buildForm } from "../buildForm";
 import {
   BaseField,
   FormFieldProps,

@@ -7,7 +7,7 @@ import { StrictModeDroppable } from "@/components/StrictModeDroppable";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-import { buildForm } from "../builder";
+import { buildForm } from "../buildForm";
 import { BaseField, FormFieldProps, withConditional } from "../fields";
 
 const fieldArrayVariants = cva("w-full", {
