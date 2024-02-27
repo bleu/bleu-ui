@@ -1,123 +1,108 @@
-/* eslint-disable no-param-reassign */
 /**
- * This function takes an object containing parameters and converts it into a query string.
- * It follows the Rails pattern for nested query parameters.
+ * Serializes an object into a query string. This function handles nested objects, arrays,
+ * and primitive data types (strings, numbers, booleans). It encodes keys and values to
+ * ensure a valid query string. The function throws an error if the input is not an object.
  *
  * @example
  * // Basic usage
  * const params = { name: 'John', age: 30 };
  * serializeQuery(params);
- * // Returns 'name=John&age=30'
+ * > 'name=John&age=30'
  *
  * @example
- * // Nested parameters
- * const nestedParams = { user: { name: 'John', age: 30 } };
- * serializeQuery(nestedParams);
- * // Returns 'user[name]=John&user[age]=30'
+ * // Nested objects and arrays
+ * const complexParams = {
+ *   user: { name: 'John', roles: ['admin', 'user'] },
+ *   active: true
+ * };
+ * serializeQuery(complexParams);
+ * > 'user[name]=John&user[roles][]=admin&user[roles][]=user&active=true'
+ *
+ * @param {Object} params - The object to be serialized into a query string.
+ * @param {string} [prefix=""] - A prefix used for nested objects (internal use).
+ * @returns {string} - The serialized query string.
+ * @throws {Error} - Throws an error if the input is not an object.
  */
-export function serializeQuery(params, prefix) {
-  const query = serializeParamsToQueryStrings(params, prefix);
-  return [...[].concat(...query)].join("&");
+export function serializeQuery(params: object, prefix = ""): string {
+  if (typeof params !== "object" || params === null) {
+    throw new Error("Input must be an object");
+  }
+
+  return Object.entries(params)
+    .reduce((acc, [key, value]) => {
+      if (value == null) return acc;
+
+      const fullKey = prefix
+        ? `${prefix}[${encodeURIComponent(key)}]`
+        : encodeURIComponent(key);
+
+      if (Array.isArray(value)) {
+        value.forEach((elem) => {
+          acc.push(`${fullKey}[]=${encodeURIComponent(elem)}`);
+        });
+      } else if (typeof value === "object") {
+        acc.push(serializeQuery(value, fullKey));
+      } else if (
+        typeof value === "boolean" ||
+        typeof value === "number" ||
+        typeof value === "string"
+      ) {
+        acc.push(`${fullKey}=${encodeURIComponent(value)}`);
+      }
+
+      return acc;
+    }, [] as string[])
+    .join("&");
 }
 
 /**
- * This function takes an object containing parameters and converts it into a query string.
- * It follows the Rails pattern for nested query parameters.
+ * Deserializes a query string into an object. This function can handle nested parameters
+ * and arrays. It uses URLSearchParams to parse the query string and reconstructs the
+ * original object structure. The function throws an error if the input is not a string.
+ *
  * @example
- * const params = {
-    "columnFilters": {
-        "is_general_thesis": [
-            "false"
-        ]
-    },
-    "pageIndex": 0,
-    "pageSize": 10
-  };
- * serializeQueryObject(params);
- * // Returns {
-    "columnFilters[is_general_thesis][]": "false",
-    "pageIndex": "0",
-    "pageSize": "10"
- * }
+ * const queryString = 'user[name]=John&user[roles][]=admin&user[roles][]=user&active=true';
+ * deserializeQuery(queryString);
+ * > { user: { name: 'John', roles: ['admin', 'user'] }, active: 'true' }
+ *
+ * @param {string} queryString - The query string to be deserialized into an object.
+ * @returns {Object} - The deserialized object.
+ * @throws {Error} - Throws an error if the input is not a string.
  */
-export function serializeQueryObject(params, prefix = undefined) {
-  const query = serializeParamsToQueryStrings(params, prefix);
-  return parseQueryStrings(query.filter((item) => item !== ""));
-}
+export function deserializeQuery(queryString: string): object {
+  if (typeof queryString !== "string") {
+    throw new Error("Query string must be a string");
+  }
 
-/**
- * This function takes a query string and converts it into an object.
- * It follows the Rails pattern for nested query parameters.
- * @example
- * const nestedQueryString = 'user[name]=John&user[age]=30';
- * deserializeQuery(nestedQueryString);
- * // Returns { user: { name: 'John', age: 30 } }
- */
-export function deserializeQuery(paramsString) {
-  const arr = decodeURIComponent(paramsString.replace(/\+/g, "%20")).split("&");
   const result = {};
+  const params = new URLSearchParams(queryString);
 
-  arr.forEach((item) => {
-    // eslint-disable-next-line prefer-const
-    let [path, value] = item.split("=");
+  params.forEach((value, key) => {
+    const path = key.split(/\[|\]/).filter(Boolean);
+    let current = result;
 
-    // eslint-disable-next-line no-useless-escape
-    const pathParts = path.split(/[\[\]]/).filter((p) => p);
-    // eslint-disable-next-line array-callback-return, consistent-return
-    pathParts.reduce((acc, key, index) => {
-      if (index === pathParts.length - 1) {
-        if (key in acc && Array.isArray(acc[key])) {
-          acc[key].push(value);
-        } else if (key in acc) {
-          acc[key] = [acc[key], value];
+    path.forEach((part, index) => {
+      const isLast = index === path.length - 1;
+      if (isLast) {
+        if (current[part]) {
+          if (Array.isArray(current[part])) {
+            current[part].push(value);
+          } else {
+            current[part] = [current[part], value];
+          }
         } else {
-          acc[key] = value;
+          current[part] = value;
         }
+      } else if (part.endsWith("[]")) {
+        const arrayKey = part.slice(0, -2);
+        current[arrayKey] = current[arrayKey] || [];
+        current = current[arrayKey];
       } else {
-        if (!(key in acc)) {
-          // eslint-disable-next-line no-restricted-globals
-          acc[key] = isNaN(Number(pathParts[index + 1])) ? {} : [];
-        }
-        return acc[key];
+        current[part] = current[part] || {};
+        current = current[part];
       }
-    }, result);
+    });
   });
 
-  return result;
-}
-
-function serializeParamsToQueryStrings(params, prefix = undefined) {
-  const query = Object.keys(params).map((key) => {
-    const value = params[key];
-
-    if (params.constructor === Array) key = `${prefix}[]`;
-    else if (params.constructor === Object)
-      key = prefix ? `${prefix}[${key}]` : key;
-
-    if (typeof value === "object") return serializeQuery(value, key);
-    return `${key}=${encodeURIComponent(value)}`;
-  });
-
-  return query;
-}
-
-function parseQueryStrings(queryStrings) {
-  const result = {};
-  queryStrings.forEach((queryString) => {
-    const firstEqualIndex = queryString.indexOf("=");
-    const key = queryString.substring(0, firstEqualIndex);
-    const value = queryString.substring(firstEqualIndex + 1);
-
-    // Handle the case where the key already exists in the result object
-    if (result[key]) {
-      // If the key already exists and is not an array, convert it to an array
-      if (!Array.isArray(result[key])) {
-        result[key] = [result[key]];
-      }
-      result[key].push(decodeURIComponent(value));
-    } else {
-      result[key] = decodeURIComponent(value);
-    }
-  });
   return result;
 }

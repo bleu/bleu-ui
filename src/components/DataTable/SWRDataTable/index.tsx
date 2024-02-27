@@ -24,11 +24,7 @@ import {
 } from "@/components/ui";
 import { SectionTitle } from "@/components/SectionTitle";
 import { formatDate, formatDateTime } from "@/lib/formatDate";
-import {
-  serializeQuery,
-  serializeQueryObject,
-  deserializeQuery,
-} from "@/lib/serializeQuery";
+import { serializeQuery, deserializeQuery } from "@/lib/serializeQuery";
 import { useTableState } from "./useTableState";
 import { Link } from "@/components/Link";
 
@@ -79,7 +75,6 @@ const formatParamsToDataTable = (params, searchKey) => {
 
 const fetcher = async ([url, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
-  // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
   const params = serializeQuery(formattedParams);
   const response = await fetch(`${url}?${params}`, {
     headers: {
@@ -243,7 +238,7 @@ export function SWRDataTable({
       pageSize,
     });
 
-    const params = serializeQueryObject(formattedParams);
+    const params = serializeQuery(formattedParams);
     setSearchParams(params);
   }, [pageIndex, pageSize, sorting, columnFilters]);
 
