@@ -1,6 +1,8 @@
 import { CircleIcon, FileIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { Trans } from "react-i18next";
+import { t } from "i18next";
 import {
   Button,
   CommandDialog,
@@ -55,9 +57,11 @@ export function CommandMenu({
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={t("Type a command or search")} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>
+            <Trans>No results found.</Trans>
+          </CommandEmpty>
           <CommandGroup heading="Links">
             {commands.mainNav
               .filter((navitem) => !navitem.external)

@@ -10,8 +10,8 @@ import { Button, Select } from "#/components/ui";
 
 export function DataTablePagination({ table }) {
   const { t } = useTranslation();
-  const currentPage = table.getState().pagination.pageIndex + 1;
-  const pageCount = table.getPageCount();
+  const currentPage = Number(table.getState().pagination.pageIndex) + 1;
+  const pageCount = table.getPageCount() || 1;
   return (
     <div className="flex items-center justify-end px-2">
       <div className="flex items-center space-x-6 lg:space-x-8">

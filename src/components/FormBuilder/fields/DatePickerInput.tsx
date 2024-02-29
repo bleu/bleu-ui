@@ -1,6 +1,7 @@
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import React from "react";
+import { Trans } from "react-i18next";
 import { Button } from "#/components/ui/Button";
 import { Calendar } from "#/components/ui/Calendar";
 import {
@@ -52,7 +53,10 @@ export const DatePickerInput = withConditional<DatePickerInputProps>(
                         isDatetime ? "PPp" : "PP"
                       )
                     ) : (
-                      <span>Pick a date</span>
+                      <span>
+                        <Trans>Pick a date</Trans>
+                        {/* TODO: change calendar INTL behavior */}
+                      </span>
                     )}
                     <CalendarIcon className="ml-auto size-4 opacity-50" />
                   </Button>

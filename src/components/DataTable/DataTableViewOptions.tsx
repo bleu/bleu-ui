@@ -1,6 +1,7 @@
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import React from "react";
+import { Trans } from "react-i18next";
 import {
   Button,
   DropdownMenu,
@@ -20,11 +21,13 @@ export function DataTableViewOptions({ table }) {
           className="ml-auto hidden h-8 lg:flex dark:border-2"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          <Trans>View</Trans>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <Trans>Toggle columns</Trans>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()

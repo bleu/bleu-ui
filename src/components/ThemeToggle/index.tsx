@@ -1,5 +1,6 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import React from "react";
+import { Trans } from "react-i18next";
 import {
   Button,
   DropdownMenu,
@@ -21,17 +22,19 @@ export function ModeToggle() {
           ) : (
             <SunIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
           )}
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">
+            <Trans>Toggle theme</Trans>
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          <Trans>Light</Trans>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          <Trans>Dark</Trans>
           <span className="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline">
-            Beta
+            <Trans>Beta</Trans>
           </span>
         </DropdownMenuItem>
         {/* <DropdownMenuItem onClick={() => setTheme("system")}>

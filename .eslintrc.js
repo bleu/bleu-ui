@@ -24,7 +24,6 @@ module.exports = {
     "typescript-sort-keys",
     "unused-imports",
     "prettier",
-    "lingui",
     "prefer-arrow",
     "sort-class-members",
   ],
