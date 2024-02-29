@@ -1,5 +1,6 @@
 import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import React from "react";
+import { Trans } from "react-i18next";
 import {
   Badge,
   Button,
@@ -70,7 +71,9 @@ export function DataTableFacetedFilter({ column, title, options }) {
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>{" "}
+            <CommandEmpty>
+              <Trans>No results found.</Trans>
+            </CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value);

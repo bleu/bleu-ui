@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import useSWR from "swr";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
+import { Trans } from "react-i18next";
 import {
   Badge,
   Checkbox,
@@ -299,7 +300,9 @@ export function SWRDataTable({
     return (
       <div className="flex items-center justify-between space-y-2">
         <div>
-          <SectionTitle>Something went wrong!</SectionTitle>
+          <SectionTitle>
+            <Trans>Something went wrong!</Trans>
+          </SectionTitle>
           <p className="text-muted-foreground">{error.message}</p>
         </div>
       </div>
@@ -361,7 +364,7 @@ export function SWRDataTable({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  <Trans>No results found.</Trans>
                 </TableCell>
               </TableRow>
             )}

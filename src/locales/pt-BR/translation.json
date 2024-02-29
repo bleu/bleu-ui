@@ -1,4 +1,18 @@
 {
+  "Type a command or search": "Digite um comando ou pesquise",
+  "No results found": "Nenhum resultado foi encontrado",
   "Items per page": "Itens por página",
-  "Page {{currentPage}} of": "Página {{currentPage}} de"
+  "Page {{currentPage}} of": "Página {{currentPage}} de",
+  "Search": "Pesquisar",
+  "View": "Visualizar",
+  "Toggle columns": "Alternar colunas",
+  "Something went wrong!": "Something went wrong!",
+  "Pick a date": "Pick a date",
+  "Click to Upload": "Click to Upload",
+  "Upload a file": "Upload a file",
+  "Download": "Download",
+  "Toggle theme": "Alternar tema",
+  "Light": "Claro",
+  "Dark": "Escuro",
+  "Beta": "Beta"
 }

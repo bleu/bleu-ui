@@ -1,5 +1,6 @@
 import { Cross2Icon } from "@radix-ui/react-icons";
 import React, { useEffect, useRef } from "react";
+import { t } from "i18next";
 import { Button, Input } from "#/components/ui";
 
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
@@ -42,7 +43,7 @@ export function DataTableToolbar({
     <div className="flex items-start justify-between">
       <div className="flex flex-1 items-start space-x-2">
         <Input
-          placeholder="Search..."
+          placeholder={t("Search", "Search...")}
           value={table.getColumn(searchKey)?.getFilterValue() ?? ""}
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)

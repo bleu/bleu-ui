@@ -1,4 +1,18 @@
 {
-  "Items per page": "",
-  "Page {{currentPage}} of": "Page {{currentPage}} of"
+  "Type a command or search": "Type a command or search",
+  "No results found": "No results found",
+  "Items per page": "Items per page",
+  "Page {{currentPage}} of": "Page {{currentPage}} of",
+  "Search": "Search...",
+  "View": "View",
+  "Toggle columns": "Toggle columns",
+  "Something went wrong!": "Something went wrong!",
+  "Pick a date": "Pick a date",
+  "Click to Upload": "Click to Upload",
+  "Upload a file": "Upload a file",
+  "Download": "Download",
+  "Toggle theme": "Toggle theme",
+  "Light": "Light",
+  "Dark": "Dark",
+  "Beta": "Beta"
 }

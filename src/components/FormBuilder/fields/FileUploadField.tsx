@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import React, { useCallback, useEffect, useReducer } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import { Trans } from "react-i18next";
 import {
   FormControl,
   FormDescription,
@@ -167,13 +168,13 @@ export const FileUploadField = withConditional<FileUploadFieldProps>(
                         )}
                         <div className="hover:ring-primary absolute inset-0 flex items-center justify-center rounded-sm bg-black/50 opacity-0 transition-opacity hover:opacity-100 hover:ring-2 hover:ring-offset-2">
                           <span className="text-lg font-semibold text-white">
-                            Click to Upload
+                            <Trans>Click to Upload</Trans>
                           </span>
                         </div>
                       </>
                     ) : (
                       <span className="text-lg font-semibold">
-                        Upload a file
+                        <Trans>Upload a file</Trans>
                       </span>
                     )}
                   </button>
@@ -192,7 +193,7 @@ export const FileUploadField = withConditional<FileUploadFieldProps>(
                     onClick={handleDownload}
                     className="text-blue-600 hover:text-blue-800"
                   >
-                    Download
+                    <Trans>Download</Trans>
                   </button>
                 )}
               </div>
