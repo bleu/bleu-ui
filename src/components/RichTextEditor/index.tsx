@@ -1,8 +1,9 @@
 import "./styles.css";
 
-import JoditEditor from "jodit-react";
-import React from "react";
+import React, { lazy } from "react";
 import { useTheme } from "@/components/ThemeToggle/context";
+
+const JoditEditor = lazy(() => import("jodit-react"));
 
 const EDITOR_BUTTONS = [
   "undo",
