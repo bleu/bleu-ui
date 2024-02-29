@@ -1,7 +1,5 @@
-import { defineRollupSwcOption, swc } from "rollup-plugin-swc3";
-import commonjs from "@rollup/plugin-commonjs";
+import { swc } from "rollup-plugin-swc3";
 import resolve from "@rollup/plugin-node-resolve";
-import terser from "@rollup/plugin-terser";
 import svgr from "@svgr/rollup";
 import autoprefixer from "autoprefixer";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
@@ -9,51 +7,40 @@ import postcss from "rollup-plugin-postcss";
 import tailwind from "tailwindcss";
 import json from "@rollup/plugin-json";
 
-const packageJson = require("./package.json");
+import { visualizer } from "rollup-plugin-visualizer";
+
+import { dts } from "rollup-plugin-dts";
+import commonjs from "@rollup/plugin-commonjs";
+import pkg from "./package.json";
+
+const peerDeps = Object.keys(pkg.peerDependencies);
+
+const external = [...peerDeps, "class-variance-authority/types"];
 
 /** @type {import('rollup').RollupOptions} */
 export default [
   {
     input: "src/index.ts",
-    output: [
-      {
-        file: packageJson.main,
-        format: "cjs",
-      },
-      {
-        file: packageJson.module,
-        format: "esm",
-      },
-    ],
-    external: ["react", "react-dom", "react-router-dom"],
+    inlineDynamicImports: true,
+    output: {
+      dir: "dist",
+      format: "esm",
+    },
+    external,
     plugins: [
       json(),
       peerDepsExternal(),
       resolve(),
       commonjs(),
       svgr(),
-      swc(
-        defineRollupSwcOption({
-          jsc: {
-            experimental: {
-              plugins: [
-                [
-                  "@lingui/swc-plugin",
-                  {
-                    // Optional
-                    // Unlike the JS version this option must be passed as object only.
-                    // Docs https://lingui.dev/ref/conf#runtimeconfigmodule
-                    runtimeModules: {
-                      i18n: ["@lingui/core", "i18n"],
-                      trans: ["@lingui/react", "Trans"],
-                    },
-                  },
-                ],
-              ],
-            },
+      swc({
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true,
           },
-        })
-      ),
+        },
+      }),
       postcss({
         extract: true,
         config: {
@@ -66,14 +53,13 @@ export default [
           }),
         ],
       }),
-      terser({
-        compress: true,
-        mangle: true,
-        output: {
-          preamble: "/* eslint-disable */",
-          comments: false,
-        },
-      }),
+      visualizer(),
     ],
+  },
+  {
+    input: "dist/dts/src/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "es" }],
+    external: [/\.css$/],
+    plugins: [dts()],
   },
 ];

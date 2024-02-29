@@ -45,3 +45,5 @@ storybook-static
 yalc.lock
 
 .swc/
+
+stats.html
