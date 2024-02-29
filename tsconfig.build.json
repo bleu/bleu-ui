@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig",
+  "exclude": [
+    "tests/**",
+    "vitest.config.mts",
+    "i18next-parser.config.ts",
+    "./src/stories",
+    "dist",
+    "node_modules"
+  ]
+}

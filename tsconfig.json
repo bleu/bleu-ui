@@ -5,9 +5,9 @@
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "dist/dts",
-    "outDir": "dist",
     "sourceMap": true,
     "esModuleInterop": true,
+    "noEmit": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -21,10 +21,10 @@
     ]
   },
   "exclude": [
-    "./src/tests",
     "vitest.config.mts",
     "./src/stories",
     "dist",
-    "node_modules"
+    "node_modules",
+    "i18next-parser.config.ts"
   ]
 }
