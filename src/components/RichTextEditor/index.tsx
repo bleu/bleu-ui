@@ -1,7 +1,7 @@
 import "./styles.css";
 
 import React, { lazy } from "react";
-import { useTheme } from "@/components/ThemeToggle/context";
+import { useTheme } from "#/components/ThemeToggle/context";
 
 const JoditEditor = lazy(() => import("jodit-react"));
 

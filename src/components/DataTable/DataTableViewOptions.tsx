@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-} from "@/components/ui";
+} from "#/components/ui";
 
 export function DataTableViewOptions({ table }) {
   return (

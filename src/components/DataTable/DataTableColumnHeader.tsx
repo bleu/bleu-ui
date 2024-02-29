@@ -12,8 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+} from "#/components/ui";
+import { cn } from "#/lib/utils";
 
 export function DataTableColumnHeader({ column, title, className }) {
   if (!column.getCanSort()) {

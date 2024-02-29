@@ -3,9 +3,9 @@ import { cva } from "class-variance-authority";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useFieldArray } from "react-hook-form";
 import { MoveIcon, TrashIcon } from "@radix-ui/react-icons";
-import { StrictModeDroppable } from "@/components/StrictModeDroppable";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { StrictModeDroppable } from "#/components/StrictModeDroppable";
+import { Button } from "#/components/ui/Button";
+import { cn } from "#/lib/utils";
 
 import { buildForm } from "../buildForm";
 import { BaseField, FormFieldProps, withConditional } from "../fields";

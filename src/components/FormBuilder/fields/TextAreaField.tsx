@@ -7,8 +7,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form";
-import { Textarea } from "@/components/ui/Textarea";
+} from "#/components/ui/Form";
+import { Textarea } from "#/components/ui/Textarea";
 
 import { BaseField, withConditional } from "../fields";
 

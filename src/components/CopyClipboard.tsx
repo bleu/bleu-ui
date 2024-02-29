@@ -2,8 +2,8 @@
 import { ClipboardCopyIcon } from "@radix-ui/react-icons";
 import copy from "copy-to-clipboard";
 import React, { PropsWithChildren, useCallback, useLayoutEffect } from "react";
-import { cn } from "@/lib/utils";
-import { useToast } from "@/hooks/useToast";
+import { cn } from "#/lib/utils";
+import { useToast } from "#/hooks/useToast";
 
 export function ClickToCopy({
   text,

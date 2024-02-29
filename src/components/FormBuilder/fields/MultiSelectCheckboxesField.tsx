@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Checkbox } from "#/components/ui/Checkbox";
 import {
   FormControl,
   FormDescription,
@@ -7,7 +7,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form";
+} from "#/components/ui/Form";
 
 import { withConditional } from "../fields";
 import { SelectFieldProps } from "./selects/SelectField";

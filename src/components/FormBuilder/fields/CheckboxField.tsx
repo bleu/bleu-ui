@@ -1,12 +1,12 @@
 import React from "react";
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Checkbox } from "#/components/ui/Checkbox";
 import {
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/Form";
+} from "#/components/ui/Form";
 
 import { BaseField, withConditional } from "../fields";
 

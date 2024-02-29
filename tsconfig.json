@@ -1,19 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/locales/*": ["./src/locales/*"],
-      "react": ["./node_modules/react"],
-      "react-dom": ["./node_modules/react-dom"],
-      "tslib": ["./node_modules/tslib/tslib.d.ts"]
-    },
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
+    "paths": { "#/*": ["./src/*"] },
     "declaration": true,
-    "outDir": "./dist",
+    "declarationMap": true,
+    "declarationDir": "dist/dts",
+    "outDir": "dist",
+    "sourceMap": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
@@ -21,7 +14,17 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "strict": true,
-    "lib": ["dom", "dom.iterable", "esnext"]
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
-  "exclude": ["./src/tests", "./src/stories", "dist", "node_modules"]
+  "exclude": [
+    "./src/tests",
+    "vitest.config.mts",
+    "./src/stories",
+    "dist",
+    "node_modules"
+  ]
 }

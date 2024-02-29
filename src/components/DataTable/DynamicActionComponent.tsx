@@ -12,8 +12,8 @@ import {
   AlertDialogTrigger,
   Button,
   Form,
-} from "@/components/ui";
-import { ClickToCopy } from "@/components/CopyClipboard";
+} from "#/components/ui";
+import { ClickToCopy } from "#/components/CopyClipboard";
 import { Link } from "../Link";
 
 export const DynamicActionComponent = ({ action, row }) => {

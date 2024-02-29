@@ -5,8 +5,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/Form";
-import { Switch } from "@/components/ui/Switch";
+} from "#/components/ui/Form";
+import { Switch } from "#/components/ui/Switch";
 
 import { BaseField, withConditional } from "../fields";
 

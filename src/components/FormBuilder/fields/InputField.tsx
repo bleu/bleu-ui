@@ -7,8 +7,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form";
-import { Input } from "@/components/ui/Input";
+} from "#/components/ui/Form";
+import { Input } from "#/components/ui/Input";
 
 import { BaseField, withConditional } from "../fields";
 

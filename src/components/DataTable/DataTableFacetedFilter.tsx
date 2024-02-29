@@ -14,8 +14,8 @@ import {
   PopoverContent,
   PopoverTrigger,
   Separator,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+} from "#/components/ui";
+import { cn } from "#/lib/utils";
 
 export function DataTableFacetedFilter({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues();

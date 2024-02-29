@@ -1,8 +1,8 @@
 /* eslint-disable no-shadow */
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/Input";
+import { cn } from "#/lib/utils";
+import { Input } from "#/components/ui/Input";
 
 interface OTPInputProps
   extends Omit<

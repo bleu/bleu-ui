@@ -1,12 +1,12 @@
 import React from "react";
-import { RichTextEditor } from "@/components/RichTextEditor";
+import { RichTextEditor } from "#/components/RichTextEditor";
 import {
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form";
+} from "#/components/ui/Form";
 
 import { BaseField, withConditional } from "../fields";
 

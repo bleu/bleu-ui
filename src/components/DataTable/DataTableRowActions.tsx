@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui";
+} from "#/components/ui";
 
 import { DynamicActionComponent } from "./DynamicActionComponent";
 

@@ -21,17 +21,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui";
-import { SectionTitle } from "@/components/SectionTitle";
-import { formatDate, formatDateTime } from "@/lib/formatDate";
-import { serializeQuery, deserializeQuery } from "@/lib/serializeQuery";
+} from "#/components/ui";
+import { SectionTitle } from "#/components/SectionTitle";
+import { formatDate, formatDateTime } from "#/lib/formatDate";
+import { serializeQuery, deserializeQuery } from "#/lib/serializeQuery";
 import { useTableState } from "./useTableState";
-import { Link } from "@/components/Link";
+import { Link } from "#/components/Link";
 
-import { DataTableColumnHeader } from "@/components/DataTable/DataTableColumnHeader";
-import { DataTablePagination } from "@/components/DataTable/DataTablePagination";
-import { DataTableRowActions } from "@/components/DataTable/DataTableRowActions";
-import { DataTableToolbar } from "@/components/DataTable/DataTableToolbar";
+import { DataTableColumnHeader } from "#/components/DataTable/DataTableColumnHeader";
+import { DataTablePagination } from "#/components/DataTable/DataTablePagination";
+import { DataTableRowActions } from "#/components/DataTable/DataTableRowActions";
+import { DataTableToolbar } from "#/components/DataTable/DataTableToolbar";
 
 function formatRequestParams(originalObj) {
   return {

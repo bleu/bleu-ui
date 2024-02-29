@@ -10,8 +10,8 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+} from "#/components/ui";
+import { cn } from "#/lib/utils";
 
 export function CommandMenu({
   commands,

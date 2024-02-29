@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
-import { BaseField, withConditional } from "@/components/FormBuilder/fields";
+import { BaseField, withConditional } from "#/components/FormBuilder/fields";
 import {
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form";
+} from "#/components/ui/Form";
 
 export interface RadiusOption {
   classes: string;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as Select from "@/components/ui/Select";
+import * as Select from "#/components/ui/Select";
 
 const SelectInput = ({ label, name, options, onValueChange }) => (
   <div className="flex w-full flex-col items-start justify-start">

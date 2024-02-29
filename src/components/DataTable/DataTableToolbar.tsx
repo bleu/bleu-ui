@@ -1,6 +1,6 @@
 import { Cross2Icon } from "@radix-ui/react-icons";
 import React, { useEffect, useRef } from "react";
-import { Button, Input } from "@/components/ui";
+import { Button, Input } from "#/components/ui";
 
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
 import { DataTableViewOptions } from "./DataTableViewOptions";

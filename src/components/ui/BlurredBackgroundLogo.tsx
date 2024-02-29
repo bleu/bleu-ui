@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "#/lib/utils";
 
 const Root = React.forwardRef<
   HTMLDivElement,

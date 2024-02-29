@@ -2,8 +2,8 @@ import { MoveIcon, TrashIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useFieldArray } from "react-hook-form";
-import { Button } from "@/components/ui/Button";
-import { StrictModeDroppable } from "@/components/StrictModeDroppable";
+import { Button } from "#/components/ui/Button";
+import { StrictModeDroppable } from "#/components/StrictModeDroppable";
 
 import { buildForm } from "../buildForm";
 import {

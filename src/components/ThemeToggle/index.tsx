@@ -6,7 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui";
+} from "#/components/ui";
 import { useTheme } from "./context";
 
 export function ModeToggle() {

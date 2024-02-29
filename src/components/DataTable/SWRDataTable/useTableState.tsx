@@ -1,6 +1,9 @@
+import { TableOptions } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 
-export function useTableState(initialState: Record<string, unknown> = {}) {
+export function useTableState(
+  initialState: TableOptions<unknown[]>["state"] = {}
+) {
   const [pagination, setPagination] = useState(
     initialState.pagination || { pageIndex: 0, pageSize: 10 }
   );
@@ -8,7 +11,7 @@ export function useTableState(initialState: Record<string, unknown> = {}) {
     initialState.rowSelection || {}
   );
   const [columnVisibility, setColumnVisibility] = useState(
-    initialState.columnVisibility || []
+    initialState.columnVisibility || {}
   );
   const [columnFilters, setColumnFilters] = useState(
     initialState.columnFilters || []

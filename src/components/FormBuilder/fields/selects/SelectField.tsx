@@ -6,8 +6,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form";
-import * as Select from "@/components/ui/Select";
+} from "#/components/ui/Form";
+import * as Select from "#/components/ui/Select";
 
 import { BaseField, withConditional } from "../../fields";
 

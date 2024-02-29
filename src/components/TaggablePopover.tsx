@@ -12,8 +12,8 @@ import {
   PopoverContent,
   PopoverTrigger,
   Separator,
-} from "@/components/ui";
-import { cn } from "@/lib/utils";
+} from "#/components/ui";
+import { cn } from "#/lib/utils";
 
 const SubItem = ({ tags, onSelect, ...props }) => {
   const search = useCommandState((state) => state.search);

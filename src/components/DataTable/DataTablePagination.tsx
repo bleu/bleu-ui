@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import React from "react";
 import {
   ChevronLeftIcon,
@@ -6,16 +5,18 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import { Button, Select } from "@/components/ui";
+import { useTranslation, Trans } from "react-i18next";
+import { Button, Select } from "#/components/ui";
 
 export function DataTablePagination({ table }) {
+  const { t } = useTranslation();
+  const currentPage = table.getState().pagination.pageIndex + 1;
+  const pageCount = table.getPageCount();
   return (
     <div className="flex items-center justify-end px-2">
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">
-            <Trans>Items per page</Trans>
-          </p>
+          <p className="text-sm font-medium">{t("Items per page")}</p>
           <Select.SelectRoot
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -37,11 +38,11 @@ export function DataTablePagination({ table }) {
           </Select.SelectRoot>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          <Trans>Page {table.getState().pagination.pageIndex + 1} of</Trans>{" "}
-          {table.getPageCount()}
+          <Trans>Page {{ currentPage }} of</Trans> {pageCount}
         </div>
         <div className="flex items-center space-x-2">
           <Button
+            // @ts-ignore
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(0)}
@@ -51,6 +52,7 @@ export function DataTablePagination({ table }) {
             <DoubleArrowLeftIcon className="h-4 w-4" />
           </Button>
           <Button
+            // @ts-ignore
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => table.previousPage()}
@@ -60,6 +62,7 @@ export function DataTablePagination({ table }) {
             <ChevronLeftIcon className="h-4 w-4" />
           </Button>
           <Button
+            // @ts-ignore
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => table.nextPage()}
