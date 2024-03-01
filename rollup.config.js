@@ -57,7 +57,7 @@ export default [
     ],
   },
   {
-    input: "dist/dts/src/index.d.ts",
+    input: "dist/dts/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "es" }],
     external: [/\.css$/],
     plugins: [dts()],
