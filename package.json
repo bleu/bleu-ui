@@ -15,7 +15,7 @@
     "build": "yarn build:js && yalc push",
     "build:js": "yarn build:types && rollup -c --bundleConfigAsCjs",
     "build:types": "tspc -p tsconfig.build.json",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore \"{src,tests}/**/*.+(ts|js|tsx)\"",
     "lint:fix": "yarn lint --fix && prettier --write .",
     "test": "vitest",

@@ -81,7 +81,7 @@ const ActionForm = ({ action, row }) => {
                 {action.method === "delete" && (
                   <input type="hidden" name="_method" value="delete" />
                 )}
-                <Button type="submit">test Confirm</Button>
+                <Button type="submit">Confirm</Button>
               </Form>
             </AlertDialogFooter>
           </AlertDialogContent>
