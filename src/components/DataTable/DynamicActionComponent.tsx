@@ -15,6 +15,7 @@ import {
 } from "#/components/ui";
 import { ClickToCopy } from "#/components/CopyClipboard";
 import { Link } from "../Link";
+import { SubmitButton } from "..";
 
 export const DynamicActionComponent = ({ action, row }) => {
   const renderActionButton = () => {
@@ -53,6 +54,7 @@ export const DynamicActionComponent = ({ action, row }) => {
 const ActionForm = ({ action, row }) => {
   const form = useForm({});
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   // TODO: the styles here are a bit off, but it's a start
   return (
@@ -74,6 +76,7 @@ const ActionForm = ({ action, row }) => {
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <Form
+                onSubmit={() => setIsSubmitting(true)}
                 action={action.url_path.replace("RESOURCE_ID", row.original.id)}
                 method="post"
                 {...form}
@@ -81,7 +84,9 @@ const ActionForm = ({ action, row }) => {
                 {action.method === "delete" && (
                   <input type="hidden" name="_method" value="delete" />
                 )}
-                <Button type="submit">Confirm</Button>
+                <SubmitButton type="submit" isSubmitting={isSubmitting}>
+                  Confirm
+                </SubmitButton>
               </Form>
             </AlertDialogFooter>
           </AlertDialogContent>
