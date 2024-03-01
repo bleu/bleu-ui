@@ -14,19 +14,21 @@ const enParsed = Object.keys(en).reduce((acc, key) => {
   return acc;
 }, {});
 
-const resources = {
+export const defaultNS = "translation" as const;
+
+export const resources = {
   en: {
     translation: enParsed,
   },
   "pt-BR": {
     translation: ptBR,
   },
-};
+} as const;
 
 i18n.use(initReactI18next).init({
   resources,
   lng: "pt-BR",
-
+  defaultNS,
   interpolation: {
     escapeValue: false,
   },
