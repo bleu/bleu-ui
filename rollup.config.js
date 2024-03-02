@@ -14,26 +14,25 @@ import commonjs from "@rollup/plugin-commonjs";
 import pkg from "./package.json";
 
 const peerDeps = Object.keys(pkg.peerDependencies);
+const deps = Object.keys(pkg.dependencies);
 
-const external = [...peerDeps, "class-variance-authority/types"];
+const external = [...peerDeps, ...deps];
 
 /** @type {import('rollup').RollupOptions} */
 export default [
   {
     input: "src/index.ts",
-    inlineDynamicImports: true,
     output: {
       dir: "dist",
       format: "esm",
-      sourcemap: true,
       preserveModules: true,
     },
     external,
     plugins: [
       json(),
       peerDepsExternal(),
-      resolve(),
       commonjs(),
+      resolve(),
       svgr(),
       swc({
         jsc: {
@@ -61,7 +60,7 @@ export default [
   {
     input: "dist/dts/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "es" }],
-    external: [/\.css$/],
+    external: [/\.css$/, /node_modules/],
     plugins: [dts()],
   },
 ];
