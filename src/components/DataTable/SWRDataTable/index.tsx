@@ -364,7 +364,7 @@ export function SWRDataTable({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  <Trans>No results found.</Trans>
+                  <Trans>No results found</Trans>.
                 </TableCell>
               </TableRow>
             )}

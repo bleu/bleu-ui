@@ -72,7 +72,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
           <CommandInput placeholder={title} />
           <CommandList>
             <CommandEmpty>
-              <Trans>No results found.</Trans>
+              <Trans>No results found</Trans>.
             </CommandEmpty>
             <CommandGroup>
               {options.map((option) => {

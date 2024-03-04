@@ -60,7 +60,7 @@ export function CommandMenu({
         <CommandInput placeholder={t("Type a command or search")} />
         <CommandList>
           <CommandEmpty>
-            <Trans>No results found.</Trans>
+            <Trans>No results found</Trans>.
           </CommandEmpty>
           <CommandGroup heading="Links">
             {commands.mainNav
