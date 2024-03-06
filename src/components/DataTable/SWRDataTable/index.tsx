@@ -1,10 +1,13 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect } from "react";
 import {
   flexRender,
   getCoreRowModel,
+  getExpandedRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
+  getGroupedRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -33,6 +36,8 @@ import { DataTableColumnHeader } from "#/components/DataTable/DataTableColumnHea
 import { DataTablePagination } from "#/components/DataTable/DataTablePagination";
 import { DataTableRowActions } from "#/components/DataTable/DataTableRowActions";
 import { DataTableToolbar } from "#/components/DataTable/DataTableToolbar";
+
+import { cn } from "#/lib/utils";
 
 function formatRequestParams(originalObj) {
   return {
@@ -157,7 +162,6 @@ const renderCell = ({ filters, column, row, selectedRows }) => {
           <span className="underline">{value}</span>
         </Link>
       );
-
     case "selection":
       return (
         <Checkbox
@@ -168,6 +172,9 @@ const renderCell = ({ filters, column, row, selectedRows }) => {
       );
     case "select":
       return value;
+    case "list":
+      return JSON.stringify(value);
+
     default:
       return null;
   }
@@ -190,7 +197,7 @@ const buildColumns = (columnsConfig, filters, selectedRows) => {
   }));
 };
 
-export function SWRDataTable({
+export function SWRDataTableOld({
   fetchPath,
   searchKey = "name",
   defaultParams = {},
@@ -365,6 +372,264 @@ export function SWRDataTable({
                   className="h-24 text-center"
                 >
                   <Trans>No results found</Trans>.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <DataTablePagination table={table} />
+    </div>
+  );
+}
+
+export function SWRDataTable({
+  fetchPath,
+  searchKey = "name",
+  defaultParams = {},
+  hasDetails = false,
+  action,
+  setSelectedData,
+  selectedRows,
+}: {
+  action?: React.ReactNode;
+  defaultParams?: Record<string, unknown>;
+  fetchPath: string;
+  hasDetails?: boolean;
+  searchKey?: string;
+  selectedRows?: any[];
+  setSelectedData?: (data: any[]) => void;
+}) {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialSearch = {
+    ...formatParamsToDataTable(
+      deserializeQuery(searchParams.toString()),
+      searchKey
+    ),
+    ...defaultParams,
+  };
+  const [grouping, setGrouping] = React.useState(["category"]);
+
+  const {
+    pagination,
+    rowSelection,
+    columnVisibility,
+    columnFilters,
+    sorting,
+    setPagination,
+    setRowSelection,
+    setColumnVisibility,
+    setColumnFilters,
+    setSorting,
+  } = useTableState({ ...initialSearch });
+
+  const { pageIndex, pageSize } = pagination;
+
+  useEffect(() => {
+    const formattedParams = formatRequestParams({
+      columnFilters,
+      sorting,
+      pageIndex,
+      pageSize,
+    });
+
+    const params = serializeQuery(formattedParams);
+    setSearchParams(params);
+  }, [pageIndex, pageSize, sorting, columnFilters]);
+
+  const { data, error } = useSWR(
+    [fetchPath, { pageIndex, pageSize, sorting, columnFilters }],
+    fetcher,
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  const columns = buildColumns(data?.columns, data?.filters, selectedRows);
+  const hiddenColumns = columns
+    .filter((c) => c.hide)
+    .map((c) => ({ [c.accessorKey]: false }))
+    .reduce((acc, obj) => Object.assign(acc, obj), {});
+
+  const filters = data?.filters;
+
+  const table = useReactTable({
+    data: data?.data ?? [],
+    pageCount: Math.ceil((data?.total ?? 0) / pageSize),
+    columns,
+    state: {
+      grouping,
+      sorting,
+      columnVisibility: {
+        ...columnVisibility,
+        ...hiddenColumns,
+      },
+      rowSelection,
+      columnFilters,
+      pagination,
+    },
+    initialState: {
+      expanded: true,
+    },
+    onGroupingChange: setGrouping,
+    getExpandedRowModel: getExpandedRowModel(),
+    getGroupedRowModel: getGroupedRowModel(),
+    onPaginationChange: setPagination,
+    manualPagination: true,
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    autoResetExpanded: false,
+  });
+
+  useEffect(() => {
+    if (setSelectedData)
+      setSelectedData(
+        table.getSelectedRowModel().flatRows.map((row) => row.original)
+      );
+  }, [rowSelection, table, setSelectedData]);
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <SectionTitle>Something went wrong!</SectionTitle>
+          <p className="text-muted-foreground">{error.message}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <DataTableToolbar
+        table={table}
+        filters={filters}
+        action={action}
+        searchKey={searchKey}
+      />
+      <div className="rounded-md border dark:border-2">
+        <Table className="border-0">
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+            {/* {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        {header.column.getCanGroup() ? (
+                          // If the header can be grouped, let's add a toggle
+                          <button
+                            {...{
+                              onClick: header.column.getToggleGroupingHandler(),
+                              style: {
+                                cursor: "pointer",
+                                backgroundColor: "red",
+                              },
+                            }}
+                          >
+                            { {header.column.getIsGrouped()
+                              ? `🛑(${header.column.getGroupedIndex()}) `
+                              : `👊 `}}
+                          </button>
+                        ) : null}{" "}
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </div>
+                    )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}  */}
+          </TableHeader>
+          <TableBody className="border-0">
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  onClick={() => {
+                    if (hasDetails) {
+                      // @ts-expect-error TS(2339) FIXME: Property 'id' does not exist on type 'unknown'.
+                      navigate(`${row.original.id}`);
+                    }
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      className={cn({
+                        "bg-muted/90":
+                          cell.getIsGrouped() || cell.getIsAggregated(),
+                      })}
+                      // style={{
+                      //   background: cell.getIsGrouped()
+                      //     ? "#0aff0082"
+                      //     : cell.getIsAggregated()
+                      //       ? "#ffa50078"
+                      //       : cell.getIsPlaceholder()
+                      //         ? "#ff000042"
+                      //         : "white",
+                      // }}
+                    >
+                      {cell.getIsGrouped() ? (
+                        // If it's a grouped cell, add an expander and row count
+                        <button onClick={row.getToggleExpandedHandler()}>
+                          {/* {row.getIsExpanded() ? "👇" : "👉"}{" "} */}
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </button>
+                      ) : cell.getIsAggregated() ? (
+                        // If the cell is aggregated, use the Aggregated
+                        // renderer for cell
+                        flexRender(
+                          cell.column.columnDef.aggregatedCell ??
+                            cell.column.columnDef.cell,
+                          cell.getContext()
+                        )
+                      ) : cell.getIsPlaceholder() ? null : (
+                        // Otherwise, just render the regular cell
+                        flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
                 </TableCell>
               </TableRow>
             )}
