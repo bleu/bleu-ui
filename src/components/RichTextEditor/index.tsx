@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { useTheme } from "#/components/ThemeToggle/context";
 
 const JoditEditor = lazy(() => import("jodit-react"));
@@ -49,22 +49,24 @@ export function RichTextEditor({ initialValue, onChange }) {
 
   return (
     <div>
-      <JoditEditor
-        value={initialValue}
-        config={{
-          readonly: false,
-          height: 300,
-          theme,
-          toolbar: true,
-          buttons: EDITOR_BUTTONS,
-          // @ts-ignore
-          uploader: {
-            insertImageAsBase64URI: true,
-          },
-        }}
-        onBlur={(content) => onChange(content)}
-        onChange={() => {}}
-      />
+      <Suspense fallback={<>Loading...</>}>
+        <JoditEditor
+          value={initialValue}
+          config={{
+            readonly: false,
+            height: 300,
+            theme,
+            toolbar: true,
+            buttons: EDITOR_BUTTONS,
+            // @ts-ignore
+            uploader: {
+              insertImageAsBase64URI: true,
+            },
+          }}
+          onBlur={(content) => onChange(content)}
+          onChange={() => {}}
+        />
+      </Suspense>
     </div>
   );
 }
