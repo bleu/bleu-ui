@@ -1,6 +1,7 @@
 import "./styles.css";
 
 import React, { Suspense, lazy } from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "#/components/ThemeToggle/context";
 
 const JoditEditor = lazy(() => import("jodit-react"));
@@ -46,6 +47,7 @@ const EDITOR_BUTTONS = [
 
 export function RichTextEditor({ initialValue, onChange }) {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -53,6 +55,8 @@ export function RichTextEditor({ initialValue, onChange }) {
         <JoditEditor
           value={initialValue}
           config={{
+            // @ts-ignore
+            placeholder: t("Start writing..."),
             readonly: false,
             height: 300,
             theme,

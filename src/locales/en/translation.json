@@ -1,9 +1,11 @@
 {
   "Type a command or search": "Type a command or search",
   "No results found": "No results found",
+  "Global search": "Global search",
   "Items per page": "Items per page",
   "Page {{currentPage}} of": "Page {{currentPage}} of",
-  "Search": "Search...",
+  "Search...": "Search...",
+  "Start writing...": "Start writing...",
   "View": "View",
   "Toggle columns": "Toggle columns",
   "Something went wrong!": "Something went wrong!",

@@ -1,8 +1,7 @@
 import { CircleIcon, FileIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Trans } from "react-i18next";
-import { t } from "i18next";
+import { Trans, useTranslation } from "react-i18next";
 import {
   Button,
   CommandDialog,
@@ -15,13 +14,10 @@ import {
 } from "#/components/ui";
 import { cn } from "#/lib/utils";
 
-export function CommandMenu({
-  commands,
-  placeholder = "Busca global",
-  ...props
-}) {
+export function CommandMenu({ commands, ...props }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     const down = (e) => {
@@ -51,7 +47,7 @@ export function CommandMenu({
         onClick={() => setOpen(true)}
         {...props}
       >
-        <span className="inline-flex">{placeholder}</span>
+        <span className="inline-flex">{t("Global search")}</span>
         <kbd className="bg-muted top- pointer-events-none absolute right-1.5 hidden h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
