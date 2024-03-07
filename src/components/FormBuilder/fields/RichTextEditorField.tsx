@@ -36,7 +36,7 @@ export const RichTextEditorField = withConditional<RichTextEditorFieldProps>(
         defaultValue={defaultValue}
         render={({ field: formField }) => (
           <FormItem className="w-full">
-            <FormLabel>{field.label}</FormLabel>
+            <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
             <FormDescription>{field.description}</FormDescription>
             <input hidden {...formField} value={formField.value} />
             <RichTextEditor

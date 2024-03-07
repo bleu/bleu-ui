@@ -28,7 +28,7 @@ export const RadiusSelect = withConditional<RadiusSelectFieldProps>(
       rules={field.required ? { required: true } : undefined}
       render={({ field: formField }) => (
         <FormItem className="w-full">
-          <FormLabel>{field.label}</FormLabel>
+          <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
           <FormDescription>{field.description}</FormDescription>
 
           <div className="flex items-center space-x-2 bg-background">

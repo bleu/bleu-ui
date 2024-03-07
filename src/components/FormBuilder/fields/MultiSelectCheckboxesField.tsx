@@ -25,7 +25,9 @@ export const MultiSelectCheckboxes =
       render={() => (
         <FormItem>
           <div className="mb-4">
-            <FormLabel className="text-base">{field.label}</FormLabel>
+            <FormLabel className="text-base" tooltip={field.tooltip}>
+              {field.label}
+            </FormLabel>
             <FormDescription>{field.description}</FormDescription>
           </div>
           <div className="h-20 overflow-y-auto">
@@ -57,7 +59,9 @@ export const MultiSelectCheckboxes =
                         }
                       />
                     </FormControl>
-                    <FormLabel className="font-normal">{item.label}</FormLabel>
+                    <FormLabel className="font-normal" tooltip={item.tooltip}>
+                      {item.label}
+                    </FormLabel>
                   </FormItem>
                 )}
               />

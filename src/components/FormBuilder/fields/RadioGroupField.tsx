@@ -96,7 +96,7 @@ export const RadioGroupField = withConditional<RadioGroupFieldProps>(
         rules={field.required ? { required: true } : undefined}
         render={({ field: formField }) => (
           <FormItem className="space-y-0">
-            <FormLabel>{field.label}</FormLabel>
+            <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
             <FormDescription className="">{field.description}</FormDescription>
             <FormControl>
               <RadioGroup
@@ -120,7 +120,10 @@ export const RadioGroupField = withConditional<RadioGroupFieldProps>(
                             <FormControl>
                               <RadioGroupItem value={option.value} />
                             </FormControl>
-                            <FormLabel className="font-normal">
+                            <FormLabel
+                              className="font-normal"
+                              tooltip={option.tooltip}
+                            >
                               {option.label}
                             </FormLabel>
                           </FormItem>

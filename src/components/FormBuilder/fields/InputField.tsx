@@ -50,7 +50,7 @@ export const InputField = withConditional<InputFieldProps>(
         }
         render={({ field: formField }) => (
           <FormItem className="w-full">
-            <FormLabel>{field.label}</FormLabel>
+            <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
             <FormDescription>{field.description}</FormDescription>
             <FormControl>
               <Input
