@@ -1,9 +1,11 @@
 {
   "Type a command or search": "Digite um comando ou pesquise",
   "No results found": "Nenhum resultado foi encontrado",
+  "Global search": "Busca global",
   "Items per page": "Itens por página",
   "Page {{currentPage}} of": "Página {{currentPage}} de",
-  "Search": "Pesquisar",
+  "Search...": "Pesquisar...",
+  "Start writing...": "Comece a escrever...",
   "View": "Visualizar",
   "Toggle columns": "Alternar colunas",
   "Something went wrong!": "Something went wrong!",
