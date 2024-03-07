@@ -25,6 +25,7 @@ export interface BaseField {
   name: string;
   placeholder?: string;
   required?: boolean;
+  tooltip?: string;
   type?: string;
   value: string;
   // Other common properties...

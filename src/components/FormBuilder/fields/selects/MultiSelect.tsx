@@ -67,7 +67,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
 
           return (
             <FormItem className="flex min-w-[6rem] flex-col">
-              <FormLabel>{field.label}</FormLabel>
+              <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>

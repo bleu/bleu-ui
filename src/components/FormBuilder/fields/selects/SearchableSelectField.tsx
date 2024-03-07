@@ -34,7 +34,7 @@ export const SearchableSelectField = withConditional<SelectFieldProps>(
       render={({ field: formField }) => (
         <FormItem className="flex flex-col">
           <input hidden {...formField} value={formField.value} />
-          <FormLabel>{field.label}</FormLabel>
+          <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
           <FormDescription>{field.description}</FormDescription>
           <Popover>
             <PopoverTrigger asChild>

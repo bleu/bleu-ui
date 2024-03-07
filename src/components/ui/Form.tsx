@@ -9,9 +9,11 @@ import {
   FormProvider,
   useFormContext,
 } from "react-hook-form";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "#/lib/utils";
 import { Label } from "#/components/ui/Label";
 import { useRailsApp } from "../RailsApp/context";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from ".";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -116,17 +118,35 @@ FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
+    tooltip?: string;
+  }
+>(({ className, tooltip, ...props }, ref) => {
   const { error, formItemId } = useFormField();
 
   return (
-    <Label
-      ref={ref}
-      className={cn(error && "text-destructive", className)}
-      htmlFor={formItemId}
-      {...props}
-    />
+    <TooltipProvider>
+      <Tooltip>
+        <div className="flex items-center gap-x-2">
+          <Label
+            ref={ref}
+            className={cn(error && "text-destructive", className)}
+            htmlFor={formItemId}
+            {...props}
+          />
+          {tooltip && (
+            <TooltipTrigger disabled>
+              <InfoCircledIcon />
+            </TooltipTrigger>
+          )}
+        </div>
+        {tooltip && (
+          <TooltipContent>
+            <p>{tooltip}</p>
+          </TooltipContent>
+        )}
+      </Tooltip>
+    </TooltipProvider>
   );
 });
 FormLabel.displayName = "FormLabel";

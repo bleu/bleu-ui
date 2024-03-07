@@ -36,7 +36,7 @@ export const DatePickerInput = withConditional<DatePickerInputProps>(
         rules={field.required ? { required: true } : undefined}
         render={({ field: formField }) => (
           <FormItem className="flex flex-col">
-            <FormLabel>{field.label}</FormLabel>
+            <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
             <Popover>
               <PopoverTrigger asChild>
                 <FormControl>

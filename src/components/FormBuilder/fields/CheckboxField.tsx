@@ -34,7 +34,7 @@ export const CheckboxField = withConditional<CheckboxFieldProps>(
             />
           </FormControl>
           <div className="space-y-1 leading-none">
-            <FormLabel>{field.label}</FormLabel>
+            <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
             <FormDescription>{field.description}</FormDescription>
           </div>
         </FormItem>

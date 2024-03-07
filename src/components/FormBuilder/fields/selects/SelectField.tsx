@@ -14,6 +14,7 @@ import { BaseField, withConditional } from "../../fields";
 export interface SelectFieldProps extends BaseField {
   options: Array<{
     label: string;
+    tooltip?: string;
     value: string;
   }>;
 }
@@ -26,7 +27,7 @@ export const SelectField = withConditional<SelectFieldProps>(
       rules={field.required ? { required: true } : undefined}
       render={({ field: formField }) => (
         <FormItem className="w-full">
-          <FormLabel>{field.label}</FormLabel>
+          <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
           <FormDescription>{field.description}</FormDescription>
           <Select.SelectRoot
             onValueChange={formField.onChange}
