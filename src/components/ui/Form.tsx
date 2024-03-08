@@ -38,7 +38,7 @@ const Form = ({
   method?: "get" | "post";
   onSubmit?: React.FormEventHandler<HTMLFormElement> | (() => void);
 }) => {
-  const csrfToken = useRailsApp();
+  const { csrfToken } = useRailsApp();
 
   return (
     // @ts-expect-error TS(2740) FIXME: Type '{ children: Element; }' is missing the follo... Remove this comment to see the full error message
