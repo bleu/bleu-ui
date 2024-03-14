@@ -20,41 +20,48 @@ export interface SelectFieldProps extends BaseField {
 }
 
 export const SelectField = withConditional<SelectFieldProps>(
-  ({ form, field }) => (
-    <FormField
-      control={form.control}
-      name={field.name}
-      rules={field.required ? { required: true } : undefined}
-      render={({ field: formField }) => (
-        <FormItem className="w-full">
-          <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
-          <FormDescription>{field.description}</FormDescription>
-          <Select.SelectRoot
-            onValueChange={formField.onChange}
-            defaultValue={String(formField.value)}
-            name={field.name}
-            disabled={field.disabled ? (field.disabled as boolean) : false}
-          >
-            <FormControl>
-              <Select.SelectTrigger className="h-10 w-full rounded-md border dark:border-2 shadow-none">
-                <Select.SelectValue placeholder={field.placeholder} />
-              </Select.SelectTrigger>
-            </FormControl>
-            <Select.SelectContent className="z-[10000]">
-              {field.options.map((option) => (
-                <Select.SelectItem
-                  key={String(option.value)}
-                  value={String(option.value)}
-                >
-                  {option.label}
-                </Select.SelectItem>
-              ))}
-            </Select.SelectContent>
-          </Select.SelectRoot>
+  ({ form, field }) => {
+    const disabled =
+      typeof field.disabled === "function"
+        ? field.disabled(form.getValues())
+        : field.disabled;
 
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  )
+    return (
+      <FormField
+        control={form.control}
+        name={field.name}
+        rules={field.required ? { required: true } : undefined}
+        render={({ field: formField }) => (
+          <FormItem className="w-full">
+            <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
+            <FormDescription>{field.description}</FormDescription>
+            <Select.SelectRoot
+              onValueChange={formField.onChange}
+              defaultValue={String(formField.value)}
+              name={field.name}
+              disabled={disabled}
+            >
+              <FormControl>
+                <Select.SelectTrigger className="h-10 w-full rounded-md border dark:border-2 shadow-none">
+                  <Select.SelectValue placeholder={field.placeholder} />
+                </Select.SelectTrigger>
+              </FormControl>
+              <Select.SelectContent className="z-[10000]">
+                {field.options.map((option) => (
+                  <Select.SelectItem
+                    key={String(option.value)}
+                    value={String(option.value)}
+                  >
+                    {option.label}
+                  </Select.SelectItem>
+                ))}
+              </Select.SelectContent>
+            </Select.SelectRoot>
+
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    );
+  }
 );
