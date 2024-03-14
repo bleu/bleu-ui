@@ -33,6 +33,7 @@ export const SelectField = withConditional<SelectFieldProps>(
             onValueChange={formField.onChange}
             defaultValue={String(formField.value)}
             name={field.name}
+            disabled={field.disabled ? (field.disabled as boolean) : false}
           >
             <FormControl>
               <Select.SelectTrigger className="h-10 w-full rounded-md border dark:border-2 shadow-none">

@@ -56,6 +56,7 @@ export const InputField = withConditional<InputFieldProps>(
               <Input
                 placeholder={field.placeholder}
                 {...formField}
+                disabled={field.disabled ? (field.disabled as boolean) : false}
                 type={field.mode}
                 onWheel={(event) =>
                   field.mode === "number" &&
