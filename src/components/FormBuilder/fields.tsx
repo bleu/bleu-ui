@@ -11,6 +11,7 @@ import { RichTextEditorFieldProps } from "./fields/RichTextEditorField";
 import { SelectFieldProps } from "./fields/selects/SelectField";
 import { TextAreaFieldProps } from "./fields/TextAreaField";
 import { FieldArrayFieldProps } from "./fields/FieldArray";
+import { TextFieldProps } from "./fields/TextField";
 
 export interface BaseField {
   conditions?: Array<{
@@ -99,4 +100,5 @@ export type FormFieldProps =
   | RadioGroupFieldProps
   | QuestionsFieldProps
   | RichTextEditorFieldProps
-  | FieldArrayFieldProps;
+  | FieldArrayFieldProps
+  | TextFieldProps;

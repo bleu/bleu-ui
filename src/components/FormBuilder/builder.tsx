@@ -17,6 +17,7 @@ import { SwitchField } from "./fields/SwitchField";
 import { TextAreaField } from "./fields/TextAreaField";
 import { DelegateField } from "./fields/DelegateField";
 import { QuestionsField } from "./fields/QuestionsField";
+import { TextField } from "./fields/TextField";
 
 export const fieldComponents = {
   input: InputField,
@@ -38,6 +39,7 @@ export const fieldComponents = {
   searchable_select: SearchableSelectField,
   radius_select: RadiusSelect,
   delegate: DelegateField,
+  text: TextField,
 } as const;
 
 export * from "./buildForm";
