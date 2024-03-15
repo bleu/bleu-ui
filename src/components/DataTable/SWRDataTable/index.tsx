@@ -192,7 +192,7 @@ export const buildDataTableColumns = (columnsConfig, filters, selectedRows) => {
 
 export function SWRDataTable({
   fetchPath,
-  searchKey = "name",
+  searchKey = undefined,
   defaultParams = {},
   hasDetails = false,
   action,
@@ -263,6 +263,7 @@ export function SWRDataTable({
     .reduce((acc, obj) => Object.assign(acc, obj), {});
 
   const filters = data?.filters;
+  const searchFor = data?.search?.key;
 
   const table = useReactTable({
     data: data?.data ?? [],
@@ -319,7 +320,7 @@ export function SWRDataTable({
         table={table}
         filters={filters}
         action={action}
-        searchKey={searchKey}
+        searchKey={searchFor || searchKey}
       />
       <div className="rounded-md border dark:border-2">
         <Table>
