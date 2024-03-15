@@ -13,6 +13,7 @@ import { TextAreaFieldProps } from "./fields/TextAreaField";
 import { FieldArrayFieldProps } from "./fields/FieldArray";
 
 export interface BaseField {
+  component?: React.ComponentType<CommonFieldProps<BaseField>>;
   conditions?: Array<{
     name: string;
     value: string | Array<string>;
@@ -26,7 +27,7 @@ export interface BaseField {
   placeholder?: string;
   required?: boolean;
   tooltip?: string;
-  type?: string;
+  type: string;
   value: string;
   // Other common properties...
 }
