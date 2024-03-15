@@ -34,7 +34,7 @@ import { DataTablePagination } from "#/components/DataTable/DataTablePagination"
 import { DataTableRowActions } from "#/components/DataTable/DataTableRowActions";
 import { DataTableToolbar } from "#/components/DataTable/DataTableToolbar";
 
-function formatRequestParams(originalObj) {
+export function formatRequestParams(originalObj) {
   return {
     ...originalObj,
     columnFilters: originalObj.columnFilters.reduce((acc, filter) => {
@@ -44,7 +44,7 @@ function formatRequestParams(originalObj) {
   };
 }
 
-const formatParamsToDataTable = (params, searchKey) => {
+export const formatParamsToDataTable = (params, searchKey) => {
   const { columnFilters = {}, pageIndex, pageSize, sorting } = params;
 
   const sortingObj = sorting ? { sorting: [sorting] } : {};
@@ -74,7 +74,7 @@ const formatParamsToDataTable = (params, searchKey) => {
   return to;
 };
 
-const fetcher = async ([url, paramsObject]) => {
+export const dataTableFetcher = async ([url, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
   const params = serializeQuery(formattedParams);
   const response = await fetch(`${url}?${params}`, {
@@ -88,7 +88,7 @@ const fetcher = async ([url, paramsObject]) => {
   return response.json();
 };
 
-const renderCell = ({ filters, column, row, selectedRows }) => {
+export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
   const value = row.getValue(column.columnDef.accessorKey);
 
   switch (column.columnDef.type) {
@@ -173,10 +173,10 @@ const renderCell = ({ filters, column, row, selectedRows }) => {
   }
 };
 
-const defaultFilterFn = (row, id, filterValue) =>
+export const defaultDataTableFilterFn = (row, id, filterValue) =>
   row.getValue(id).includes(filterValue);
 
-const buildColumns = (columnsConfig, filters, selectedRows) => {
+export const buildDataTableColumns = (columnsConfig, filters, selectedRows) => {
   if (!columnsConfig) return [];
 
   return columnsConfig.map((columnConfig) => ({
@@ -185,8 +185,8 @@ const buildColumns = (columnsConfig, filters, selectedRows) => {
       // @ts-expect-error TS(2741) FIXME: Property 'className' is missing in type '{ column:... Remove this comment to see the full error message
       <DataTableColumnHeader column={column} title={columnConfig.title} />
     ),
-    cell: (rest) => renderCell({ filters, ...rest, selectedRows }),
-    filterFn: columnConfig.filterable ? defaultFilterFn : null,
+    cell: (rest) => renderDataTableCell({ filters, ...rest, selectedRows }),
+    filterFn: columnConfig.filterable ? defaultDataTableFilterFn : null,
   }));
 };
 
@@ -246,13 +246,17 @@ export function SWRDataTable({
 
   const { data, error } = useSWR(
     [fetchPath, { pageIndex, pageSize, sorting, columnFilters }],
-    fetcher,
+    dataTableFetcher,
     {
       keepPreviousData: true,
     }
   );
 
-  const columns = buildColumns(data?.columns, data?.filters, selectedRows);
+  const columns = buildDataTableColumns(
+    data?.columns,
+    data?.filters,
+    selectedRows
+  );
   const hiddenColumns = columns
     .filter((c) => c.hide)
     .map((c) => ({ [c.accessorKey]: false }))
