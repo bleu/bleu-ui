@@ -34,6 +34,11 @@ export const InputField = withConditional<InputFieldProps>(
       e.stopPropagation();
     };
 
+    const disabled =
+      typeof field.disabled === "function"
+        ? field.disabled(form.getValues())
+        : field.disabled;
+
     return (
       <FormField
         control={form.control}
@@ -56,6 +61,7 @@ export const InputField = withConditional<InputFieldProps>(
               <Input
                 placeholder={field.placeholder}
                 {...formField}
+                disabled={disabled}
                 type={field.mode}
                 onWheel={(event) =>
                   field.mode === "number" &&
