@@ -141,6 +141,7 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
     case "actions":
       return <DataTableRowActions row={row} column={column} />;
     case "image":
+      if (!row.getValue("image")?.url) return null;
       return (
         <img
           className="aspect-ratio-1 size-16 rounded-sm object-contain"
