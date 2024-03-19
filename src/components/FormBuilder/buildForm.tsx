@@ -19,8 +19,8 @@ export function buildForm(
   index = 0,
   customComponents: { [key: string]: FieldComponentType } = {}
 ) {
-  // @ts-ignore
   const formElements = fields.map((field) => {
+    // @ts-ignore
     const FieldComponent: FieldComponentType | undefined =
       field?.component ||
       { ...fieldComponents, ...customComponents }[field.type];
