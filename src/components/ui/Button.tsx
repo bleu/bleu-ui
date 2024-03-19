@@ -1,6 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "#/lib/utils";
 import { Icons } from "./Icons";
 
@@ -50,12 +51,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size,
       asChild = false,
       loading = false,
-      loadingText = "Saving...",
+      loadingText: _loadingText,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
+    const { t } = useTranslation();
+    const loadingText = _loadingText ?? t("Loading");
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

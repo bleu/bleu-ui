@@ -46,7 +46,7 @@ export function DataTableToolbar({
     <div className="flex items-start justify-between">
       <div className="flex flex-1 items-start space-x-2">
         <Input
-          placeholder={t("Search...")}
+          placeholder={t("Search")}
           value={table.getColumn(searchKey)?.getFilterValue() ?? ""}
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)

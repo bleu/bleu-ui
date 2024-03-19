@@ -56,7 +56,7 @@ export function RichTextEditor({ initialValue, onChange }) {
           value={initialValue}
           config={{
             // @ts-ignore
-            placeholder: t("Start writing..."),
+            placeholder: t("Start writing"),
             readonly: false,
             height: 300,
             theme,
