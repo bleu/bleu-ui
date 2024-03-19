@@ -208,7 +208,7 @@ export function SWRDataTable({
   setSelectedData?: (data: any[]) => void;
 }) {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const initialSearch = {
     ...formatParamsToDataTable(
       deserializeQuery(searchParams.toString()),
@@ -241,8 +241,8 @@ export function SWRDataTable({
     });
 
     const params = serializeQuery(formattedParams);
-    setSearchParams(params);
-  }, [pageIndex, pageSize, sorting, columnFilters]);
+    navigate(`?${params}`, { replace: true });
+  }, [pageIndex, pageSize, sorting, columnFilters, navigate]);
 
   const { data, error } = useSWR(
     [fetchPath, { pageIndex, pageSize, sorting, columnFilters }],
