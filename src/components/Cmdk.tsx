@@ -2,8 +2,11 @@ import { CircleIcon, FileIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { CommandLoading } from "cmdk";
+import useSWR from "swr";
 import {
   Button,
+  ButtonProps,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -13,18 +16,52 @@ import {
   CommandSeparator,
 } from "#/components/ui";
 import { cn } from "#/lib/utils";
+import { useDebounceValue } from "#/hooks/useDebounceValue";
 
-export function CommandMenu({ commands, ...props }) {
+interface Command {
+  href: string;
+  id: string;
+  result_type: string;
+  title: string;
+  type: string;
+}
+
+interface CommandMenuProps {
+  commands: {
+    mainNav: Command[];
+    sidebarNav?: { items: Command[]; title: string }[];
+  };
+  fetcher: (query: string) => Promise<Command[]>;
+  icons: Record<string, React.ComponentType<{ className: string }>>;
+}
+
+export function CommandMenu({
+  commands,
+  fetcher,
+  className,
+  icons,
+  ...props
+}: CommandMenuProps & ButtonProps) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+  const [debouncedSearch, setDebouncedSearch] = useDebounceValue("", 300);
+  const { data: searchResults, isLoading: loading } = useSWR<Command[]>(
+    debouncedSearch,
+    fetcher
+  );
+
+  React.useEffect(() => {
+    setDebouncedSearch(search);
+  }, [search]);
+
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    const down = (e) => {
+    const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        // eslint-disable-next-line no-shadow
-        setOpen((open) => !open);
+        setOpen((prevOpen) => !prevOpen);
       }
     };
 
@@ -32,16 +69,17 @@ export function CommandMenu({ commands, ...props }) {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  const runCommand = React.useCallback((command) => {
+  const runCommand = (command: () => void) => {
     setOpen(false);
     command();
-  }, []);
+  };
 
   return (
     <>
       <Button
         variant="outline"
         className={cn(
+          className,
           "text-muted-foreground relative w-full justify-start text-sm sm:pr-12 md:w-40 lg:w-64"
         )}
         onClick={() => setOpen(true)}
@@ -52,27 +90,66 @@ export function CommandMenu({ commands, ...props }) {
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder={t("Type a command or search")} />
+      <CommandDialog open={open} onOpenChange={setOpen} loading={loading}>
+        <CommandInput
+          placeholder={t("Type a command or search")}
+          value={search}
+          onValueChange={setSearch}
+        />
         <CommandList>
           <CommandEmpty>
             <Trans>No results found</Trans>.
           </CommandEmpty>
+
+          {loading || searchResults !== undefined ? (
+            <>
+              {" "}
+              <CommandGroup heading={t("Search results")}>
+                {loading && (
+                  <CommandLoading>
+                    <p className="text-muted-foreground">
+                      <Trans>Loading...</Trans>
+                    </p>
+                  </CommandLoading>
+                )}{" "}
+                {searchResults?.map((result) => {
+                  const Icon = icons[result.type] ?? FileIcon;
+
+                  return (
+                    <CommandItem
+                      key={result.href}
+                      value={result.title}
+                      onSelect={() => {
+                        runCommand(() => navigate(result.href));
+                      }}
+                    >
+                      <p>
+                        <Icon className="inline mr-1 h-2 w-2 stroke-1" />
+                        <b className="inline">{result.result_type}</b> |{" "}
+                        {result.title}
+                      </p>
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+              <CommandSeparator />
+            </>
+          ) : (
+            ""
+          )}
           <CommandGroup heading="Links">
-            {commands.mainNav
-              .filter((navitem) => !navitem.external)
-              .map((navItem) => (
-                <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
-                  onSelect={() => {
-                    runCommand(() => navigate(navItem.href));
-                  }}
-                >
-                  <FileIcon className="mr-2 h-2 w-2" />
-                  {navItem.title}
-                </CommandItem>
-              ))}
+            {commands.mainNav.map((navItem) => (
+              <CommandItem
+                key={navItem.href}
+                value={navItem.title}
+                onSelect={() => {
+                  runCommand(() => navigate(navItem.href));
+                }}
+              >
+                <FileIcon className="mr-2 h-2 w-2" />
+                {navItem.title}
+              </CommandItem>
+            ))}
           </CommandGroup>
           <CommandSeparator />
           {commands.sidebarNav?.map((group) => (
