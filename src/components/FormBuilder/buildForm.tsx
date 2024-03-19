@@ -21,10 +21,10 @@ export function buildForm(
 ) {
   // @ts-ignore
   const formElements = fields.map((field) => {
-    // @ts-ignore
-    const FieldComponent: FieldComponentType =
+    const FieldComponent: FieldComponentType | undefined =
       field?.component ||
       { ...fieldComponents, ...customComponents }[field.type];
+
     if (!FieldComponent) {
       throw new Error(`Invalid field type: ${field.type}`);
     }

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "concurrently \"yarn build:dev\" \"yarn storybook\" \"yarn test\" ",
-    "build:dev": "rollup -cw --bundleConfigAsCjs --watch.onBundleEnd \"yalc push\"",
+    "build:dev": "rollup -cw --bundleConfigAsCjs --watch.onBundleEnd \"yalc push --sig --changed\"",
     "build": "yarn build:js && yalc push",
     "build:js": "yarn build:types && rollup -c --bundleConfigAsCjs",
     "build:types": "tspc -p tsconfig.build.json",
