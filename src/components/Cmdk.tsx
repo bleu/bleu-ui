@@ -31,7 +31,7 @@ interface CommandMenuProps {
     mainNav: Command[];
     sidebarNav?: { items: Command[]; title: string }[];
   };
-  fetcher: (query: string) => Promise<Command[]>;
+  fetcher?: (query: string) => Promise<Command[]>;
   icons?: Record<string, React.ComponentType<{ className: string }>>;
 }
 
@@ -46,10 +46,9 @@ export function CommandMenu({
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [debouncedSearch, setDebouncedSearch] = useDebounceValue("", 300);
-  const { data: searchResults, isLoading: loading } = useSWR<Command[]>(
-    debouncedSearch,
-    fetcher
-  );
+  const { data: searchResults, isLoading: loading } = fetcher
+    ? useSWR<Command[]>(debouncedSearch, fetcher)
+    : { data: undefined, isLoading: false };
 
   React.useEffect(() => {
     setDebouncedSearch(search);
