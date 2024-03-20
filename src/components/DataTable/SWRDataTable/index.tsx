@@ -37,6 +37,7 @@ import { DataTableToolbar } from "#/components/DataTable/DataTableToolbar";
 export function formatRequestParams(originalObj) {
   return {
     ...originalObj,
+    sorting: originalObj?.sorting?.length > 0 ? originalObj.sorting[0] : null,
     columnFilters: originalObj.columnFilters.reduce((acc, filter) => {
       acc[filter.id] = filter.value;
       return acc;
