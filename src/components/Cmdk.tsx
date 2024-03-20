@@ -20,10 +20,10 @@ import { useDebounceValue } from "#/hooks/useDebounceValue";
 
 interface Command {
   href: string;
-  id: string;
-  result_type: string;
+  id?: string;
+  result_type?: string;
   title: string;
-  type: string;
+  type?: string;
 }
 
 interface CommandMenuProps {
@@ -32,7 +32,7 @@ interface CommandMenuProps {
     sidebarNav?: { items: Command[]; title: string }[];
   };
   fetcher: (query: string) => Promise<Command[]>;
-  icons: Record<string, React.ComponentType<{ className: string }>>;
+  icons?: Record<string, React.ComponentType<{ className: string }>>;
 }
 
 export function CommandMenu({
@@ -113,7 +113,8 @@ export function CommandMenu({
                   </CommandLoading>
                 )}{" "}
                 {searchResults?.map((result) => {
-                  const Icon = icons[result.type] ?? FileIcon;
+                  const Icon =
+                    icons && result.type ? icons[result.type] : FileIcon;
 
                   return (
                     <CommandItem
