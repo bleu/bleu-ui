@@ -5,7 +5,6 @@ import { CheckboxFieldProps } from "./fields/CheckboxField";
 import { DatePickerInputProps } from "./fields/DatePickerInput";
 import { FileUploadFieldProps } from "./fields/FileUploadField";
 import { InputFieldProps } from "./fields/InputField";
-import { QuestionsFieldProps } from "./fields/QuestionsField";
 import { RadioGroupFieldProps } from "./fields/RadioGroupField";
 import { RichTextEditorFieldProps } from "./fields/RichTextEditorField";
 import { SelectFieldProps } from "./fields/selects/SelectField";
@@ -98,6 +97,5 @@ export type FormFieldProps =
   | FileUploadFieldProps
   | SelectFieldProps
   | RadioGroupFieldProps
-  | QuestionsFieldProps
   | RichTextEditorFieldProps
   | FieldArrayFieldProps;
