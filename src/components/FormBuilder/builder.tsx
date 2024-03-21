@@ -5,7 +5,6 @@ import { HiddenField } from "./fields/HiddenField";
 import { FileUploadField } from "./fields/FileUploadField";
 import { InputField } from "./fields/InputField";
 import { MultiSelectCheckboxes } from "./fields/MultiSelectCheckboxesField";
-
 import { RadioGroupField } from "./fields/RadioGroupField";
 import { RichTextEditorField } from "./fields/RichTextEditorField";
 import { ColorPickerField } from "./fields/selects/ColorPickerField";
@@ -16,7 +15,6 @@ import { SelectField } from "./fields/selects/SelectField";
 import { SwitchField } from "./fields/SwitchField";
 import { TextAreaField } from "./fields/TextAreaField";
 import { DelegateField } from "./fields/DelegateField";
-import { QuestionsField } from "./fields/QuestionsField";
 
 export const fieldComponents = {
   input: InputField,
@@ -31,7 +29,6 @@ export const fieldComponents = {
   multi_select: MultiSelect,
   field_array: FieldArray,
   hidden: HiddenField,
-  questions: QuestionsField,
   wysiwyg: RichTextEditorField,
   multi_select_checkbox: MultiSelectCheckboxes,
   color_picker: ColorPickerField,

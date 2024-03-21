@@ -11,7 +11,6 @@ export * from "./HiddenField";
 export * from "./FileUploadField";
 export * from "./InputField";
 export * from "./MultiSelectCheckboxesField";
-export * from "./QuestionsField";
 export * from "./RadioGroupField";
 export * from "./RichTextEditorField";
 export * from "./SwitchField";

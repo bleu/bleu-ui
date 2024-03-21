@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseField, CommonFieldProps, fieldComponents } from "./index";
 
-type FieldComponentType = (
+export type FieldComponentType = (
   props: CommonFieldProps<BaseField>
 ) => React.ReactNode | null;
 
@@ -31,7 +31,13 @@ export function buildForm(
 
     const name = field.name.replace("RESOURCE_ID", String(index));
 
-    return <FieldComponent field={{ ...field, name, index }} form={form} />;
+    return (
+      <FieldComponent
+        field={{ ...field, name, index }}
+        form={form}
+        customComponents={customComponents}
+      />
+    );
   });
 
   return formElements;

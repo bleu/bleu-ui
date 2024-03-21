@@ -5,12 +5,12 @@ import { CheckboxFieldProps } from "./fields/CheckboxField";
 import { DatePickerInputProps } from "./fields/DatePickerInput";
 import { FileUploadFieldProps } from "./fields/FileUploadField";
 import { InputFieldProps } from "./fields/InputField";
-import { QuestionsFieldProps } from "./fields/QuestionsField";
 import { RadioGroupFieldProps } from "./fields/RadioGroupField";
 import { RichTextEditorFieldProps } from "./fields/RichTextEditorField";
 import { SelectFieldProps } from "./fields/selects/SelectField";
 import { TextAreaFieldProps } from "./fields/TextAreaField";
 import { FieldArrayFieldProps } from "./fields/FieldArray";
+import { FieldComponentType } from "./buildForm";
 
 export interface BaseField {
   component?: React.ComponentType<CommonFieldProps<BaseField>>;
@@ -33,6 +33,7 @@ export interface BaseField {
 }
 
 export interface CommonFieldProps<T extends BaseField> {
+  customComponents?: { [key: string]: FieldComponentType };
   field: T;
   form: UseFormReturn<FieldValues>;
 }
@@ -98,6 +99,5 @@ export type FormFieldProps =
   | FileUploadFieldProps
   | SelectFieldProps
   | RadioGroupFieldProps
-  | QuestionsFieldProps
   | RichTextEditorFieldProps
   | FieldArrayFieldProps;
