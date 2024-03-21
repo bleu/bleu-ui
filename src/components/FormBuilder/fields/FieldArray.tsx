@@ -52,7 +52,7 @@ export interface FieldArrayFieldProps extends BaseField {
 }
 
 export const FieldArray = withConditional<FieldArrayFieldProps>(
-  ({ form, field }) => {
+  ({ form, field, customComponents }) => {
     const { fields, append, remove, move } = useFieldArray({
       control: form.control,
       name: field.name,
@@ -157,7 +157,12 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                                     <MoveIcon className="size-6 self-center" />
                                   </div>
                                 )}
-                                {buildForm(field.fields, form, Number(index))}
+                                {buildForm(
+                                  field.fields,
+                                  form,
+                                  Number(index),
+                                  customComponents
+                                )}
                                 {field.remove !== false && (
                                   // eslint-disable-next-line jsx-a11y/control-has-associated-label
                                   <button

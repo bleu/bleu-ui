@@ -10,6 +10,7 @@ import { RichTextEditorFieldProps } from "./fields/RichTextEditorField";
 import { SelectFieldProps } from "./fields/selects/SelectField";
 import { TextAreaFieldProps } from "./fields/TextAreaField";
 import { FieldArrayFieldProps } from "./fields/FieldArray";
+import { FieldComponentType } from "./buildForm";
 
 export interface BaseField {
   component?: React.ComponentType<CommonFieldProps<BaseField>>;
@@ -32,6 +33,7 @@ export interface BaseField {
 }
 
 export interface CommonFieldProps<T extends BaseField> {
+  customComponents?: { [key: string]: FieldComponentType };
   field: T;
   form: UseFormReturn<FieldValues>;
 }
