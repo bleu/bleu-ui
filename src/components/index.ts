@@ -9,3 +9,4 @@ export * from "./RailsApp";
 export * from "./SectionTitle";
 export * from "./OtpInput";
 export * from "./SubmitButton";
+export * from "./StrictModeDroppable";
