@@ -5,9 +5,7 @@ export const TableContext = React.createContext({});
 export function useTableContext() {
   const context = React.useContext(TableContext);
   if (context === undefined) {
-    throw new Error(
-      "useMediaTableContext must be used within a MediaTableProvider"
-    );
+    throw new Error("useTableContext must be used within a TableProvider");
   }
   return context;
 }
