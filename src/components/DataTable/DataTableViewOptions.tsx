@@ -10,8 +10,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "#/components/ui";
+import { useTableContext } from "./TableContext";
 
-export function DataTableViewOptions({ table }) {
+export function DataTableViewOptions() {
+  // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
+  const { table } = useTableContext();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
