@@ -1,49 +1,23 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useEffect } from "react";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import useSWR from "swr";
+import React from "react";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
 import { Trans } from "react-i18next";
-import {
-  Badge,
-  Checkbox,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "#/components/ui";
+import { useSearchParams } from "react-router-dom";
+import { Badge, Checkbox, Table } from "#/components/ui";
 import { SectionTitle } from "#/components/SectionTitle";
 import { formatDate, formatDateTime } from "#/lib/formatDate";
-import { serializeQuery, deserializeQuery } from "#/lib/serializeQuery";
-import { useTableState } from "./useTableState";
 import { Link } from "#/components/Link";
 
 import { DataTableColumnHeader } from "#/components/DataTable/DataTableColumnHeader";
 import { DataTablePagination } from "#/components/DataTable/DataTablePagination";
 import { DataTableRowActions } from "#/components/DataTable/DataTableRowActions";
 import { DataTableToolbar } from "#/components/DataTable/DataTableToolbar";
-
-export function formatRequestParams(originalObj) {
-  return {
-    ...originalObj,
-    sorting: originalObj?.sorting?.length > 0 ? originalObj.sorting[0] : null,
-    columnFilters: originalObj.columnFilters.reduce((acc, filter) => {
-      acc[filter.id] = filter.value;
-      return acc;
-    }, {}),
-  };
-}
+import { DataTable } from "../DataTable";
+import { useSWRDataTable } from "../useSWRDataTable";
+import { SWRDataTableHeader } from "./SWRDataTableHeader";
+import { SWRDataTableBody } from "./SWRDataTableBody";
+import { deserializeQuery } from "#/lib/serializeQuery";
 
 export const formatParamsToDataTable = (params, searchKey) => {
   const { columnFilters = {}, pageIndex, pageSize, sorting } = params;
@@ -73,20 +47,6 @@ export const formatParamsToDataTable = (params, searchKey) => {
   };
 
   return to;
-};
-
-export const dataTableFetcher = async ([url, paramsObject]) => {
-  const formattedParams = formatRequestParams(paramsObject);
-  const params = serializeQuery(formattedParams);
-  const response = await fetch(`${url}?${params}`, {
-    headers: {
-      Accept: "application/json",
-    },
-  });
-  if (!response.ok) {
-    throw new Error("Failed to fetch.");
-  }
-  return response.json();
 };
 
 export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
@@ -209,7 +169,6 @@ export function SWRDataTable({
   selectedRows?: any[];
   setSelectedData?: (data: any[]) => void;
 }) {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const initialSearch = {
     ...formatParamsToDataTable(
@@ -219,89 +178,13 @@ export function SWRDataTable({
     ...defaultParams,
   };
 
-  const {
-    pagination,
-    rowSelection,
-    columnVisibility,
-    columnFilters,
-    sorting,
-    setPagination,
-    setRowSelection,
-    setColumnVisibility,
-    setColumnFilters,
-    setSorting,
-  } = useTableState({ ...initialSearch });
-
-  const { pageIndex, pageSize } = pagination;
-
-  useEffect(() => {
-    const formattedParams = formatRequestParams({
-      columnFilters,
-      sorting,
-      pageIndex,
-      pageSize,
-    });
-
-    const params = serializeQuery(formattedParams);
-    navigate(`?${params}`, { replace: true });
-  }, [pageIndex, pageSize, sorting, columnFilters, navigate]);
-
-  const { data, error } = useSWR(
-    [fetchPath, { pageIndex, pageSize, sorting, columnFilters }],
-    dataTableFetcher,
-    {
-      keepPreviousData: true,
-    }
+  const { data, error, tableState, setTableState } = useSWRDataTable(
+    fetchPath,
+    initialSearch
   );
 
-  const columns = buildDataTableColumns(
-    data?.columns,
-    data?.filters,
-    selectedRows
-  );
-  const hiddenColumns = columns
-    .filter((c) => c.hide)
-    .map((c) => ({ [c.accessorKey]: false }))
-    .reduce((acc, obj) => Object.assign(acc, obj), {});
-
-  const filters = data?.filters;
-  const searchFor = data?.search?.key;
-
-  const table = useReactTable({
-    data: data?.data ?? [],
-    pageCount: Math.ceil((data?.total ?? 0) / pageSize),
-    columns,
-    state: {
-      sorting,
-      columnVisibility: {
-        ...columnVisibility,
-        ...hiddenColumns,
-      },
-      rowSelection,
-      columnFilters,
-      pagination,
-    },
-    onPaginationChange: setPagination,
-    manualPagination: true,
-    enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onColumnVisibilityChange: setColumnVisibility,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-  });
-
-  // TODO save selected rows independently of the table page
-
-  useEffect(() => {
-    if (setSelectedData)
-      setSelectedData(
-        table.getSelectedRowModel().flatRows.map((row) => row.original)
-      );
-  }, [rowSelection, table, setSelectedData]);
+  const buildColumns = (tableColumns, tableFilters) =>
+    buildDataTableColumns(tableColumns, tableFilters, selectedRows);
 
   if (error) {
     return (
@@ -317,68 +200,26 @@ export function SWRDataTable({
   }
 
   return (
-    <div className="space-y-4">
-      <DataTableToolbar
-        table={table}
-        filters={filters}
-        action={action}
-        searchKey={searchFor || searchKey}
-      />
-      <div className="rounded-md border dark:border-2">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  onClick={() => {
-                    if (hasDetails) {
-                      // @ts-expect-error TS(2339) FIXME: Property 'id' does not exist on type 'unknown'.
-                      navigate(`${row.original.id}`);
-                    }
-                  }}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  <Trans>No results found</Trans>.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+    <DataTable
+      data={data}
+      error={error}
+      tableState={tableState}
+      setTableState={setTableState}
+      // @ts-ignore
+      buildTableColumns={buildColumns}
+      setSelectedData={setSelectedData}
+      setQueryToParams
+    >
+      <div className="space-y-4">
+        <DataTableToolbar action={action} />
+        <div className="rounded-md border dark:border-2">
+          <Table>
+            <SWRDataTableHeader />
+            <SWRDataTableBody hasDetails={hasDetails} />
+          </Table>
+        </div>
+        <DataTablePagination />
       </div>
-      <DataTablePagination table={table} />
-    </div>
+    </DataTable>
   );
 }

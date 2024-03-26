@@ -46,5 +46,12 @@ export function useTableState(
     ]
   );
 
-  return { ...state, ...handlers };
+  return {
+    tableState: {
+      ...state,
+    },
+    setTableState: {
+      ...handlers,
+    },
+  };
 }
