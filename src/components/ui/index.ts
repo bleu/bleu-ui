@@ -28,3 +28,4 @@ export * from "./Tooltip";
 export * from "./Toast";
 export * from "./Toaster";
 export * from "./Spinner";
+export * from "./KpiCard";

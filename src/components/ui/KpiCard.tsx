@@ -69,4 +69,4 @@ KpiCard.Title = Title;
 KpiCard.Content = Content;
 KpiCard.FooterNote = FooterNote;
 
-export default KpiCard;
+export { KpiCard };
