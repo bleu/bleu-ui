@@ -1,11 +1,11 @@
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { merge } from "lodash";
 import { PlotParams } from "react-plotly.js";
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { cn } from "#/lib";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "..";
 
-// @ts-ignore
+// @ts-ignore Type 'Promise<typeof /@types/react-plotly.js/index")>' is not assignable to type 'Promise<{ default: ComponentType<any>; }>'
 const PlotPrimitive = lazy(() => import("react-plotly.js"));
 
 interface PlotProps extends PlotParams {
@@ -100,7 +100,9 @@ export function Plot(props: PlotProps) {
           <PlotTitle title={plotProps.title} tooltip={plotProps.toolTip} />
         )}
         {/* @ts-ignore */}
-        <PlotPrimitive {...plotProps} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <PlotPrimitive {...plotProps} />
+        </Suspense>
       </div>
     </div>
   );
