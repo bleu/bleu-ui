@@ -27,5 +27,6 @@ export * from "./Textarea";
 export * from "./Tooltip";
 export * from "./Toast";
 export * from "./Toaster";
+export * from "./Progress";
 export * from "./Spinner";
 export * from "./KpiCard";
