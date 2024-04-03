@@ -8,7 +8,7 @@ import { TableBody, TableCell, TableRow } from "#/components/ui";
 
 import { useTableContext } from "../TableContext";
 
-export function SWRDataTableBody({ hasDetails }) {
+export function DataTableBody({ hasDetails }) {
   // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
   const { table } = useTableContext();
 

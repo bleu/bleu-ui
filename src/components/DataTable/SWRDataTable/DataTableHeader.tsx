@@ -6,7 +6,7 @@ import { TableHead, TableHeader, TableRow } from "#/components/ui";
 
 import { useTableContext } from "../TableContext";
 
-export function SWRDataTableHeader() {
+export function DataTableHeader() {
   // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
   const { table } = useTableContext();
 

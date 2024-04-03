@@ -10,28 +10,32 @@ import {
 
 import { DynamicActionComponent } from "./DynamicActionComponent";
 
-export const DataTableRowActions = ({ row, column }) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button
-        variant="ghost"
-        className="data-[state=open]:bg-muted flex h-8 w-8 items-center justify-center whitespace-nowrap rounded-md p-0"
-      >
-        <DotsHorizontalIcon className="h-4 w-4" />
-        <span className="sr-only">Open menu</span>
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end" className="w-[160px]">
-      {/* TODO: here we'd need to filter actions that the user cannot perform, or ideally do this in the BE */}
-      {column.columnDef.actions
-        .filter(({ condition_key, condition_value }) => {
-          if (!condition_key && !condition_value) return true;
+export const DataTableRowActions = ({ row, column }) => {
+  if (!column.columnDef.actions.length) return null;
 
-          return row.original?.[condition_key] === condition_value;
-        })
-        .map((action) => (
-          <DynamicActionComponent key={action} action={action} row={row} />
-        ))}
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className="data-[state=open]:bg-muted flex h-8 w-8 items-center justify-center whitespace-nowrap rounded-md p-0"
+        >
+          <DotsHorizontalIcon className="h-4 w-4" />
+          <span className="sr-only">Open menu</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-[160px]">
+        {/* TODO: here we'd need to filter actions that the user cannot perform, or ideally do this in the BE */}
+        {column.columnDef.actions
+          .filter(({ condition_key, condition_value }) => {
+            if (!condition_key && !condition_value) return true;
+
+            return row.original?.[condition_key] === condition_value;
+          })
+          .map((action) => (
+            <DynamicActionComponent key={action} action={action} row={row} />
+          ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
