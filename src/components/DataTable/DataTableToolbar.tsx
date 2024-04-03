@@ -6,13 +6,18 @@ import { Button, Input } from "#/components/ui";
 
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
 import { DataTableViewOptions } from "./DataTableViewOptions";
+import { useTableContext } from "./TableContext";
 
 export function DataTableToolbar({
-  table,
-  filters,
   action,
+  showViewOptions = true,
   searchKey = "name",
 }) {
+  // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
+  const { table, filters, searchKey: TableSeachKey } = useTableContext();
+
+  const search = TableSeachKey || searchKey;
+
   if (!table || !filters) {
     return null;
   }
@@ -47,9 +52,9 @@ export function DataTableToolbar({
       <div className="flex flex-1 items-start space-x-2">
         <Input
           placeholder={t("Search")}
-          value={table.getColumn(searchKey)?.getFilterValue() ?? ""}
+          value={table.getColumn(search)?.getFilterValue() ?? ""}
           onChange={(event) =>
-            table.getColumn(searchKey)?.setFilterValue(event.target.value)
+            table.getColumn(search)?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px] dark:border-2"
         />
@@ -79,7 +84,7 @@ export function DataTableToolbar({
       </div>
       <div className="flex items-center space-x-2">
         {action}
-        <DataTableViewOptions table={table} />
+        {showViewOptions && <DataTableViewOptions />}
       </div>
     </div>
   );

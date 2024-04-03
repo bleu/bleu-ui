@@ -3257,6 +3257,7 @@ __metadata:
     "@types/react": "npm:18.2.64"
     "@types/react-beautiful-dnd": "npm:^13"
     "@types/react-dom": "npm:18.2.21"
+    "@types/react-plotly.js": "npm:^2"
     "@types/react-test-renderer": "npm:18.0.7"
     "@types/rollup-plugin-peer-deps-external": "npm:^2"
     "@typescript-eslint/eslint-plugin": "npm:7.1.1"
@@ -3303,6 +3304,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-hook-form: "npm:^7.51.0"
     react-i18next: "npm:^14.1.0"
+    react-plotly.js: "npm:^2.6.0"
     react-router: "npm:^6.22.3"
     react-router-dom: "npm:^6.22.3"
     react-test-renderer: "npm:18.2.0"
@@ -8597,6 +8599,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/plotly.js@npm:*":
+  version: 2.29.2
+  resolution: "@types/plotly.js@npm:2.29.2"
+  checksum: 10c0/e8cb303c08d70af00975b6514816279a424dfffffb0b70c7d5cd1e66d3d9069ddce735a266ba811aaec748458f5eb59e0ac248563e1ea18f1f49ecbd74ec6f5f
+  languageName: node
+  linkType: hard
+
 "@types/pretty-hrtime@npm:^1.0.0":
   version: 1.0.1
   resolution: "@types/pretty-hrtime@npm:1.0.1"
@@ -8659,6 +8668,16 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 10c0/bd090f5e1b13765fbc191d9eb720dd152d26c20558221963009189c4636ce11e4c1c976e4cde4a74335f997a2be651af27d3727474a8091424101a83a71eebfb
+  languageName: node
+  linkType: hard
+
+"@types/react-plotly.js@npm:^2":
+  version: 2.6.3
+  resolution: "@types/react-plotly.js@npm:2.6.3"
+  dependencies:
+    "@types/plotly.js": "npm:*"
+    "@types/react": "npm:*"
+  checksum: 10c0/8cd6f99766009d541615471251b377200c5fd00a08995b64566f4cdfb6d1938ee64ba38d3847c7fe3d1d7515e59c1b0111e3262481480540b1a5e5a041cc4e3b
   languageName: node
   linkType: hard
 
@@ -20546,6 +20565,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-plotly.js@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "react-plotly.js@npm:2.6.0"
+  dependencies:
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    plotly.js: ">1.34.0"
+    react: ">0.13.0"
+  checksum: 10c0/9b5ba8e33782daa9624d79295975d08d4c7581bac41d67d497eec0a306e4d030465a1e8282fab145bc02705fe96262f6fb0d214133657c480982fc268763644a
+  languageName: node
+  linkType: hard
+
 "react-redux@npm:^7.2.0":
   version: 7.2.9
   resolution: "react-redux@npm:7.2.9"
@@ -24269,8 +24300,8 @@ __metadata:
   linkType: hard
 
 "webpack-dev-middleware@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "webpack-dev-middleware@npm:6.1.1"
+  version: 6.1.2
+  resolution: "webpack-dev-middleware@npm:6.1.2"
   dependencies:
     colorette: "npm:^2.0.10"
     memfs: "npm:^3.4.12"
@@ -24282,7 +24313,7 @@ __metadata:
   peerDependenciesMeta:
     webpack:
       optional: true
-  checksum: 10c0/f8f5b7f7591fa3e4d4008b28ab2b5c13367a24587257e3e37cff31e2d8a6c859de5294af83c79e8faf3137db194377f392fffacdf5010b5c1311eba6f9b71568
+  checksum: 10c0/90c415a770c7db493f4a7d8f3308d761ff63249f628fa8a133eac5a61e849cdf658398e189fc2d95ce0ea884641363f964db6b269c6cea877765321dd7f14b9a
   languageName: node
   linkType: hard
 

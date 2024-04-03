@@ -7,8 +7,12 @@ import {
 } from "@radix-ui/react-icons";
 import { useTranslation, Trans } from "react-i18next";
 import { Button, Select } from "#/components/ui";
+import { useTableContext } from "./TableContext";
 
-export function DataTablePagination({ table }) {
+export function DataTablePagination() {
+  // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
+  const { table } = useTableContext();
+
   const { t } = useTranslation();
   const currentPage = Number(table.getState().pagination.pageIndex) + 1;
   const pageCount = table.getPageCount() || 1;
