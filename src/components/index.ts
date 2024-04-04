@@ -13,3 +13,4 @@ export * from "./StrictModeDroppable";
 export * from "./Plot";
 export * from "./TableSkeleton";
 export * from "./KpiSkeleton";
+export * from "./ChartSkeleton";

@@ -3,7 +3,13 @@ import { merge } from "lodash";
 import { PlotParams } from "react-plotly.js";
 import React, { Suspense, lazy } from "react";
 import { cn } from "#/lib";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "..";
+import {
+  ChartSkeleton,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "..";
 
 // @ts-ignore Type 'Promise<typeof /@types/react-plotly.js/index")>' is not assignable to type 'Promise<{ default: ComponentType<any>; }>'
 const PlotPrimitive = lazy(() => import("react-plotly.js"));
@@ -100,7 +106,7 @@ export function Plot(props: PlotProps) {
           <PlotTitle title={plotProps.title} tooltip={plotProps.toolTip} />
         )}
         {/* @ts-ignore */}
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ChartSkeleton />}>
           <PlotPrimitive {...plotProps} />
         </Suspense>
       </div>
