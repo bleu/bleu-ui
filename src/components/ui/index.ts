@@ -30,3 +30,4 @@ export * from "./Toaster";
 export * from "./Progress";
 export * from "./Spinner";
 export * from "./KpiCard";
+export * from "./Skeleton";

@@ -11,3 +11,5 @@ export * from "./OtpInput";
 export * from "./SubmitButton";
 export * from "./StrictModeDroppable";
 export * from "./Plot";
+export * from "./TableSkeleton";
+export * from "./KpiSkeleton";

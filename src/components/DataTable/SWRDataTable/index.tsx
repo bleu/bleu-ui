@@ -15,8 +15,8 @@ import { DataTableRowActions } from "#/components/DataTable/DataTableRowActions"
 import { DataTableToolbar } from "#/components/DataTable/DataTableToolbar";
 import { DataTable } from "../DataTable";
 import { useSWRDataTable } from "../useSWRDataTable";
-import { SWRDataTableHeader } from "./SWRDataTableHeader";
-import { SWRDataTableBody } from "./SWRDataTableBody";
+import { DataTableHeader } from "./DataTableHeader";
+import { DataTableBody } from "./DataTableBody";
 import { deserializeQuery } from "#/lib/serializeQuery";
 
 export const formatParamsToDataTable = (params, searchKey) => {
@@ -214,8 +214,8 @@ export function SWRDataTable({
         <DataTableToolbar action={action} />
         <div className="rounded-md border dark:border-2">
           <Table>
-            <SWRDataTableHeader />
-            <SWRDataTableBody hasDetails={hasDetails} />
+            <DataTableHeader />
+            <DataTableBody hasDetails={hasDetails} />
           </Table>
         </div>
         <DataTablePagination />
@@ -223,3 +223,5 @@ export function SWRDataTable({
     </DataTable>
   );
 }
+
+export { DataTableHeader, DataTableBody };
