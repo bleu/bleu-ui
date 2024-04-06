@@ -31,3 +31,4 @@ export * from "./Progress";
 export * from "./Spinner";
 export * from "./KpiCard";
 export * from "./Skeleton";
+export * from "./Carousel";
