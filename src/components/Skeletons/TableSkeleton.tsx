@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "#/components/ui/Table";
-import { Skeleton } from "./ui/Skeleton";
+import { Skeleton } from "#/components/ui/Skeleton";
 
 export function TableSkeleton({
   rowsCount = 4,
