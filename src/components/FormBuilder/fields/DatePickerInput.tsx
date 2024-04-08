@@ -75,6 +75,7 @@ export const DatePickerInput = withConditional<DatePickerInputProps>(
             </Popover>
             <FormDescription>{field.description}</FormDescription>
             <FormMessage />
+            <input hidden {...formField} value={formField.value} />
           </FormItem>
         )}
       />
