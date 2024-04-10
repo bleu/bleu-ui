@@ -16,7 +16,10 @@ function formatRequestParams(originalObj) {
 const dataTableFetcher = async ([url, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
   const params = serializeQuery(formattedParams);
-  const response = await fetch(`${url}?${params}`, {
+
+  const separator = url.includes("?") ? "&" : "?";
+
+  const response = await fetch(`${url}${separator}${params}`, {
     headers: {
       Accept: "application/json",
     },
