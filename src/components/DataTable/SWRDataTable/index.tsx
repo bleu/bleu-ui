@@ -52,7 +52,10 @@ export const formatParamsToDataTable = (params, searchKey) => {
 export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
   const value = row.getValue(column.columnDef.accessorKey);
 
-  switch (column.columnDef.type) {
+  const displayAs =
+    column.columnDef.field_options?.display_type || column.columnDef.type;
+
+  switch (displayAs) {
     case "text":
       return <div className="max-w-[400px] truncate">{value}</div>;
     case "boolean":
