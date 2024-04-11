@@ -8,7 +8,7 @@ export function constructFullUrlWithParams(
     throw new Error("Base URL must be a string.");
   }
 
-  const url = new URL(baseUrl);
+  const url = new URL(baseUrl, window.location.origin);
 
   const existingParams = deserializeQuery(url.search);
 

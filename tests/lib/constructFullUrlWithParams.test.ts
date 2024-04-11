@@ -1,7 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { constructFullUrlWithParams } from "../../src/lib/constructFullUrlWithParams";
 
 describe("constructFullUrlWithParams", () => {
+  beforeAll(() => {
+    vi.stubGlobal("location", { origin: "http://localhost" });
+  });
+
   it("should throw an error if the base URL is not a string", () => {
     // @ts-expect-error
     expect(() => constructFullUrlWithParams(null, {})).toThrow(
