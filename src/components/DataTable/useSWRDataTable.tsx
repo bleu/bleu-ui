@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useTableState } from "./useTableState";
-import { serializeQuery } from "#/lib/serializeQuery";
+import { constructFullUrlWithParams } from "#/lib/constructFullUrlWithParams";
 
 function formatRequestParams(originalObj) {
   return {
@@ -15,8 +15,10 @@ function formatRequestParams(originalObj) {
 
 const dataTableFetcher = async ([url, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
-  const params = serializeQuery(formattedParams);
-  const response = await fetch(`${url}?${params}`, {
+
+  const fullUrl = constructFullUrlWithParams(url, formattedParams);
+
+  const response = await fetch(fullUrl, {
     headers: {
       Accept: "application/json",
     },
