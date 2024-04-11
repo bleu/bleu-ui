@@ -1,14 +1,18 @@
 import { deserializeQuery, serializeQuery } from "./serializeQuery";
 
 export function constructFullUrlWithParams(
-  baseUrl: string,
+  pathOrUrl: string,
   queryParams: Record<string, unknown>
 ) {
-  if (typeof baseUrl !== "string") {
+  if (typeof pathOrUrl !== "string") {
     throw new Error("Base URL must be a string.");
   }
 
-  const url = new URL(baseUrl, window.location.origin);
+  const isFullUrl = /^(http|https):\/\//.test(pathOrUrl);
+  const url = new URL(
+    pathOrUrl,
+    isFullUrl ? undefined : window.location.origin
+  );
 
   const existingParams = deserializeQuery(url.search);
 

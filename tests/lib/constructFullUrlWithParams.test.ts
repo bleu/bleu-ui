@@ -13,6 +13,22 @@ describe("constructFullUrlWithParams", () => {
     );
   });
 
+  it("should correctly handle full URLs", () => {
+    const fullUrl = "http://example.com";
+    const queryParams = { section: "blog", article: 123 };
+    const result = constructFullUrlWithParams(fullUrl, queryParams);
+    expect(result).toBe("http://example.com/?section=blog&article=123");
+  });
+
+  it("should correctly handle relative paths", () => {
+    const relativePath = "/path/to/resource";
+    const queryParams = { section: "blog", article: 123 };
+    const result = constructFullUrlWithParams(relativePath, queryParams);
+    expect(result).toBe(
+      "http://localhost/path/to/resource?section=blog&article=123"
+    );
+  });
+
   it("should correctly add simple query parameters to a base URL", () => {
     const baseUrl = "http://example.com";
     const queryParams = { name: "John", age: 30 };

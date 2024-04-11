@@ -13,10 +13,10 @@ function formatRequestParams(originalObj) {
   };
 }
 
-const dataTableFetcher = async ([url, paramsObject]) => {
+const dataTableFetcher = async ([pathOrUrl, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
 
-  const fullUrl = constructFullUrlWithParams(url, formattedParams);
+  const fullUrl = constructFullUrlWithParams(pathOrUrl, formattedParams);
 
   const response = await fetch(fullUrl, {
     headers: {
