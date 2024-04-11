@@ -1,7 +1,7 @@
 import { Cross2Icon } from "@radix-ui/react-icons";
 import React, { useEffect, useRef } from "react";
 
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Button, Input } from "#/components/ui";
 
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
@@ -77,7 +77,7 @@ export function DataTableToolbar({
             onClick={() => table.resetColumnFilters()}
             className="h-8 px-2 lg:px-3"
           >
-            Reset
+            <Trans>Reset</Trans>
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
