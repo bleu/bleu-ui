@@ -5,6 +5,7 @@ import { constructFullUrlWithParams } from "#/lib/constructFullUrlWithParams";
 function formatRequestParams(originalObj) {
   return {
     ...originalObj,
+    grouping: originalObj.grouping.length > 0 ? originalObj.grouping[0] : null,
     sorting: originalObj?.sorting?.length > 0 ? originalObj.sorting[0] : null,
     columnFilters: originalObj.columnFilters.reduce((acc, filter) => {
       acc[filter.id] = filter.value;
@@ -40,6 +41,7 @@ export function useSWRDataTable(path, initialSearch = {}, options = {}) {
         pageSize: tableState.pagination.pageSize,
         sorting: tableState.sorting,
         columnFilters: tableState.columnFilters,
+        grouping: tableState.grouping,
       },
     ],
     dataTableFetcher,

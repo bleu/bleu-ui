@@ -1,7 +1,9 @@
 import {
   getCoreRowModel,
+  getExpandedRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
+  getGroupedRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -14,6 +16,7 @@ import { serializeQuery } from "#/lib/serializeQuery";
 export function formatRequestParams(originalObj) {
   return {
     ...originalObj,
+    grouping: originalObj.grouping.length > 0 ? originalObj.grouping[0] : null,
     sorting: originalObj?.sorting?.length > 0 ? originalObj.sorting[0] : null,
     columnFilters: originalObj.columnFilters.reduce((acc, filter) => {
       acc[filter.id] = filter.value;
@@ -44,8 +47,14 @@ export function DataTable({
   setQueryToParams,
   setSelectedData,
 }) {
-  const { pagination, rowSelection, columnVisibility, columnFilters, sorting } =
-    tableState;
+  const {
+    pagination,
+    rowSelection,
+    columnVisibility,
+    columnFilters,
+    sorting,
+    grouping,
+  } = tableState;
 
   const {
     setPagination,
@@ -53,6 +62,7 @@ export function DataTable({
     setColumnVisibility,
     setColumnFilters,
     setSorting,
+    setGrouping,
   } = setTableState;
 
   if (error) {
@@ -74,6 +84,7 @@ export function DataTable({
     pageCount: Math.ceil((data?.total ?? 0) / pagination.pageSize),
     columns,
     state: {
+      ...(grouping.length > 0 ? { grouping } : {}),
       sorting,
       rowSelection,
       columnFilters,
@@ -83,6 +94,14 @@ export function DataTable({
         ...hiddenColumns,
       },
     },
+    ...(grouping.length > 0
+      ? {
+          onGroupingChange: setGrouping,
+          getExpandedRowModel: getExpandedRowModel(),
+          getGroupedRowModel: getGroupedRowModel(),
+          autoResetExpanded: false,
+        }
+      : {}),
     onPaginationChange: setPagination,
     manualPagination: true,
     enableRowSelection: true,
@@ -112,6 +131,7 @@ export function DataTable({
       sorting: tableState.sorting,
       pageIndex: tableState.pagination.pageIndex,
       pageSize: tableState.pagination.pageSize,
+      grouping: tableState.grouping,
     });
 
     const params = serializeQuery(formattedParams);
@@ -121,6 +141,7 @@ export function DataTable({
     tableState.pagination.pageSize,
     tableState.sorting,
     tableState.columnFilters,
+    tableState.grouping,
     navigate,
   ]);
 

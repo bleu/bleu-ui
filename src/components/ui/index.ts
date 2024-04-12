@@ -32,3 +32,4 @@ export * from "./Spinner";
 export * from "./KpiCard";
 export * from "./Skeleton";
 export * from "./Carousel";
+export * from "./Collapsible";
