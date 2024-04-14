@@ -61,13 +61,13 @@ describe("constructFullUrlWithParams", () => {
     const baseUrl = "http://example.com?name=Jane&active=true";
     const queryParams = { age: 30, active: false };
     const result = constructFullUrlWithParams(baseUrl, queryParams);
-    expect(result).toBe("http://example.com/?name=Jane&active=false&age=30");
+    expect(result).toBe("http://example.com/?name=Jane&active=true&age=30");
   });
 
-  it("should override existing parameters with new ones", () => {
+  it("should not override existing parameters with new ones", () => {
     const baseUrl = "http://example.com?name=Jane";
     const queryParams = { name: "John", age: 30 };
     const result = constructFullUrlWithParams(baseUrl, queryParams);
-    expect(result).toBe("http://example.com/?name=John&age=30");
+    expect(result).toBe("http://example.com/?name=Jane&age=30");
   });
 });

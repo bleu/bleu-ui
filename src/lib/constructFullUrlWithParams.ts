@@ -1,3 +1,4 @@
+import { mergeObjects } from "./mergeObjects";
 import { deserializeQuery, serializeQuery } from "./serializeQuery";
 
 export function constructFullUrlWithParams(
@@ -16,7 +17,7 @@ export function constructFullUrlWithParams(
 
   const existingParams = deserializeQuery(url.search);
 
-  const mergedParams = { ...existingParams, ...queryParams };
+  const mergedParams = mergeObjects(existingParams, queryParams);
   const serializedParams = serializeQuery(mergedParams);
 
   url.search = serializedParams;
