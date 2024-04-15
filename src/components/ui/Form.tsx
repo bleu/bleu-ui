@@ -13,7 +13,7 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "#/lib/utils";
 import { Label } from "#/components/ui/Label";
 import { useRailsApp } from "../RailsApp/context";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from ".";
+import { Tooltip } from ".";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -125,28 +125,17 @@ const FormLabel = React.forwardRef<
   const { error, formItemId } = useFormField();
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <div className="flex items-center gap-x-2">
-          <Label
-            ref={ref}
-            className={cn(error && "text-destructive", className)}
-            htmlFor={formItemId}
-            {...props}
-          />
-          {tooltip && (
-            <TooltipTrigger disabled>
-              <InfoCircledIcon />
-            </TooltipTrigger>
-          )}
-        </div>
-        {tooltip && (
-          <TooltipContent>
-            <p>{tooltip}</p>
-          </TooltipContent>
-        )}
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip content={tooltip}>
+      <div className="flex items-center gap-x-2">
+        <Label
+          ref={ref}
+          className={cn(error && "text-destructive", className)}
+          htmlFor={formItemId}
+          {...props}
+        />
+        {tooltip && <InfoCircledIcon />}
+      </div>
+    </Tooltip>
   );
 });
 FormLabel.displayName = "FormLabel";
