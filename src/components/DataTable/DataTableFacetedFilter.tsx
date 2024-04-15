@@ -1,4 +1,4 @@
-import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { CheckIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { Trans } from "react-i18next";
 import {
@@ -30,7 +30,8 @@ export function DataTableFacetedFilter({ column, title, options }) {
           size="sm"
           className="h-8 border-dashed dark:border-2"
         >
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <MagnifyingGlassIcon className="mr-2 h-4 w-4" />
+
           {title}
           {selectedValues?.size > 0 && (
             <>
@@ -123,7 +124,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    <Trans>Clear filters</Trans>
                   </CommandItem>
                 </CommandGroup>
               </>
