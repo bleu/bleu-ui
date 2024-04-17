@@ -2,7 +2,7 @@
 import React from "react";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { Badge, Checkbox, Table } from "#/components/ui";
 import { SectionTitle } from "#/components/SectionTitle";
@@ -18,6 +18,7 @@ import { useSWRDataTable } from "../useSWRDataTable";
 import { DataTableHeader } from "./DataTableHeader";
 import { DataTableBody } from "./DataTableBody";
 import { deserializeQuery } from "#/lib/serializeQuery";
+import { formatNumber } from "#/lib";
 
 export const formatParamsToDataTable = (params, searchKey) => {
   const { columnFilters = {}, pageIndex, pageSize, sorting } = params;
@@ -51,6 +52,7 @@ export const formatParamsToDataTable = (params, searchKey) => {
 
 export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
   const value = row.getValue(column.columnDef.accessorKey);
+  const { i18n } = useTranslation();
 
   const displayAs =
     column.columnDef.field_options?.display_type || column.columnDef.type;
@@ -101,6 +103,9 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
     case "datetime":
       return <div>{formatDateTime(value)}</div>;
     case "number":
+      if (i18n.language === "en") {
+        return <div>{formatNumber(value, 1, "decimal", "standard")}</div>;
+      }
       return <div>{value}</div>;
     case "actions":
       return <DataTableRowActions row={row} column={column} />;

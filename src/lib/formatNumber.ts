@@ -8,6 +8,7 @@ export const formatNumber = (
   lessThanThresholdToReplace = 0.001
 ) => {
   if (number === 0) return "0";
+  if (!number) return "0";
   if (Math.abs(Number(number)) < lessThanThresholdToReplace) {
     return `< ${lessThanThresholdToReplace.toLocaleString("en-US")}`;
   }
