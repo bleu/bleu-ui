@@ -103,10 +103,11 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
     case "datetime":
       return <div>{formatDateTime(value)}</div>;
     case "number":
-      if (i18n.language === "en") {
-        return <div>{formatNumber(value, 1, "decimal", "standard")}</div>;
-      }
-      return <div>{value}</div>;
+      return (
+        <div>
+          {formatNumber(value, 1, "decimal", "standard", 0.001, i18n.language)}
+        </div>
+      );
     case "actions":
       return <DataTableRowActions row={row} column={column} />;
     case "image":
