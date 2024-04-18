@@ -10,3 +10,5 @@ export * from "./TableContext";
 export * from "./useSWRDataTable";
 export * from "./useTableState";
 export * from "./DataTable";
+export * from "./DataTableSearch";
+export * from "./DataTableFilters";
