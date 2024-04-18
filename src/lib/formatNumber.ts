@@ -1,18 +1,24 @@
 type Notation = "compact" | "engineering" | "scientific" | "standard";
 
+const languageMap = {
+  en: "en-US",
+  "pt-BR": "pt-BR",
+};
+
 export const formatNumber = (
   number: number | string | bigint,
   decimals = 1,
   style = "decimal",
   notation: Notation = "compact",
-  lessThanThresholdToReplace = 0.001
+  lessThanThresholdToReplace = 0.001,
+  language = "en"
 ) => {
   if (number === 0) return "0";
+  if (!number) return "0";
   if (Math.abs(Number(number)) < lessThanThresholdToReplace) {
-    return `< ${lessThanThresholdToReplace.toLocaleString("en-US")}`;
+    return `< ${lessThanThresholdToReplace.toLocaleString(languageMap[language])}`;
   }
-
-  return Number(number).toLocaleString("en-US", {
+  return Number(number).toLocaleString(languageMap[language], {
     notation,
     maximumFractionDigits: decimals,
     style,
