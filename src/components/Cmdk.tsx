@@ -37,6 +37,7 @@ interface CommandMenuProps {
   };
   fetcher?: (query: string) => Promise<CommandI[]>;
   icons?: Record<string, React.ComponentType<{ className: string }>>;
+  placeholder?: string;
 }
 
 function useGlobalShortcut(setOpen, enableGlobalShortcut) {
@@ -165,6 +166,7 @@ export const CommandMenu = ({
   commands,
   fetcher,
   icons,
+  placeholder,
   usePopover = false,
   enableGlobalShortcut = true,
   ...props
@@ -198,7 +200,7 @@ export const CommandMenu = ({
       <Command className="w-[600px]">
         <PopoverAnchor asChild>
           <CommandInput
-            placeholder={t("Type a command or search")}
+            placeholder={placeholder || t("Type a command or search")}
             value={search}
             onValueChange={setSearch}
             className={cn(
@@ -245,7 +247,7 @@ export const CommandMenu = ({
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen} loading={isLoading}>
         <CommandInput
-          placeholder={t("Type a command or search")}
+          placeholder={placeholder || t("Type a command or search")}
           value={search}
           onValueChange={setSearch}
         />
