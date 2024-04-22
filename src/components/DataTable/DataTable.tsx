@@ -46,6 +46,7 @@ export function DataTable({
   buildTableColumns = buildColumns,
   setQueryToParams,
   setSelectedData,
+  isLoading = false,
 }) {
   const {
     pagination,
@@ -154,6 +155,7 @@ export function DataTable({
     setTableState,
     table,
     searchKey,
+    isLoading,
   };
 
   return (
