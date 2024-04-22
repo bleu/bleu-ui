@@ -97,7 +97,7 @@ export const RadioGroupField = withConditional<RadioGroupFieldProps>(
         render={({ field: formField }) => (
           <FormItem className="space-y-0">
             <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
-            <FormDescription className="">{field.description}</FormDescription>
+            <FormDescription>{field.description}</FormDescription>
             <FormControl>
               <RadioGroup
                 onValueChange={formField.onChange}

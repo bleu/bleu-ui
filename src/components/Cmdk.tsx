@@ -114,10 +114,10 @@ const SharedCommandContent = ({
                     onSelect={() => {
                       runCommand(result.href);
                     }}
-                    className="grid grid-cols-subgrid col-span-2 gap-4"
+                    className="grid grid-cols-subgrid col-span-2 gap-2"
                   >
                     <div>
-                      <Icon className="inline-flex h-2 w-2 mr-1 stroke-1" />
+                      <Icon className="inline-flex h-4 w-4 mr-1 stroke-1" />
                       <b>{result.result_type}</b>
                     </div>
                     <div>{result.title}</div>
@@ -174,7 +174,7 @@ export const CommandMenu = ({
 
   return usePopover ? (
     <Popover {...props} open={open} onOpenChange={setOpen}>
-      <Command>
+      <Command className="[&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
         <PopoverAnchor asChild>
           <CommandInput
             placeholder={placeholder || t("Type a command or search")}
@@ -186,10 +186,10 @@ export const CommandMenu = ({
             )}
             onKeyDown={(e) => setOpen(e.key !== "Escape")}
             onMouseDown={() => setOpen((isOpen) => !!search && !isOpen)}
+            loading={isLoading}
           />
         </PopoverAnchor>
         <PopoverContent
-          className="w-full"
           side="bottom"
           asChild
           onOpenAutoFocus={(e) => e.preventDefault()}
