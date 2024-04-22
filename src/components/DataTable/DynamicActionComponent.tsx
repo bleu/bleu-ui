@@ -1,6 +1,7 @@
 /* eslint-disable no-case-declarations */
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Trans } from "react-i18next";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -51,30 +52,54 @@ export const DynamicActionComponent = ({ action, row }) => {
   return renderActionButton();
 };
 
-const ActionForm = ({ action, row }) => {
+interface ActionFormProps {
+  action: {
+    method: string;
+    name: string;
+    trigger_confirmation: boolean;
+    url_path: string;
+  };
+  children?: React.ReactNode;
+  row: {
+    original: {
+      id: string;
+    };
+  };
+}
+
+export const ActionForm: React.FC<ActionFormProps> = ({
+  action,
+  row,
+  children,
+}) => {
   const form = useForm({});
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  // TODO: the styles here are a bit off, but it's a start
   return (
     <>
       {action?.trigger_confirmation && (
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogTrigger asChild>
-            <Button variant="ghost" className="w-full">
-              {action.name}
-            </Button>
+            {children || (
+              <Button variant="ghost" className="w-full">
+                {action.name}
+              </Button>
+            )}
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogTitle>
+                <Trans>Are you sure?</Trans>
+              </AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone.
+                <Trans>This action cannot be undone.</Trans>
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>
+                <Trans>Cancel</Trans>
+              </AlertDialogCancel>
               <Form
                 onSubmit={() => setIsSubmitting(true)}
                 action={action.url_path.replace("RESOURCE_ID", row.original.id)}
@@ -85,7 +110,7 @@ const ActionForm = ({ action, row }) => {
                   <input type="hidden" name="_method" value="delete" />
                 )}
                 <SubmitButton type="submit" isSubmitting={isSubmitting}>
-                  Confirm
+                  <Trans>Confirm</Trans>
                 </SubmitButton>
               </Form>
             </AlertDialogFooter>
