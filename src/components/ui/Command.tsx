@@ -65,13 +65,16 @@ const CommandInput = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, children, ...props }, ref) => (
   // eslint-disable-next-line react/no-unknown-property
-  <div className="flex items-center px-3" cmdk-input-wrapper="">
+  <div
+    className={cn("flex items-center px-3", className)}
+    // eslint-disable-next-line react/no-unknown-property
+    cmdk-input-wrapper=""
+  >
     <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "placeholder:text-muted-foreground flex h-11 w-full rounded-md border-none bg-transparent py-3 text-sm focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50",
-        className
+        "placeholder:text-muted-foreground flex h-11 w-full rounded-md border-none bg-transparent py-3 text-sm focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50"
       )}
       {...props}
     >
