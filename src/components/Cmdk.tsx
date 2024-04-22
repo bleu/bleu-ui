@@ -102,22 +102,29 @@ const SharedCommandContent = ({
                 </p>
               </CommandLoading>
             )}
-            {searchResults?.map((result) => {
-              const Icon = icons && result.type ? icons[result.type] : FileIcon;
-              return (
-                <CommandItem
-                  key={result.href}
-                  value={result.title}
-                  onSelect={() => {
-                    runCommand(result.href);
-                  }}
-                >
-                  <Icon className="inline mr-1 h-2 w-2 stroke-1" />
-                  <b className="inline">{result.result_type}</b> |{" "}
-                  {result.title}
-                </CommandItem>
-              );
-            })}
+            <div className="grid grid-cols-[auto_1fr]">
+              {searchResults?.map((result) => {
+                const Icon =
+                  icons && result.type ? icons[result.type] : FileIcon;
+
+                return (
+                  <CommandItem
+                    key={result.href}
+                    value={result.title}
+                    onSelect={() => {
+                      runCommand(result.href);
+                    }}
+                    className="grid grid-cols-subgrid col-span-2 gap-4"
+                  >
+                    <div>
+                      <Icon className="inline-flex h-2 w-2 mr-1 stroke-1" />
+                      <b>{result.result_type}</b>
+                    </div>
+                    <div>{result.title}</div>
+                  </CommandItem>
+                );
+              })}
+            </div>
           </CommandGroup>
           <CommandSeparator />
         </>
