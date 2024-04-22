@@ -31,10 +31,7 @@ interface CommandI {
 }
 
 interface CommandMenuProps {
-  commands?: {
-    mainNav: CommandI[];
-    sidebarNav: { items: CommandI[]; title: string }[];
-  };
+  commands?: CommandI[];
   fetcher?: (query: string) => Promise<CommandI[]>;
   icons?: Record<string, React.ComponentType<{ className: string }>>;
   placeholder?: string;
@@ -75,49 +72,22 @@ const SharedCommandContent = ({
 }) => {
   const { t } = useTranslation();
 
-  const commandFromNavs = (
-    <>
-      {commands?.mainNav && commands?.mainNav?.length > 0 && (
-        <CommandGroup heading="Links">
-          {commands.mainNav.map((navItem) => (
-            <CommandItem
-              key={navItem.href}
-              value={navItem.title}
-              onMouseDown={(e) => e.preventDefault()}
-              onSelect={() => {
-                runCommand(navItem.href);
-              }}
-            >
-              <FileIcon className="mr-2 h-2 w-2" />
-              {navItem.title}
-            </CommandItem>
-          ))}
-        </CommandGroup>
-      )}
-
-      {commands?.sidebarNav && commands?.sidebarNav?.length > 0 && (
-        <>
-          <CommandSeparator />
-
-          {commands.sidebarNav?.map((group) => (
-            <CommandGroup key={group.title} heading={group.title}>
-              {group.items.map((navItem) => (
-                <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
-                  onSelect={() => {
-                    runCommand(navItem.href);
-                  }}
-                >
-                  <CircleIcon className="mr-2 h-2 w-2" />
-                  {navItem.title}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          ))}
-        </>
-      )}
-    </>
+  const commandList = commands && commands?.length > 0 && (
+    <CommandGroup heading="Links">
+      {commands.map((navItem) => (
+        <CommandItem
+          key={navItem.href}
+          value={navItem.title}
+          onMouseDown={(e) => e.preventDefault()}
+          onSelect={() => {
+            runCommand(navItem.href);
+          }}
+        >
+          <CircleIcon className="mr-2 h-2 w-2" />
+          {navItem.title}
+        </CommandItem>
+      ))}
+    </CommandGroup>
   );
 
   return (
@@ -157,7 +127,7 @@ const SharedCommandContent = ({
         <Trans>No results found</Trans>.
       </CommandEmpty>
 
-      {commandFromNavs}
+      {commandList}
     </>
   );
 };
@@ -197,21 +167,22 @@ export const CommandMenu = ({
 
   return usePopover ? (
     <Popover {...props} open={open} onOpenChange={setOpen}>
-      <Command className="w-[600px]">
+      <Command>
         <PopoverAnchor asChild>
           <CommandInput
             placeholder={placeholder || t("Type a command or search")}
             value={search}
             onValueChange={setSearch}
             className={cn(
-              "text-muted-foreground justify-center text-sm inline-flex max-w-lg"
+              "text-muted-foreground justify-center text-sm inline-flex",
+              props.className
             )}
             onKeyDown={(e) => setOpen(e.key !== "Escape")}
             onMouseDown={() => setOpen((isOpen) => !!search && !isOpen)}
           />
         </PopoverAnchor>
         <PopoverContent
-          className="w-[600px]"
+          className="w-full"
           side="bottom"
           asChild
           onOpenAutoFocus={(e) => e.preventDefault()}
@@ -250,6 +221,7 @@ export const CommandMenu = ({
           placeholder={placeholder || t("Type a command or search")}
           value={search}
           onValueChange={setSearch}
+          className={cn(props.className)}
         />
         <CommandList>
           <SharedCommandContent
