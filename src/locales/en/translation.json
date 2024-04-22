@@ -1,16 +1,21 @@
 {
-  "Global search": "Global search",
-  "Type a command or search": "Type a command or search",
-  "No results found": "No results found",
   "Search results": "Search results",
   "Loading": "Loading...",
+  "No results found": "No results found",
+  "Type a command or search": "Type a command or search",
+  "Global search": "Global search",
+  "Copied to clipboard": "Copied to clipboard",
   "Clear filters": "Clear filters",
+  "Reset": "Reset",
   "Items per page": "Items per page",
   "Page {{currentPage}} of": "Page {{currentPage}} of",
   "Search": "Search...",
-  "Reset": "Reset",
   "View": "View",
   "Toggle columns": "Toggle columns",
+  "Are you sure?": "Are you sure?",
+  "This action cannot be undone": "This action cannot be undone.",
+  "Cancel": "Cancel",
+  "Confirm": "Confirm",
   "Something went wrong!": "Something went wrong!",
   "Pick a date": "Pick a date",
   "Click to Upload": "Click to Upload",
@@ -20,6 +25,5 @@
   "Toggle theme": "Toggle theme",
   "Light": "Light",
   "Dark": "Dark",
-  "Beta": "Beta",
-  "Copied to clipboard": "Copied to clipboard"
+  "Beta": "Beta"
 }

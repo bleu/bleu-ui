@@ -1,16 +1,21 @@
 {
-  "Global search": "Busca global",
-  "Type a command or search": "Digite um comando ou pesquise",
-  "No results found": "Nenhum resultado foi encontrado",
   "Search results": "Resultados da busca",
   "Loading": "Carregando...",
+  "No results found": "Nenhum resultado foi encontrado",
+  "Type a command or search": "Digite um comando ou pesquise",
+  "Global search": "Busca global",
+  "Copied to clipboard": "Copiado para a área de transferência",
   "Clear filters": "Limpar filtros",
+  "Reset": "Remover",
   "Items per page": "Itens por página",
   "Page {{currentPage}} of": "Página {{currentPage}} de",
   "Search": "Pesquise por palavra chave...",
-  "Reset": "Remover",
   "View": "Visualizar",
   "Toggle columns": "Alternar colunas",
+  "Are you sure?": "Você tem certeza?",
+  "This action cannot be undone.": "Esta ação não pode ser desfeita.",
+  "Cancel": "Cancelar",
+  "Confirm": "Confirmar",
   "Something went wrong!": "Algo deu errado!",
   "Pick a date": "Escolha uma data",
   "Click to Upload": "Clique para fazer upload",
@@ -20,6 +25,5 @@
   "Toggle theme": "Alternar tema",
   "Light": "Claro",
   "Dark": "Escuro",
-  "Beta": "Beta",
-  "Copied to clipboard": "Copiado para a área de transferência"
+  "Beta": "Beta"
 }
