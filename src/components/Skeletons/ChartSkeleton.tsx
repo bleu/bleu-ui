@@ -1,4 +1,5 @@
 import React from "react";
+import { Trans } from "react-i18next";
 import { Skeleton } from "#/components/ui/Skeleton";
 
 function BarSet() {
@@ -18,7 +19,9 @@ export function ChartSkeleton({ barsSetCount = 3, className = "" }) {
     <div className={`${className} p-4`}>
       <div className="flex flex-col items-center">
         <div className="flex items-end space-x-2">
-          <span className="sr-only">Loading...</span>
+          <span className="sr-only">
+            <Trans>Loading</Trans>
+          </span>
           {barSet.map((_, barIndex) => (
             // eslint-disable-next-line react/no-array-index-key
             <BarSet key={barIndex} />

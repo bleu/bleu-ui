@@ -70,7 +70,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? (
           <>
             <Icons.Spinner
-              aria-label="Loading"
+              aria-label={loadingText}
               className="mr-2 size-4 animate-spin"
             />
             {loadingText}

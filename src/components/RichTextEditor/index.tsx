@@ -1,7 +1,7 @@
 import "./styles.css";
 
 import React, { Suspense, lazy } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "#/components/ThemeToggle/context";
 
 const JoditEditor = lazy(() => import("jodit-react"));
@@ -51,7 +51,7 @@ export function RichTextEditor({ initialValue, onChange }) {
 
   return (
     <div>
-      <Suspense fallback={<>Loading...</>}>
+      <Suspense fallback={<Trans>Loading</Trans>}>
         <JoditEditor
           value={initialValue}
           config={{
