@@ -48,7 +48,7 @@ export const SearchableSelectField = withConditional<SelectFieldProps>(
                   )}
                 >
                   {formField.value
-                    ? field.options.find(
+                    ? field.options?.find(
                         (option) => option.value === formField.value
                       )?.label
                     : "Select an option"}
@@ -61,7 +61,7 @@ export const SearchableSelectField = withConditional<SelectFieldProps>(
                 <CommandInput placeholder="Search options..." />
                 <CommandEmpty>No options found.</CommandEmpty>
                 <CommandGroup className="max-h-80 overflow-y-auto">
-                  {field.options.map((option) => (
+                  {field.options?.map((option) => (
                     <CommandItem
                       value={option.label}
                       key={option.value}
