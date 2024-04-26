@@ -47,7 +47,7 @@ export interface MultiSelectField extends SelectFieldProps {
 
 export const MultiSelect = withConditional<MultiSelectField>(
   ({ form, field }) => {
-    const [options, setOptions] = React.useState(field.options);
+    const [options, setOptions] = React.useState(field.options || []);
     const selection = form.watch(field.name) || [];
 
     const addNewTag = ({ tag }) => {
@@ -91,7 +91,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                           </Badge>
                           <div className="hidden space-x-1 lg:flex">
                             {options
-                              .filter((option) =>
+                              ?.filter((option) =>
                                 formField.value?.includes(option.value)
                               )
                               .map((option) => (
@@ -113,7 +113,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                   <Command>
                     <CommandInput placeholder={field.placeholder} />
                     <CommandList>
-                      {options.map((option) => {
+                      {options?.map((option) => {
                         const isSelected = formFieldValue.includes(
                           option.value
                         );
