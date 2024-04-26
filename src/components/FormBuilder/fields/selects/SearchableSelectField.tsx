@@ -7,6 +7,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from "#/components/ui/Command";
 import {
   FormControl,
@@ -59,28 +60,30 @@ export const SearchableSelectField = withConditional<SelectFieldProps>(
             <PopoverContent className="w-[200px] p-0">
               <Command>
                 <CommandInput placeholder="Search options..." />
-                <CommandEmpty>No options found.</CommandEmpty>
-                <CommandGroup className="max-h-80 overflow-y-auto">
-                  {field.options?.map((option) => (
-                    <CommandItem
-                      value={option.label}
-                      key={option.value}
-                      onSelect={() => {
-                        form.setValue(field.name, option.value);
-                      }}
-                    >
-                      <CheckIcon
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          option.value === formField.value
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {option.label}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
+                <CommandList>
+                  <CommandEmpty>No options found.</CommandEmpty>
+                  <CommandGroup className="max-h-80 overflow-y-auto">
+                    {field.options?.map((option) => (
+                      <CommandItem
+                        value={option.label}
+                        key={option.value}
+                        onSelect={() => {
+                          form.setValue(field.name, option.value);
+                        }}
+                      >
+                        <CheckIcon
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            option.value === formField.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                        {option.label}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
               </Command>
             </PopoverContent>
           </Popover>

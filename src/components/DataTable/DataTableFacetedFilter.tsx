@@ -119,14 +119,16 @@ export function DataTableFacetedFilter({ column, title, options }) {
             {selectedValues.size > 0 && (
               <>
                 <CommandSeparator />
-                <CommandGroup>
-                  <CommandItem
-                    onSelect={() => column?.setFilterValue(undefined)}
-                    className="justify-center text-center"
-                  >
-                    <Trans>Clear filters</Trans>
-                  </CommandItem>
-                </CommandGroup>
+                <CommandList>
+                  <CommandGroup>
+                    <CommandItem
+                      onSelect={() => column?.setFilterValue(undefined)}
+                      className="justify-center text-center"
+                    >
+                      <Trans>Clear filters</Trans>
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
               </>
             )}
           </CommandList>
