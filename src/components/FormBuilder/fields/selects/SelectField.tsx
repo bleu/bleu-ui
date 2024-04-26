@@ -12,7 +12,7 @@ import * as Select from "#/components/ui/Select";
 import { BaseField, withConditional } from "../../fields";
 
 export interface SelectFieldProps extends BaseField {
-  options: Array<{
+  options?: Array<{
     label: string;
     tooltip?: string;
     value: string;
@@ -47,7 +47,7 @@ export const SelectField = withConditional<SelectFieldProps>(
                 </Select.SelectTrigger>
               </FormControl>
               <Select.SelectContent className="z-[10000]">
-                {field.options.map((option) => (
+                {field.options?.map((option) => (
                   <Select.SelectItem
                     key={String(option.value)}
                     value={String(option.value)}
