@@ -9,7 +9,9 @@ import { useTranslation, Trans } from "react-i18next";
 import { Button, Select } from "#/components/ui";
 import { useTableContext } from "./TableContext";
 
-export function DataTablePagination() {
+export function DataTablePagination({
+  itemsPerPageOptions = [10, 20, 30, 40, 50],
+}) {
   // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
   const { table } = useTableContext();
 
@@ -33,7 +35,7 @@ export function DataTablePagination() {
               />
             </Select.SelectTrigger>
             <Select.SelectContent side="top">
-              {[10, 20, 30, 40, 50].map((pageSize) => (
+              {itemsPerPageOptions.map((pageSize) => (
                 <Select.SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </Select.SelectItem>
