@@ -18,6 +18,18 @@ describe("CheckboxField", () => {
     expect(checkboxElement).toBeInTheDocument();
   });
 
+  it("renders the checkbox label correctly", () => {
+    renderFormField(CheckboxField, field);
+    const labelElement = screen.getByText("Test Checkbox");
+    expect(labelElement).toBeInTheDocument();
+  });
+
+  it("disables the checkbox when the disabled prop is set to true", () => {
+    renderFormField(CheckboxField, { ...field, disabled: true });
+    const checkboxElement = screen.getByRole("checkbox");
+    expect(checkboxElement).toBeDisabled();
+  });
+
   it("updates the form state correctly when interacted with", () => {
     const { form } = renderFormField(CheckboxField, field);
 

@@ -18,6 +18,13 @@ describe("DatePickerInput", () => {
     expect(datePickerElement).toBeInTheDocument();
   });
 
+  it("displays the selected date in the correct format", () => {
+    vi.setSystemTime(mockDate);
+    renderFormField(DatePickerInput, { ...field, defaultValue: mockDate });
+    const buttonElement = screen.getByRole("button");
+    expect(buttonElement).toHaveTextContent("Jan 1, 2022");
+  });
+
   it("updates the form state correctly when a date is selected", () => {
     vi.setSystemTime(mockDate);
     const { form } = renderFormField(DatePickerInput, field);

@@ -16,7 +16,6 @@
     "strict": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["vitest/globals"],
-
     "plugins": [
       { "transform": "typescript-transform-paths" },
       { "transform": "typescript-transform-paths", "afterDeclarations": true }

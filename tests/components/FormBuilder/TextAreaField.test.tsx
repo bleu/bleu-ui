@@ -20,6 +20,11 @@ describe("TextAreaField", () => {
   //   fireEvent.change(textareaElement, { target: { value: "" } });
   //   expect(textareaElement).toBeInvalid();
   // });
+  it("applies the disabled prop when set to true", () => {
+    renderFormField(TextAreaField, { ...field, disabled: true });
+    const textareaElement = screen.getByRole("textbox");
+    expect(textareaElement).toBeDisabled();
+  });
 
   it("updates the form state correctly when interacted with", () => {
     const { form } = renderFormField(TextAreaField, field);

@@ -15,6 +15,20 @@ describe("FormField", () => {
     );
   };
 
+  // it("renders the correct error message when validation fails", async () => {
+  //   render(
+  //     renderFormField({
+  //       name: "test",
+  //       rules: { required: "Field is required" },
+  //       render: ({ field }) => <input {...field} />,
+  //     })
+  //   );
+  //   const inputElement = screen.getByRole("textbox");
+  //   fireEvent.blur(inputElement);
+  //   const errorMessage = await screen.findByRole("alert");
+  //   expect(errorMessage).toHaveTextContent("Field is required");
+  // });
+
   it("renders the appropriate field component based on the render prop", () => {
     render(
       renderFormField({

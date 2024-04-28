@@ -19,4 +19,10 @@ describe("SwitchField", () => {
     fireEvent.click(switchElement);
     expect(form.getValues("test")).toBe(true);
   });
+
+  it("disables the switch when the disabled prop is set to true", () => {
+    renderFormField(SwitchField, { ...field, disabled: true });
+    const switchElement = screen.getByRole("switch");
+    expect(switchElement).toBeDisabled();
+  });
 });
