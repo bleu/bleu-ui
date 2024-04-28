@@ -1,14 +1,15 @@
 import { vi, describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { DatePickerInput } from "#/components";
+import { DatePickerInput, DatePickerInputProps } from "#/components";
 
 describe("DatePickerInput", () => {
   const mockDate = new Date(2022, 0, 1);
-  const field = {
+  const field: DatePickerInputProps = {
     type: "date",
     name: "test",
     defaultValue: "",
+    value: "",
   };
 
   it("renders a date picker input", () => {
@@ -20,7 +21,10 @@ describe("DatePickerInput", () => {
 
   it("displays the selected date in the correct format", () => {
     vi.setSystemTime(mockDate);
-    renderFormField(DatePickerInput, { ...field, defaultValue: mockDate });
+    renderFormField(DatePickerInput, {
+      ...field,
+      defaultValue: mockDate.toDateString(),
+    });
     const buttonElement = screen.getByRole("button");
     expect(buttonElement).toHaveTextContent("Jan 1, 2022");
   });

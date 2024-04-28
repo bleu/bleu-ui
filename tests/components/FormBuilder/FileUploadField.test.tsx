@@ -1,11 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { screen } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { FileUploadField } from "#/components";
+import { FileUploadField, FileUploadFieldProps } from "#/components";
 
 describe("FileUploadField", () => {
   it("renders an upload button", () => {
-    const field = { type: "file", name: "test", mode: "file" };
+    const field: FileUploadFieldProps = {
+      type: "file",
+      name: "test",
+      mode: "file",
+      value: "",
+    };
 
     renderFormField(FileUploadField, field);
 

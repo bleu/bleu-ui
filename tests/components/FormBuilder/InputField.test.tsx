@@ -1,10 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { InputField } from "#/components";
+import { InputField, InputFieldProps } from "#/components";
 
 describe("InputField", () => {
-  const field = { type: "input", name: "test", value: "" };
+  const field: InputFieldProps = {
+    type: "input",
+    name: "test",
+    value: "",
+    mode: "text",
+  };
   it("renders an input element", () => {
     renderFormField(InputField, field);
     const inputElement = screen.getByRole("textbox");

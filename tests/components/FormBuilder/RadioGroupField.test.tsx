@@ -1,15 +1,22 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { RadioGroupField } from "#/components";
+import { RadioGroupField, RadioGroupFieldProps } from "#/components";
 
 describe("RadioGroupField", () => {
-  const field = {
+  const field: RadioGroupFieldProps = {
     type: "radio_group",
     name: "test",
-    options: [
-      { value: "option1", label: "Option 1" },
-      { value: "option2", label: "Option 2" },
+    value: "",
+    sections: [
+      {
+        label: "Test",
+        description: "Test description",
+        options: [
+          { value: "option1", label: "Option 1" },
+          { value: "option2", label: "Option 2" },
+        ],
+      },
     ],
   };
 

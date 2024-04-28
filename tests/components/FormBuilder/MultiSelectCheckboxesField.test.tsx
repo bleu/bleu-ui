@@ -1,12 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { MultiSelectCheckboxes } from "#/components";
+import {
+  MultiSelectCheckboxes,
+  MultiSelectCheckboxesFieldProps,
+} from "#/components";
 
 describe("MultiSelectCheckboxes", () => {
-  const field = {
+  const field: MultiSelectCheckboxesFieldProps = {
     type: "multi_select_checkbox",
     name: "test",
+    value: "",
     options: [
       { value: "option1", label: "Option 1" },
       { value: "option2", label: "Option 2" },

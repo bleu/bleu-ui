@@ -1,10 +1,14 @@
 import { describe, it, expect, vi } from "vitest";
 import { screen, act } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { RichTextEditorField } from "#/components";
+import { RichTextEditorField, RichTextEditorFieldProps } from "#/components";
 
 describe("RichTextEditorField", () => {
-  const field = { type: "wysiwyg", name: "test" };
+  const field: RichTextEditorFieldProps = {
+    type: "wysiwyg",
+    name: "test",
+    value: "",
+  };
 
   it("renders a rich text editor", async () => {
     const { container } = renderFormField(RichTextEditorField, field);

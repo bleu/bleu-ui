@@ -1,13 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { FieldArray } from "#/components";
+import { FieldArray, FieldArrayFieldProps } from "#/components";
 
 describe("FieldArray", () => {
   it("renders an 'Add' button", () => {
-    const field = {
+    const field: FieldArrayFieldProps = {
       type: "field_array",
       name: "test",
+      value: "",
+      defaultValues: { name: "" },
       fields: [],
       hasSequence: false,
     };
@@ -18,12 +20,20 @@ describe("FieldArray", () => {
   });
 
   it("adds a new field when the 'Add' button is clicked", () => {
-    const field = {
+    const field: FieldArrayFieldProps = {
       type: "field_array",
       name: "test",
+      value: "",
       label: "Test",
       defaultValues: { name: "" },
-      fields: [{ type: "input", name: "name" }],
+      fields: [
+        {
+          type: "input",
+          name: "name",
+          label: "Name",
+          value: "",
+        },
+      ],
       hasSequence: false,
     };
     const { form } = renderFormField(FieldArray, field);

@@ -1,10 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { TextAreaField } from "#/components";
+import { TextAreaField, TextAreaFieldProps } from "#/components";
 
 describe("TextAreaField", () => {
-  const field = { type: "textarea", name: "test" };
+  const field: TextAreaFieldProps = {
+    type: "textarea",
+    name: "test",
+    value: "",
+  };
 
   it("renders a textarea element", () => {
     renderFormField(TextAreaField, field);
