@@ -53,6 +53,7 @@ export const InputField = withConditional<InputFieldProps>(
               }
             : undefined
         }
+        defaultValue={field.defaultValue}
         render={({ field: formField }) => (
           <FormItem className="w-full">
             <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>

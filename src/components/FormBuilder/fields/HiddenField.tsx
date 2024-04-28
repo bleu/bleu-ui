@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, FormField } from "#/components/ui/Form";
+import { FormField, FormItem } from "#/components/ui/Form";
 
 import { withConditional } from "../fields";
 
@@ -9,9 +9,9 @@ export const HiddenField = withConditional(({ form, field }) => (
     name={field.name}
     defaultValue={field.value}
     render={({ field: formField }) => (
-      <FormControl>
+      <FormItem>
         <input type="hidden" {...formField} />
-      </FormControl>
+      </FormItem>
     )}
   />
 ));

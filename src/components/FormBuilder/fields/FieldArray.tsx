@@ -125,8 +125,7 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
           <DragDropContext onDragEnd={handleDrag}>
             <ul>
               <StrictModeDroppable droppableId={`${field.name}-items`}>
-                {/* eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars */}
-                {(provided, snapshot) => (
+                {(provided) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {fields.map((rhfField, index) => {
                       // @ts-expect-error
@@ -139,11 +138,10 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                           draggableId={`item-${index}`}
                           index={index}
                         >
-                          {/* eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars */}
-                          {(provided, snapshot) => (
+                          {(innerProvided) => (
                             <li
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
+                              ref={innerProvided.innerRef}
+                              {...innerProvided.draggableProps}
                               className="mb-3"
                             >
                               <div
@@ -152,7 +150,7 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                                 {field.hasSequence && (
                                   <div
                                     className="flex h-full w-6 flex-col justify-center"
-                                    {...provided.dragHandleProps}
+                                    {...innerProvided.dragHandleProps}
                                   >
                                     <MoveIcon className="size-6 self-center" />
                                   </div>
@@ -167,6 +165,7 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                                   // eslint-disable-next-line jsx-a11y/control-has-associated-label
                                   <button
                                     type="button"
+                                    data-testid="remove-button"
                                     onClick={() => handleRemove(Number(index))}
                                     className="mt-4"
                                   >
