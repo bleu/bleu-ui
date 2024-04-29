@@ -7,16 +7,31 @@ import { cn } from "#/lib/utils";
 
 const ToastProvider = ToastPrimitives.Provider;
 
+const toastViewPortVariants = cva(
+  "fixed z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:top-auto sm:flex-col md:max-w-[420px]",
+  {
+    variants: {
+      position: {
+        "top-right": "top-0 sm:right-0",
+        "bottom-right": "top-0 sm:bottom-0 sm:right-0",
+        "top-left": "top-0 sm:left-0",
+        "bottom-left": "top-0 sm:bottom-0 sm:left-0",
+      },
+    },
+    defaultVariants: {
+      position: "bottom-right",
+    },
+  }
+);
+
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>,
-  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport> &
+    VariantProps<typeof toastViewPortVariants>
+>(({ className, position, ...props }, ref) => (
   <ToastPrimitives.Viewport
     ref={ref}
-    className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-      className
-    )}
+    className={cn(toastViewPortVariants({ position }), className)}
     {...props}
   />
 ));
@@ -122,4 +137,5 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
+  toastViewPortVariants,
 };

@@ -13,6 +13,8 @@ import { DynamicActionComponent } from "./DynamicActionComponent";
 export const DataTableRowActions = ({ row, column }) => {
   const actions = row.original.actions || column.columnDef.actions;
 
+  if (!actions?.length) return null;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

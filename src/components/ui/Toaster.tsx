@@ -9,7 +9,11 @@ import {
 } from "#/components/ui/Toast";
 import { useToast } from "#/hooks/useToast";
 
-function Toaster() {
+function Toaster({
+  position = "top-right",
+}: {
+  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left";
+}) {
   const { toasts } = useToast();
 
   return (
@@ -24,7 +28,7 @@ function Toaster() {
           <ToastClose />
         </Toast>
       ))}
-      <ToastViewport />
+      <ToastViewport position={position} />
     </ToastProvider>
   );
 }
