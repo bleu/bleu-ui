@@ -12,12 +12,12 @@ import {
 import { withConditional } from "../fields";
 import { SelectFieldProps } from "./selects/SelectField";
 
-export interface MultiSelectCheckboxesField extends SelectFieldProps {
+export interface MultiSelectCheckboxesFieldProps extends SelectFieldProps {
   type: "multi_select_checkbox";
 }
 
 export const MultiSelectCheckboxes =
-  withConditional<MultiSelectCheckboxesField>(({ form, field }) => (
+  withConditional<MultiSelectCheckboxesFieldProps>(({ form, field }) => (
     <FormField
       control={form.control}
       name={field.name}

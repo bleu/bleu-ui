@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "#/*": ["./src/*"] },
+    "paths": { "#/*": ["./src/*"], "tests/*": ["./tests/*"] },
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
@@ -15,6 +15,7 @@
     "skipLibCheck": true,
     "strict": true,
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vitest/globals"],
     "plugins": [
       { "transform": "typescript-transform-paths" },
       { "transform": "typescript-transform-paths", "afterDeclarations": true }

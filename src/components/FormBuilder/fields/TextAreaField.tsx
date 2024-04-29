@@ -11,6 +11,7 @@ import {
 import { Textarea } from "#/components/ui/Textarea";
 
 import { BaseField, withConditional } from "../fields";
+import isFieldDisabled from "../isFieldDisabled";
 
 export interface TextAreaFieldProps extends BaseField {
   length?: {
@@ -47,6 +48,7 @@ export const TextAreaField = withConditional<TextAreaFieldProps>(
             <FormDescription>{field.description}</FormDescription>
             <FormControl>
               <Textarea
+                disabled={isFieldDisabled(form, field)}
                 placeholder={field.placeholder}
                 className="resize-none"
                 {...formField}

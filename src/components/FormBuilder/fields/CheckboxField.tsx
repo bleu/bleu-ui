@@ -9,6 +9,7 @@ import {
 } from "#/components/ui/Form";
 
 import { BaseField, withConditional } from "../fields";
+import isFieldDisabled from "../isFieldDisabled";
 
 export interface CheckboxFieldProps extends BaseField {
   type: "checkbox";
@@ -31,6 +32,7 @@ export const CheckboxField = withConditional<CheckboxFieldProps>(
             <Checkbox
               checked={formField.value}
               onCheckedChange={formField.onChange}
+              disabled={isFieldDisabled(form, field)}
             />
           </FormControl>
           <div className="space-y-1 leading-none">
