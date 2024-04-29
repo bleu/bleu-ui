@@ -139,6 +139,18 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
       );
     case "select":
       return value;
+    case "external_link":
+      return (
+        <a
+          href={value}
+          target="_blank"
+          rel="noreferrer"
+          className="underline text-primary flex items-center"
+        >
+          <Trans>Open</Trans>&nbsp;
+          <span>{column.columnDef.title}</span>
+        </a>
+      );
     default:
       return null;
   }
