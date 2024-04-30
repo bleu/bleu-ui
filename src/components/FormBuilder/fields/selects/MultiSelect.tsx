@@ -84,7 +84,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                             className="mx-2 h-4"
                           />
                           <Badge
-                            variant="secondary"
+                            color="secondary"
                             className="rounded-sm px-1 font-normal lg:hidden"
                           >
                             {selection.length}
@@ -96,7 +96,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                               )
                               .map((option) => (
                                 <Badge
-                                  variant="secondary"
+                                  color="secondary"
                                   key={option.value}
                                   className="rounded-sm px-1 font-normal"
                                 >

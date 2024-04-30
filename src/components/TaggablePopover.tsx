@@ -43,7 +43,7 @@ export const TaggablePopover = ({ tags, selectedTags, onSelect }) => (
           <>
             <Separator orientation="vertical" className="mx-2 h-4" />
             <Badge
-              variant="secondary"
+              color="secondary"
               className="rounded-sm px-1 font-normal lg:hidden"
             >
               {selectedTags.length}
@@ -51,7 +51,7 @@ export const TaggablePopover = ({ tags, selectedTags, onSelect }) => (
             <div className="hidden space-x-1 lg:flex">
               {selectedTags.length > 2 ? (
                 <Badge
-                  variant="secondary"
+                  color="secondary"
                   className="rounded-sm px-1 font-normal"
                 >
                   {selectedTags.length} tags
@@ -61,7 +61,7 @@ export const TaggablePopover = ({ tags, selectedTags, onSelect }) => (
                   .filter((option) => selectedTags.includes(option.value))
                   .map((option) => (
                     <Badge
-                      variant="secondary"
+                      color="secondary"
                       key={option.value}
                       className="rounded-sm px-1 font-normal"
                     >

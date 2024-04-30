@@ -70,13 +70,17 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
       // TODO: needs to be refactored
       switch (value) {
         case "draft":
-          return <Badge variant="pending">Draft</Badge>;
+          return <Badge color="pending">Draft</Badge>;
         case "scheduled":
-          return <Badge variant="successOutline">Scheduled</Badge>;
+          return (
+            <Badge color="success" outline="outline">
+              Scheduled
+            </Badge>
+          );
         case "active":
-          return <Badge variant="success">Active</Badge>;
+          return <Badge color="success">Active</Badge>;
         case "ended":
-          return <Badge variant="destructive">Ended</Badge>;
+          return <Badge color="destructive">Ended</Badge>;
         default:
           if (column.columnDef.accessorKey !== "is_active") {
             return <Badge>{value}</Badge>;
@@ -93,7 +97,7 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
           }
 
           return (
-            <Badge variant={status.value === false ? null : "destructive"}>
+            <Badge color={status.value === false ? null : "destructive"}>
               {status.label}
             </Badge>
           );

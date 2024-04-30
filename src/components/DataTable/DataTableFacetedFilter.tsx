@@ -37,7 +37,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
               <Badge
-                variant="secondary"
+                color="secondary"
                 className="rounded-sm px-1 font-normal lg:hidden"
               >
                 {selectedValues.size}
@@ -45,7 +45,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
               <div className="hidden space-x-1 lg:flex">
                 {selectedValues.size > 2 ? (
                   <Badge
-                    variant="secondary"
+                    color="secondary"
                     className="rounded-sm px-1 font-normal"
                   >
                     {selectedValues.size} selected
@@ -55,7 +55,7 @@ export function DataTableFacetedFilter({ column, title, options }) {
                     .filter((option) => selectedValues.has(option.value))
                     .map((option) => (
                       <Badge
-                        variant="secondary"
+                        color="secondary"
                         key={option.value}
                         className="rounded-sm px-1 font-normal"
                       >
