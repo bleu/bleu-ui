@@ -5,7 +5,7 @@ import { Input } from "#/components/ui";
 
 import { useTableContext } from "./TableContext";
 
-export function DataTableSearch({ searchKey = "name" }) {
+export function DataTableSearch({ searchKey = "name", placeholder = null }) {
   // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
   const { table, searchKey: TableSeachKey } = useTableContext();
 
@@ -15,7 +15,7 @@ export function DataTableSearch({ searchKey = "name" }) {
 
   return (
     <Input
-      placeholder={t("Search")}
+      placeholder={placeholder || t("Search")}
       value={table.getColumn(search)?.getFilterValue() ?? ""}
       onChange={(event) =>
         table.getColumn(search)?.setFilterValue(event.target.value)
