@@ -5,7 +5,7 @@ import { Input } from "#/components/ui";
 
 import { useTableContext } from "./TableContext";
 
-export function DataTableSearch({ searchKey = "name", placeholder = null }) {
+export function DataTableSearch({ searchKey = "name", placeholder = "" }) {
   // @ts-expect-error TS(2339) FIXME: Property 'table' does not exist on type '{}'.
   const { table, searchKey: TableSeachKey } = useTableContext();
 
