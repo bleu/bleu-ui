@@ -19,6 +19,7 @@ export function useTableState(
   const [sorting, setSorting] = useState(initialState.sorting || []);
 
   const [grouping, setGrouping] = useState(initialState.grouping || []);
+  const [expanded, setExpanded] = useState(initialState.expanded || false);
 
   const state = useMemo(
     () => ({
@@ -28,6 +29,7 @@ export function useTableState(
       columnFilters,
       sorting,
       grouping,
+      expanded,
     }),
     [
       pagination,
@@ -36,6 +38,7 @@ export function useTableState(
       columnFilters,
       sorting,
       grouping,
+      expanded,
     ]
   );
 
@@ -47,6 +50,7 @@ export function useTableState(
       setColumnFilters,
       setSorting,
       setGrouping,
+      setExpanded,
     }),
     [
       setPagination,
@@ -55,6 +59,7 @@ export function useTableState(
       setColumnFilters,
       setSorting,
       setGrouping,
+      setExpanded,
     ]
   );
 

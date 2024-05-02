@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { TableContext } from "./TableContext";
@@ -55,6 +55,7 @@ export function DataTable({
     columnFilters,
     sorting,
     grouping,
+    expanded,
   } = tableState;
 
   const {
@@ -64,6 +65,7 @@ export function DataTable({
     setColumnFilters,
     setSorting,
     setGrouping,
+    setExpanded,
   } = setTableState;
 
   if (error) {
@@ -90,6 +92,7 @@ export function DataTable({
       rowSelection,
       columnFilters,
       pagination,
+      expanded,
       columnVisibility: {
         ...columnVisibility,
         ...hiddenColumns,
@@ -106,6 +109,7 @@ export function DataTable({
     onPaginationChange: setPagination,
     manualPagination: true,
     enableRowSelection: true,
+    onExpandedChange: setExpanded,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -146,17 +150,28 @@ export function DataTable({
     navigate,
   ]);
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const contextValue = {
-    data,
-    filters,
-    error,
-    tableState,
-    setTableState,
-    table,
-    searchKey,
-    isLoading,
-  };
+  const contextValue = useMemo(
+    () => ({
+      data,
+      filters,
+      error,
+      tableState,
+      setTableState,
+      table,
+      searchKey,
+      isLoading,
+    }),
+    [
+      data,
+      filters,
+      error,
+      tableState,
+      setTableState,
+      table,
+      searchKey,
+      isLoading,
+    ]
+  );
 
   return (
     <TableContext.Provider value={contextValue}>

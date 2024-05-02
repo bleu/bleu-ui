@@ -31,7 +31,7 @@ const dataTableFetcher = async ([pathOrUrl, paramsObject]) => {
 };
 
 export function useSWRDataTable(path, initialSearch = {}, options = {}) {
-  const { tableState, setTableState } = useTableState({ ...initialSearch });
+  const { tableState, setTableState } = useTableState(initialSearch);
 
   const { data, error, isLoading } = useSWR(
     [
