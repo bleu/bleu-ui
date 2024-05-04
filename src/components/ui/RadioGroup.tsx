@@ -34,4 +34,29 @@ const RadioGroupItem = React.forwardRef<
 ));
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
 
-export { RadioGroup, RadioGroupItem };
+const RadioGroupItemWithChildren = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
+    children: React.ReactNode;
+  }
+>(({ className, children, ...props }, ref) => (
+  // eslint-disable-next-line jsx-a11y/label-has-associated-control
+  <label className="flex items-center space-x-2 cursor-pointer">
+    <RadioGroupPrimitive.Item
+      ref={ref}
+      className={cn(
+        "border-primary text-primary ring-offset-background focus-visible:ring-ring data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground aspect-square h-4 w-4 rounded-full border focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      )}
+      {...props}
+    >
+      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+        <Cross2Icon className="h-3 w-3" />
+      </RadioGroupPrimitive.Indicator>
+    </RadioGroupPrimitive.Item>
+    {children}
+  </label>
+));
+
+RadioGroupItemWithChildren.displayName = RadioGroupPrimitive.Item.displayName;
+export { RadioGroup, RadioGroupItemWithChildren, RadioGroupItem };
