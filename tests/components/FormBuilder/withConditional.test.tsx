@@ -13,7 +13,9 @@ describe("withConditional", () => {
       name: "test",
       type: "input",
       value: "",
-      conditions: [{ name: "test", value: "value" }],
+      conditions: {
+        allOf: [{ test: ["value"] }],
+      },
     };
     const form = renderHook(() =>
       useForm({
@@ -31,7 +33,9 @@ describe("withConditional", () => {
       name: "test",
       type: "input",
       value: "",
-      conditions: [{ name: "test", value: "value" }],
+      conditions: {
+        allOf: [{ test: ["value"] }],
+      },
     };
     const form = renderHook(() => useForm()).result.current;
     render(<ConditionalComponent field={field} form={form} />);
