@@ -146,10 +146,12 @@ export const CommandMenu = ({
   placeholder,
   usePopover = false,
   enableGlobalShortcut = true,
+  openInNewTab = false,
   ...props
 }: CommandMenuProps &
   ButtonProps & {
     enableGlobalShortcut?: boolean;
+    openInNewTab?: boolean;
     usePopover?: boolean;
   }) => {
   const navigate = useNavigate();
@@ -167,9 +169,14 @@ export const CommandMenu = ({
 
   useGlobalShortcut(setOpen, enableGlobalShortcut);
 
-  const runCommand = (href) => {
+  const runCommand = (href: string) => {
     setOpen(false);
-    navigate(href);
+
+    if (!openInNewTab) navigate(href);
+
+    const handle = window.open(href, "_blank", "noopener noreferrer");
+    handle?.blur();
+    window.focus();
   };
 
   return usePopover ? (
