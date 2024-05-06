@@ -1,3 +1,4 @@
+import React from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "#/lib/utils";
 import {
@@ -9,11 +10,7 @@ import {
   FormMessage,
 } from "#/components/ui/Form";
 import { Label } from "#/components/ui/Label";
-import {
-  RadioGroup,
-  RadioGroupItem,
-  RadioGroupItemWithChildren,
-} from "#/components/ui/RadioGroup";
+import { RadioGroup, RadioGroupItem } from "#/components/ui/RadioGroup";
 import { BaseField, withConditional } from "../fields";
 
 export interface RadioGroupFieldProps extends BaseField {
@@ -58,25 +55,25 @@ const RadioGroupWithoutSection = ({ form, field }) => (
         <FormControl>
           <RadioGroup
             value={rcfField.value}
-            className={cn(radioGroupVariants(field))}
+            className={cn(radioGroupVariants(field), "py-2")}
           >
-            {field.options.map((option, idx) => (
+            {field.options.map((option) => (
               <FormItem
                 key={option.value}
-                className={cn("", {
-                  "p-2": idx !== field.options.length - 1 && idx > 1,
-                })}
+                className="flex items-center space-x-1 space-y-0"
               >
-                <FormControl>
-                  <RadioGroupItemWithChildren value={option.value}>
-                    <FormLabel
-                      className="text-sm font-normal ml-1 select-none cursor-pointer"
-                      tooltip={option.tooltip}
-                    >
-                      {option.label}
-                    </FormLabel>
-                  </RadioGroupItemWithChildren>
+                <FormControl
+                  onClick={() => {
+                    rcfField.onChange(
+                      rcfField.value === option.value ? null : option.value
+                    );
+                  }}
+                >
+                  <RadioGroupItem value={option.value} />
                 </FormControl>
+                <FormLabel className="font-normal" tooltip={option.tooltip}>
+                  {option.label}
+                </FormLabel>
               </FormItem>
             ))}
           </RadioGroup>

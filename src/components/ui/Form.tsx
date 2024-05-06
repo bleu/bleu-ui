@@ -215,22 +215,18 @@ const FormLabel = React.forwardRef<
 >(({ className, tooltip, ...props }, ref) => {
   const { error, formItemId } = useFormField();
 
-  const label = (
-    <Label
-      ref={ref}
-      className={cn(error && "text-destructive", className)}
-      htmlFor={formItemId}
-      {...props}
-    />
-  );
-  return tooltip ? (
-    <Tooltip content={tooltip} className="flex items-center gap-x-2">
-      <div className="inline-flex space-x-1">
-        {label} <InfoCircledIcon />
+  return (
+    <Tooltip content={tooltip}>
+      <div className="flex items-center gap-x-2">
+        <Label
+          ref={ref}
+          className={cn(error && "text-destructive", className)}
+          htmlFor={formItemId}
+          {...props}
+        />
+        {tooltip && <InfoCircledIcon />}
       </div>
     </Tooltip>
-  ) : (
-    label
   );
 });
 FormLabel.displayName = "FormLabel";

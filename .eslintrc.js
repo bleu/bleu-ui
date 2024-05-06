@@ -39,8 +39,6 @@ module.exports = {
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-uses-react": "off",
     "typescript-sort-keys/interface": "error",
     "typescript-sort-keys/string-enum": "error",
     "unused-imports/no-unused-imports": "error",
