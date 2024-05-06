@@ -12,12 +12,14 @@ import { TextAreaFieldProps } from "./fields/TextAreaField";
 import { FieldArrayFieldProps } from "./fields/FieldArray";
 import { FieldComponentType } from "./buildForm";
 
+export interface Conditions {
+  [key: string]: any;
+  allOf?: Conditions[];
+  anyOf?: Conditions[];
+}
 export interface BaseField {
   component?: React.ComponentType<CommonFieldProps<BaseField>>;
-  conditions?: Array<{
-    name: string;
-    value: string | Array<string>;
-  }>;
+  conditions?: Conditions;
   defaultValue?: string;
   description?: string;
   disabled?: boolean | ((data: FieldValues) => boolean);
@@ -44,28 +46,26 @@ export function withConditional<T extends BaseField>(
   return (props: CommonFieldProps<T>) => {
     const { form, field } = props;
 
-    const conditions = Array.isArray(field.conditions)
-      ? field.conditions
-      : null;
-
-    if (!conditions) return <Component {...props} />;
-
-    const watchedFields = conditions.map((condition) =>
-      condition
-        ? form.watch(condition.name.replace("RESOURCE_ID", String(field.index)))
-        : null
-    );
-
-    // determine if all conditions are satisfied
-    const shouldRender = conditions.every((condition, index) => {
-      if (!condition) return true; // No condition means always render
-
-      const watchField = watchedFields[index];
-      if (condition.value instanceof Array) {
-        return condition.value.includes(watchField);
+    const evaluateConditions = (conditions: Conditions): boolean => {
+      if (conditions.allOf) {
+        return conditions.allOf.every(evaluateConditions);
       }
-      return watchField === condition.value;
-    });
+      if (conditions.anyOf) {
+        return conditions.anyOf.some(evaluateConditions);
+      }
+
+      if (Object.keys(conditions).length === 0) return true;
+
+      const key = Object.keys(conditions)[0];
+      const watchField = form.watch(
+        key.replace("RESOURCE_ID", String(field.index))
+      );
+      const values = conditions[key];
+      return values.includes(watchField);
+    };
+
+    const conditionRoot = field.conditions ? field.conditions : {};
+    const shouldRender = evaluateConditions(conditionRoot);
 
     if (!shouldRender) return null;
 
