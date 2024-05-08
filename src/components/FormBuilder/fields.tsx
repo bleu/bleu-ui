@@ -11,12 +11,8 @@ import { SelectFieldProps } from "./fields/selects/SelectField";
 import { TextAreaFieldProps } from "./fields/TextAreaField";
 import { FieldArrayFieldProps } from "./fields/FieldArray";
 import { FieldComponentType } from "./buildForm";
+import { Conditions, evaluateConditions } from "./evaluateConditions";
 
-export interface Conditions {
-  [key: string]: any;
-  allOf?: Conditions[];
-  anyOf?: Conditions[];
-}
 export interface BaseField {
   component?: React.ComponentType<CommonFieldProps<BaseField>>;
   conditions?: Conditions;
@@ -25,6 +21,7 @@ export interface BaseField {
   disabled?: boolean | ((data: FieldValues) => boolean);
   index?: number;
   label?: string;
+  mode?: string;
   name: string;
   placeholder?: string;
   required?: boolean;
@@ -46,26 +43,11 @@ export function withConditional<T extends BaseField>(
   return (props: CommonFieldProps<T>) => {
     const { form, field } = props;
 
-    const evaluateConditions = (conditions: Conditions): boolean => {
-      if (conditions.allOf) {
-        return conditions.allOf.every(evaluateConditions);
-      }
-      if (conditions.anyOf) {
-        return conditions.anyOf.some(evaluateConditions);
-      }
-
-      if (Object.keys(conditions).length === 0) return true;
-
-      const key = Object.keys(conditions)[0];
-      const watchField = form.watch(
-        key.replace("RESOURCE_ID", String(field.index))
-      );
-      const values = conditions[key];
-      return values.includes(watchField);
-    };
-
-    const conditionRoot = field.conditions ? field.conditions : {};
-    const shouldRender = evaluateConditions(conditionRoot);
+    const shouldRender = evaluateConditions(
+      form,
+      field.conditions,
+      field.index
+    );
 
     if (!shouldRender) return null;
 

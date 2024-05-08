@@ -12,7 +12,7 @@ import {
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "#/lib/utils";
 import { Label } from "#/components/ui/Label";
-import { Tooltip } from "#/components/ui";
+import { Tooltip } from "#/components/ui/Tooltip";
 import { useRailsApp } from "#/components/RailsApp";
 
 // Create separate contexts for form field state and updater

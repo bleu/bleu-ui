@@ -1,5 +1,6 @@
 import React from "react";
 import { BaseField, CommonFieldProps, fieldComponents } from "./index";
+import { evaluateConditions } from "./evaluateConditions";
 
 export type FieldComponentType = (
   props: CommonFieldProps<BaseField>
@@ -25,6 +26,10 @@ export function buildForm(
       field?.component ||
       { ...fieldComponents, ...customComponents }[field.type];
 
+    const shouldRender = evaluateConditions(form, field.conditions, index);
+
+    if (!shouldRender) return null;
+
     if (!FieldComponent) {
       throw new Error(`Invalid field type: ${field.type}`);
     }
@@ -33,6 +38,7 @@ export function buildForm(
 
     return (
       <FieldComponent
+        key={field.name + name + index}
         field={{ ...field, name, index }}
         form={form}
         customComponents={customComponents}
@@ -40,5 +46,5 @@ export function buildForm(
     );
   });
 
-  return formElements;
+  return formElements.filter((element) => element !== null);
 }
