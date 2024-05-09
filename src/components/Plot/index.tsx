@@ -3,7 +3,9 @@ import { merge } from "lodash";
 import { PlotParams } from "react-plotly.js";
 import React, { Suspense, lazy } from "react";
 import { cn } from "#/lib";
-import { ChartSkeleton, Tooltip, TooltipTrigger } from "..";
+
+import { ChartSkeleton } from "#/components/Skeletons/ChartSkeleton";
+import { Tooltip, TooltipTrigger } from "#/components/ui/Tooltip";
 
 // @ts-ignore Type 'Promise<typeof /@types/react-plotly.js/index")>' is not assignable to type 'Promise<{ default: ComponentType<any>; }>'
 const PlotPrimitive = lazy(() => import("react-plotly.js"));

@@ -2,6 +2,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
+import { ClickToCopy } from "#/components/CopyClipboard";
+import { Link } from "../Link";
+import { SubmitButton } from "#/components/SubmitButton";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,12 +14,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Button,
-  Form,
-} from "#/components/ui";
-import { ClickToCopy } from "#/components/CopyClipboard";
-import { Link } from "../Link";
-import { SubmitButton } from "..";
+} from "#/components/ui/AlertDialog";
+import { Button } from "#/components/ui/Button";
+import { Form } from "#/components/ui/Form";
 
 export const DynamicActionComponent = ({ action, row }) => {
   const renderActionButton = () => {
