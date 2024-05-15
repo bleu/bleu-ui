@@ -1,4 +1,3 @@
-import { CommandLoading } from "cmdk";
 import { CircleIcon, FileIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
@@ -59,6 +58,31 @@ function useGlobalShortcut(setOpen, enableGlobalShortcut) {
   }, [setOpen]);
 }
 
+function Spinner() {
+  return (
+    <svg
+      className="animate-spin h-4 w-4 opacity-50"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      />
+    </svg>
+  );
+}
+
 const SharedCommandContent = ({
   searchResults,
   isLoading,
@@ -95,13 +119,6 @@ const SharedCommandContent = ({
       {isLoading || searchResults !== undefined ? (
         <>
           <CommandGroup heading={t("Search results")}>
-            {isLoading && (
-              <CommandLoading>
-                <p className="text-muted-foreground">
-                  <Trans>Loading...</Trans>
-                </p>
-              </CommandLoading>
-            )}
             <div className="grid grid-cols-[auto_1fr]">
               {searchResults?.map((result) => {
                 const Icon =
@@ -131,7 +148,13 @@ const SharedCommandContent = ({
       ) : null}
 
       <CommandEmpty>
-        <Trans>No results found</Trans>.
+        {isLoading ? (
+          <div className="w-40 flex justify-center gap-x-2">
+            <Spinner /> <Trans>Loading</Trans>
+          </div>
+        ) : (
+          <Trans>No results found</Trans>
+        )}
       </CommandEmpty>
 
       {commandList}
