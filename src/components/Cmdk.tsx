@@ -1,4 +1,3 @@
-import { CommandLoading } from "cmdk";
 import { CircleIcon, FileIcon } from "@radix-ui/react-icons";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import {
   ButtonProps,
   Command,
   CommandDialog,
+  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
@@ -18,6 +18,7 @@ import {
   Popover,
   PopoverAnchor,
   PopoverContent,
+  Spinner,
 } from "#/components/ui";
 import { cn } from "#/lib/utils";
 
@@ -94,13 +95,6 @@ const SharedCommandContent = ({
       {isLoading || searchResults !== undefined ? (
         <>
           <CommandGroup heading={t("Search results")}>
-            {isLoading && (
-              <CommandLoading>
-                <p className="text-muted-foreground">
-                  <Trans>Loading...</Trans>
-                </p>
-              </CommandLoading>
-            )}
             <div className="grid grid-cols-[auto_1fr]">
               {searchResults?.map((result) => {
                 const Icon =
@@ -128,6 +122,16 @@ const SharedCommandContent = ({
           <CommandSeparator />
         </>
       ) : null}
+
+      <CommandEmpty>
+        {isLoading ? (
+          <div className="w-40 flex justify-center gap-x-2">
+            <Spinner size="sm" /> <Trans>Loading</Trans>
+          </div>
+        ) : (
+          <Trans>No results found</Trans>
+        )}
+      </CommandEmpty>
 
       {commandList}
     </>
