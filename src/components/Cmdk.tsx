@@ -3,12 +3,12 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import useSWR from "swr";
+import { useState, useEffect } from "react";
 import {
   Button,
   ButtonProps,
   Command,
   CommandDialog,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
@@ -19,7 +19,6 @@ import {
   PopoverContent,
 } from "#/components/ui";
 import { cn } from "#/lib/utils";
-import { useDebounceValue } from "#/hooks/useDebounceValue";
 
 interface CommandI {
   href: string;
@@ -162,6 +161,24 @@ const SharedCommandContent = ({
   );
 };
 
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
+export default useDebounce;
+
 export const CommandMenu = ({
   commands,
   fetcher,
@@ -180,15 +197,13 @@ export const CommandMenu = ({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
-  const [search, setSearch] = React.useState("");
-  const [debouncedSearch, setDebouncedSearch] = useDebounceValue(search, 300);
-  const { data: searchResults, isLoading } = fetcher
-    ? useSWR<CommandI[]>(debouncedSearch, fetcher)
-    : { data: undefined, isLoading: false };
 
-  React.useEffect(() => {
-    setDebouncedSearch(search);
-  }, [search, setDebouncedSearch]);
+  const [search, setSearch] = React.useState("");
+  const debouncedSearch = useDebounce(search, 300);
+  const { data: searchResults, isLoading } = useSWR<CommandI[]>(
+    () => debouncedSearch || null,
+    fetcher || (() => Promise.resolve([]))
+  );
 
   useGlobalShortcut(setOpen, enableGlobalShortcut);
 

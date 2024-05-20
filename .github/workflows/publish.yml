@@ -28,7 +28,7 @@ jobs:
           node-version: lts/*
           cache: "yarn"
           registry-url: "https://npm.pkg.github.com"
-          scope: "@bleu-fi"
+          scope: "@bleu"
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -37,7 +37,7 @@ jobs:
         if: github.ref == 'refs/tags/v*' # Only run on version tags
         run: |
           yarn build
-          npm login --registry=https://npm.pkg.github.com/ --scope=bleu-fi
+          npm login --registry=https://npm.pkg.github.com/ --scope=bleu
           npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
