@@ -6,7 +6,7 @@ export function formatDate(date, language = "en") {
   }).format(new Date(date));
 }
 
-export function formatDateTime(date, language = "en") {
+export function formatDateTime(date: Date | string | number, language = "en") {
   return Intl.DateTimeFormat(language, {
     year: "numeric",
     month: "short",
