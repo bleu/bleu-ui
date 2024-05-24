@@ -103,9 +103,9 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
           );
       }
     case "date":
-      return <div>{formatDate(value)}</div>;
+      return <div>{value ? formatDate(value, i18n.language) : ""}</div>;
     case "datetime":
-      return <div>{formatDateTime(value)}</div>;
+      return <div>{value ? formatDateTime(value, i18n.language) : ""}</div>;
     case "number":
       return (
         <div>
@@ -151,8 +151,9 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
           rel="noreferrer"
           className="underline text-primary flex items-center"
         >
-          <Trans>Open</Trans>&nbsp;
-          <span>{column.columnDef.title}</span>
+          <span>
+            <Trans>Open</Trans>&nbsp;{column.columnDef.title}
+          </span>
         </a>
       );
     default:
