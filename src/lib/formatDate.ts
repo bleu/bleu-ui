@@ -1,13 +1,13 @@
-export function formatDate(date) {
-  return Intl.DateTimeFormat(undefined, {
+export function formatDate(date, language = "en") {
+  return Intl.DateTimeFormat(language, {
     year: "numeric",
     month: "short",
     day: "numeric",
   }).format(new Date(date));
 }
 
-export function formatDateTime(date: Date | string | number) {
-  return Intl.DateTimeFormat(undefined, {
+export function formatDateTime(date, language = "en") {
+  return Intl.DateTimeFormat(language, {
     year: "numeric",
     month: "short",
     day: "numeric",
