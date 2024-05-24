@@ -13,7 +13,17 @@ import { DynamicActionComponent } from "./DynamicActionComponent";
 export const DataTableRowActions = ({ row, column }) => {
   const actions = row.original.actions || column.columnDef.actions;
 
+  const filteredActions = actions.filter(
+    ({ condition_key, condition_value }) => {
+      if (!condition_key && !condition_value) return true;
+
+      return row.original?.[condition_key] === condition_value;
+    }
+  );
+
   if (!actions?.length) return null;
+
+  if (filteredActions?.length === 0) return null;
 
   return (
     <DropdownMenu>
@@ -28,15 +38,9 @@ export const DataTableRowActions = ({ row, column }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         {/* TODO: here we'd need to filter actions that the user cannot perform, or ideally do this in the BE */}
-        {actions
-          .filter(({ condition_key, condition_value }) => {
-            if (!condition_key && !condition_value) return true;
-
-            return row.original?.[condition_key] === condition_value;
-          })
-          .map((action) => (
-            <DynamicActionComponent key={action} action={action} row={row} />
-          ))}
+        {filteredActions.map((action) => (
+          <DynamicActionComponent key={action} action={action} row={row} />
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
