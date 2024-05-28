@@ -44,7 +44,9 @@ export const MultiSelectCheckboxes =
                   >
                     <FormControl>
                       <Checkbox
-                        checked={formField.value?.includes(item.value)}
+                        checked={formField.value
+                          ?.map(String)
+                          .includes(item.value)}
                         onCheckedChange={(checked) =>
                           checked
                             ? formField.onChange([
