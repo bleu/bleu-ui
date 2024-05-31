@@ -140,7 +140,6 @@ type FormItemContextValue = {
 // Create a provider component for form item context
 export const FormItemProvider = ({
   children,
-  ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   const [itemState, setItemState] = React.useState<FormItemContextValue>({
     id: React.useId(),
@@ -149,7 +148,7 @@ export const FormItemProvider = ({
   return (
     <FormItemStateContext.Provider value={itemState}>
       <FormItemUpdaterContext.Provider value={setItemState}>
-        <div {...props}>{children}</div>
+        {children}
       </FormItemUpdaterContext.Provider>
     </FormItemStateContext.Provider>
   );
