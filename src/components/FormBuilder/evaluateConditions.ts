@@ -1,5 +1,4 @@
 import { FieldValues, UseFormReturn } from "react-hook-form";
-import { camelToSnake } from "#/lib";
 
 export interface Conditions {
   [key: string]: any;
@@ -26,11 +25,13 @@ export const evaluateConditions = (
     );
   }
 
-  return Object.entries(conditions).every(([key, values]) => {
-    if (key === "allOf" || key === "anyOf") return true;
-    const actualKey = key.replace("RESOURCE_ID", String(index));
-    const watchField =
-      form.watch(actualKey) || form.watch(camelToSnake(actualKey));
-    return values.includes(watchField);
-  });
+  if (Object.keys(conditions).length === 0) return true;
+  const key = Object.keys(conditions)[0];
+  const watchField = form.watch(key.replace("RESOURCE_ID", String(index)));
+  const values = conditions[key];
+
+  if (!Array.isArray(values)) {
+    return values === watchField;
+  }
+  return values.includes(watchField);
 };
