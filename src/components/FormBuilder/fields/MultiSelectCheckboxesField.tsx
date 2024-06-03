@@ -55,7 +55,8 @@ export const MultiSelectCheckboxes =
                               ])
                             : formField.onChange(
                                 formField.value?.filter(
-                                  (value) => value !== item.value
+                                  (value) =>
+                                    String(value) !== String(item.value)
                                 )
                               )
                         }
