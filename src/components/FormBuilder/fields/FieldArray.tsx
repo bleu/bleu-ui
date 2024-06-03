@@ -121,7 +121,6 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
     return (
       <div className="w-full">
         <div className="mr-10">
-          {/* @ts-expect-error */}
           <DragDropContext onDragEnd={handleDrag}>
             <ul>
               <StrictModeDroppable droppableId={`${field.name}-items`}>
@@ -132,7 +131,6 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
                       // eslint-disable-next-line no-underscore-dangle
                       if (rhfField._destroy) return null;
                       return (
-                        // @ts-expect-error
                         <Draggable
                           key={`${field.name}[${rhfField.id}]`}
                           draggableId={`item-${index}`}
