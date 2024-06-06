@@ -32,7 +32,7 @@ export const SelectField = withConditional<SelectFieldProps>(
           <FormDescription>{field.description}</FormDescription>
           <Select.SelectRoot
             onValueChange={formField.onChange}
-            defaultValue={String(formField.value)}
+            value={String(formField.value)}
             name={field.name}
             disabled={isFieldDisabled(form, field)}
           >
