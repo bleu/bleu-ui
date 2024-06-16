@@ -16,7 +16,6 @@ export * from "./Label";
 export * from "./Pagination";
 export * from "./Popover";
 export * from "./RadioGroup";
-// export * from "./RichTextEditor/index";
 export * as Select from "./Select";
 export * from "./SelectInput";
 export * from "./Separator";

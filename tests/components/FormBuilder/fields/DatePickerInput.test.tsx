@@ -1,7 +1,10 @@
 import { vi, describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { DatePickerInput, DatePickerInputProps } from "#/components";
+import {
+  DatePickerInput,
+  DatePickerInputProps,
+} from "#/components/FormBuilder/fields/DatePickerInput";
 
 describe("DatePickerInput", () => {
   const mockDate = new Date(2022, 0, 1);

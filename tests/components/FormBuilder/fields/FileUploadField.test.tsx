@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { screen } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { FileUploadField, FileUploadFieldProps } from "#/components";
+import {
+  FileUploadField,
+  FileUploadFieldProps,
+} from "#/components/FormBuilder/fields/FileUploadField";
 
 describe("FileUploadField", () => {
   it("renders an upload button", () => {

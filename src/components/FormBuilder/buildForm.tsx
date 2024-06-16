@@ -1,10 +1,8 @@
 import React from "react";
-import { BaseField, CommonFieldProps, fieldComponents } from "./index";
-import { evaluateConditions } from "./evaluateConditions";
 
-export type FieldComponentType = (
-  props: CommonFieldProps<BaseField>
-) => React.ReactNode | null;
+import { evaluateConditions } from "./evaluateConditions";
+import { BaseField, CommonFieldProps, FieldComponentType } from "./types";
+import { fieldComponents } from "./builder";
 
 // In case you want to use a custom component for a specific field type
 // you can pass it as an argument to the buildForm function OR in the 'component' property of the field object.
@@ -48,3 +46,38 @@ export function buildForm(
 
   return formElements.filter((element) => element !== null);
 }
+export function withConditional<T extends BaseField>(
+  Component: React.ComponentType<CommonFieldProps<T>>
+) {
+  return (props: CommonFieldProps<T>) => {
+    const { form, field } = props;
+
+    const shouldRender = evaluateConditions(
+      form,
+      field?.conditions,
+      field?.index
+    );
+
+    if (!shouldRender) return null;
+
+    return <Component {...props} />;
+  };
+}
+
+export const parseFields = (fields, index) => {
+  const updatedFields = fields.map((field) => {
+    if (field.type === "field_array") {
+      return {
+        ...field,
+        name: field.name.replace("RESOURCE_ID", index),
+        fields: field.fields.map((f) => ({
+          ...f,
+          name: f.name.replace("RESOURCE_ID", index),
+        })),
+      };
+    }
+    return { ...field, name: field.name.replace("RESOURCE_ID", index) };
+  });
+
+  return updatedFields;
+};

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { FormControl, FormField } from "#/components/ui/Form";
 
-import { BaseField, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { BaseField } from "../types";
 
 export interface DelegateFieldProps extends BaseField {
   delegateKey: string;

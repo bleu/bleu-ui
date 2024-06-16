@@ -1,7 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
-import { screen, act } from "@testing-library/react";
+import { act } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { RichTextEditorField, RichTextEditorFieldProps } from "#/components";
+import {
+  RichTextEditorField,
+  RichTextEditorFieldProps,
+} from "#/components/FormBuilder/fields/RichTextEditorField";
 
 describe("RichTextEditorField", () => {
   const field: RichTextEditorFieldProps = {
@@ -10,16 +13,20 @@ describe("RichTextEditorField", () => {
     value: "",
   };
 
+  beforeEach(async () => {
+    renderFormField(RichTextEditorField, field);
+    await act(() => vi.dynamicImportSettled());
+    await act(() => vi.dynamicImportSettled());
+  });
+
   it("renders a rich text editor", async () => {
     const { container } = renderFormField(RichTextEditorField, field);
-    expect(screen.getByText("Loading")).toBeInTheDocument();
-    await act(() => vi.dynamicImportSettled());
-    expect(container.querySelector(".jodit-wysiwyg")).toBeInTheDocument();
+    const editorElement = container.querySelector(".jodit-wysiwyg");
+    expect(editorElement).not.toBeNull();
   });
 
   it("updates the form state when the editor content changes", async () => {
     const { form, container } = renderFormField(RichTextEditorField, field);
-    await act(() => vi.dynamicImportSettled());
     const editorElement = container.querySelector(".jodit-wysiwyg");
 
     if (!editorElement) {

@@ -20,9 +20,11 @@ export const renderFormField = (
   return {
     form,
     ...render(
-      <FormProvider {...form}>
-        <Component form={form} field={field} />
-      </FormProvider>
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <FormProvider {...form}>
+          <Component form={form} field={field} />
+        </FormProvider>
+      </React.Suspense>
     ),
   };
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { RichTextEditor } from "#/components/RichTextEditor";
 import {
   FormDescription,
   FormField,
@@ -8,7 +7,10 @@ import {
   FormMessage,
 } from "#/components/ui/Form";
 
-import { BaseField, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { BaseField } from "../types";
+
+const RichTextEditor = React.lazy(() => import("#/components/RichTextEditor"));
 
 export interface RichTextEditorFieldProps extends BaseField {
   type: "wysiwyg";

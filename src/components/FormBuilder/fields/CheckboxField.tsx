@@ -8,7 +8,8 @@ import {
   FormLabel,
 } from "#/components/ui/Form";
 
-import { BaseField, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { BaseField } from "../types";
 import isFieldDisabled from "../isFieldDisabled";
 
 export interface CheckboxFieldProps extends BaseField {

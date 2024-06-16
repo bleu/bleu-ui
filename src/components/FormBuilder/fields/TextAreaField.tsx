@@ -10,7 +10,8 @@ import {
 } from "#/components/ui/Form";
 import { Textarea } from "#/components/ui/Textarea";
 
-import { BaseField, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { BaseField } from "../types";
 import isFieldDisabled from "../isFieldDisabled";
 
 export interface TextAreaFieldProps extends BaseField {

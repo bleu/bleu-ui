@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { RadioGroupField, RadioGroupFieldProps } from "#/components";
+import {
+  RadioGroupField,
+  RadioGroupFieldProps,
+} from "#/components/FormBuilder/fields/RadioGroupField";
 
 describe("RadioGroupField", () => {
   const field: RadioGroupFieldProps = {

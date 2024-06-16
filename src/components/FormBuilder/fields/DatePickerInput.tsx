@@ -19,7 +19,8 @@ import {
 } from "#/components/ui/Popover";
 import { cn } from "#/lib/utils";
 
-import { BaseField, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { BaseField } from "../types";
 
 export interface DatePickerInputProps extends BaseField {
   type: "date" | "datetime";

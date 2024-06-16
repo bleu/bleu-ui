@@ -7,8 +7,8 @@ import { StrictModeDroppable } from "#/components/StrictModeDroppable";
 import { Button } from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
 
-import { buildForm } from "../buildForm";
-import { BaseField, FormFieldProps, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { FormFieldProps, BaseField } from "../types";
 
 const fieldArrayVariants = cva("w-full", {
   variants: {
@@ -32,6 +32,7 @@ const fieldArrayVariants = cva("w-full", {
     gap: "medium",
   },
 });
+
 export interface FieldArrayFieldProps extends BaseField {
   _destroy?: boolean;
   defaultValues: Record<string, unknown>;
@@ -52,7 +53,7 @@ export interface FieldArrayFieldProps extends BaseField {
 }
 
 export const FieldArray = withConditional<FieldArrayFieldProps>(
-  ({ form, field, customComponents }) => {
+  ({ form, field, customComponents, buildForm }) => {
     const { fields, append, remove, move } = useFieldArray({
       control: form.control,
       name: field.name,
@@ -116,6 +117,10 @@ export const FieldArray = withConditional<FieldArrayFieldProps>(
         ).fill(field.defaultValues);
         append(emptyFields, { shouldFocus: false });
       }
+    }
+
+    if (!buildForm) {
+      throw new Error("buildForm is required");
     }
 
     return (

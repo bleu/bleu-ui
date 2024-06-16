@@ -6,7 +6,6 @@ import { FileUploadField } from "./fields/FileUploadField";
 import { InputField } from "./fields/InputField";
 import { MultiSelectCheckboxes } from "./fields/MultiSelectCheckboxesField";
 import { RadioGroupField } from "./fields/RadioGroupField";
-import { RichTextEditorField } from "./fields/RichTextEditorField";
 import { ColorPickerField } from "./fields/selects/ColorPickerField";
 import { MultiSelect } from "./fields/selects/MultiSelect";
 import { RadiusSelect } from "./fields/selects/RadiusSelect";
@@ -15,6 +14,7 @@ import { SelectField } from "./fields/selects/SelectField";
 import { SwitchField } from "./fields/SwitchField";
 import { TextAreaField } from "./fields/TextAreaField";
 import { DelegateField } from "./fields/DelegateField";
+import { RichTextEditorField } from "./fields/RichTextEditorField";
 
 export const fieldComponents = {
   input: InputField,
@@ -36,5 +36,3 @@ export const fieldComponents = {
   radius_select: RadiusSelect,
   delegate: DelegateField,
 } as const;
-
-export * from "./buildForm";

@@ -48,7 +48,7 @@ const EDITOR_BUTTONS = [
   "source",
 ];
 
-export function RichTextEditor({ initialValue, onChange }) {
+export default function RichTextEditor({ initialValue, onChange }) {
   const { theme } = useTheme();
   const { t } = useTranslation();
 

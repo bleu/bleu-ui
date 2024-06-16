@@ -2,7 +2,10 @@ import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 
 import { renderFormField } from "tests/helpers/renderFormField";
-import { CheckboxField, CheckboxFieldProps } from "#/components";
+import {
+  CheckboxField,
+  CheckboxFieldProps,
+} from "#/components/FormBuilder/fields/CheckboxField";
 
 describe("CheckboxField", () => {
   const field: CheckboxFieldProps = {

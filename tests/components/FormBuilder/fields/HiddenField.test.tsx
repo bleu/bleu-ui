@@ -1,7 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { screen } from "@testing-library/react";
-import { BaseField, HiddenField } from "#/components";
+
 import { renderFormField } from "../../../../tests/helpers/renderFormField";
+import { HiddenField } from "#/components/FormBuilder/fields/HiddenField";
+import { BaseField } from "#/components/FormBuilder/types";
 
 describe("HiddenField", () => {
   const field: BaseField = {

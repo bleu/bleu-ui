@@ -15,11 +15,11 @@ import {
   PopoverTrigger,
 } from "#/components/ui/Popover";
 
-import { withConditional } from "../../fields";
+import { withConditional } from "../../buildForm";
 import { SelectFieldProps } from "./SelectField";
 import { cn } from "#/lib/utils";
 
-function hexToBrightness(hexColor) {
+function hexToBrightness(hexColor: string | undefined) {
   // ensure the hex color is valid and in the proper format
   if (!hexColor || hexColor.length !== 7 || hexColor[0] !== "#") {
     return 120;

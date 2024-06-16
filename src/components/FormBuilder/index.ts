@@ -1,3 +1,4 @@
-export * from "./builder";
+export { fieldComponents } from "./builder";
 export * from "./fields";
-export * from "./fields/index";
+export * from "./types";
+export * from "./buildForm";

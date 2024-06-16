@@ -4,7 +4,7 @@ import { renderFormField } from "tests/helpers/renderFormField";
 import {
   MultiSelectCheckboxes,
   MultiSelectCheckboxesFieldProps,
-} from "#/components";
+} from "#/components/FormBuilder/fields/MultiSelectCheckboxesField";
 
 describe("MultiSelectCheckboxes", () => {
   const field: MultiSelectCheckboxesFieldProps = {

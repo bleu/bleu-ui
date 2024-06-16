@@ -12,7 +12,6 @@ export * from "./FileUploadField";
 export * from "./InputField";
 export * from "./MultiSelectCheckboxesField";
 export * from "./RadioGroupField";
-export * from "./RichTextEditorField";
 export * from "./SwitchField";
 export * from "./TextAreaField";
 export * from "./DelegateField";

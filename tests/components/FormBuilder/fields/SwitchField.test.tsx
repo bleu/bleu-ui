@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { SwitchField, SwitchFieldProps } from "#/components";
+import {
+  SwitchField,
+  SwitchFieldProps,
+} from "#/components/FormBuilder/fields/SwitchField";
 
 describe("SwitchField", () => {
   const field: SwitchFieldProps = { type: "switch", name: "test", value: "" };

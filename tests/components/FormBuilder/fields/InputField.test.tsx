@@ -1,7 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
 import { renderFormField } from "tests/helpers/renderFormField";
-import { InputField, InputFieldProps } from "#/components";
+
+import {
+  InputField,
+  InputFieldProps,
+} from "#/components/FormBuilder/fields/InputField";
 
 describe("InputField", () => {
   const field: InputFieldProps = {

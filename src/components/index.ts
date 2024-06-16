@@ -10,5 +10,4 @@ export * from "./SectionTitle";
 export * from "./OtpInput";
 export * from "./SubmitButton";
 export * from "./StrictModeDroppable";
-export * from "./Plot";
 export * from "./Skeletons";

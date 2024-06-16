@@ -1,4 +1,4 @@
-import { CommonFieldProps, FormFieldProps } from "./fields";
+import { FormFieldProps, CommonFieldProps } from "./types";
 
 type FieldProps = CommonFieldProps<FormFieldProps>;
 

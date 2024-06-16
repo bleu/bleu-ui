@@ -8,7 +8,7 @@ export interface Conditions {
 
 export const evaluateConditions = (
   form: UseFormReturn<FieldValues>,
-  conditions: Conditions | undefined,
+  conditions?: Conditions | undefined,
   index?: number
 ): boolean => {
   if (!conditions) return true;

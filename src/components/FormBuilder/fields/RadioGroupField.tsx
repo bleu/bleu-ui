@@ -11,7 +11,8 @@ import {
 } from "#/components/ui/Form";
 import { Label } from "#/components/ui/Label";
 import { RadioGroup, RadioGroupItem } from "#/components/ui/RadioGroup";
-import { BaseField, withConditional } from "../fields";
+import { withConditional } from "../buildForm";
+import { BaseField } from "../types";
 
 export interface RadioGroupFieldProps extends BaseField {
   sections: Array<{

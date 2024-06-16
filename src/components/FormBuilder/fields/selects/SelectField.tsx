@@ -9,7 +9,8 @@ import {
 } from "#/components/ui/Form";
 import * as Select from "#/components/ui/Select";
 
-import { BaseField, withConditional } from "../../fields";
+import { withConditional } from "../../buildForm";
+import { BaseField } from "../../types";
 import isFieldDisabled from "../../isFieldDisabled";
 
 export interface SelectFieldProps extends BaseField {
