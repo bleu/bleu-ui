@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { evaluateConditions } from "./evaluateConditions";
 import { BaseField, CommonFieldProps, FieldComponentType } from "./types";
@@ -35,12 +35,14 @@ export function buildForm(
     const name = field.name.replace("RESOURCE_ID", String(index));
 
     return (
-      <FieldComponent
-        key={field.name + name + index}
-        field={{ ...field, name, index }}
-        form={form}
-        customComponents={customComponents}
-      />
+      <Suspense>
+        <FieldComponent
+          key={field.name + name + index}
+          field={{ ...field, name, index }}
+          form={form}
+          customComponents={customComponents}
+        />
+      </Suspense>
     );
   });
 
