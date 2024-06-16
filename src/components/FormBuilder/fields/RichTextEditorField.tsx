@@ -9,8 +9,7 @@ import {
 
 import { withConditional } from "../buildForm";
 import { BaseField } from "../types";
-
-const RichTextEditor = React.lazy(() => import("#/components/RichTextEditor"));
+import RichTextEditor from "#/components/RichTextEditor";
 
 export interface RichTextEditorFieldProps extends BaseField {
   type: "wysiwyg";
