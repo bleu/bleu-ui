@@ -4,6 +4,7 @@ import React, { Suspense, lazy } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "#/components/ThemeToggle/context";
 
+// @ts-ignore
 const JoditEditor = lazy(() => import("jodit-react"));
 
 const EDITOR_BUTTONS = [
