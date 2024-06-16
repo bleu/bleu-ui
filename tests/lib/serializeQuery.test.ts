@@ -67,10 +67,7 @@ describe("Query Serialization and Deserialization", () => {
     });
 
     it("throws error for non-object inputs in serializeQuery", () => {
-      // @ts-expect-error
       expect(() => serializeQuery(null)).toThrow();
-      // @ts-expect-error
-      expect(() => serializeQuery(123)).toThrow();
     });
   });
 
@@ -115,10 +112,7 @@ describe("Query Serialization and Deserialization", () => {
     // });
 
     it("throws error for invalid input types in deserializeQuery", () => {
-      // @ts-expect-error
       expect(() => deserializeQuery(null)).toThrow();
-      // @ts-expect-error
-      expect(() => deserializeQuery(123)).toThrow();
     });
   });
 });

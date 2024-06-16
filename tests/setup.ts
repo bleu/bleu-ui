@@ -58,7 +58,7 @@ export const renderHookWithError = (...args: unknown[]) => {
   const restore = suppressConsoleError();
 
   try {
-    // @ts-ignore
+    // @ts-expect-error
     renderHook(...args);
   } catch (ex) {
     error = ex;

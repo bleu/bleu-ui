@@ -23,7 +23,7 @@
  * @returns {string} - The serialized query string.
  * @throws {Error} - Throws an error if the input is not an object.
  */
-export function serializeQuery(params: object, prefix = ""): string {
+export function serializeQuery(params?: object | null, prefix = ""): string {
   if (typeof params !== "object" || params === null) {
     throw new Error("Input must be an object");
   }
