@@ -7,7 +7,17 @@ import { ChartSkeleton } from "#/components/Skeletons/ChartSkeleton";
 import { Tooltip, TooltipTrigger } from "#/components/ui/Tooltip";
 
 // @ts-ignore Type 'Promise<typeof /@types/react-plotly.js/index")>' is not assignable to type 'Promise<{ default: ComponentType<any>; }>'
-const PlotPrimitive = lazy(() => import("react-plotly.js"));
+const PlotPrimitive = lazy(async () => {
+  try {
+    return await import("react-plotly.js");
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(
+      "You're trying to load react-plotly.js but it's not installed. Please run `yarn add react-plotly.js` to install it."
+    );
+    return { default: () => <div>Plotly not installed</div> };
+  }
+});
 
 interface PlotProps {
   title?: string;
