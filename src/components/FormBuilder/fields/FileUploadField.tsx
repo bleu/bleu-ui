@@ -12,7 +12,7 @@ import {
 } from "#/components/ui/Form";
 import { cn } from "#/lib/utils";
 
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
 import { BaseField } from "../types";
 
 const imageUploadVariants = cva("w-full", {

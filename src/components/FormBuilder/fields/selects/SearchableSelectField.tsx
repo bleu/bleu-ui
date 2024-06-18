@@ -24,7 +24,7 @@ import {
 } from "#/components/ui/Popover";
 import { cn } from "#/lib/utils";
 
-import { withConditional } from "../../buildForm";
+import { withConditional } from "../../withConditional";
 import { SelectFieldProps } from "./SelectField";
 
 export const SearchableSelectField = withConditional<SelectFieldProps>(

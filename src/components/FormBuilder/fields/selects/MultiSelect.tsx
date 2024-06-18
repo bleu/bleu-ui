@@ -25,7 +25,7 @@ import {
 import { Separator } from "#/components/ui/Separator";
 import { cn } from "#/lib/utils";
 
-import { withConditional } from "../../buildForm";
+import { withConditional } from "../../withConditional";
 import { SelectFieldProps } from "./SelectField";
 
 const SubItem = ({ tags, onSelect, ...props }) => {

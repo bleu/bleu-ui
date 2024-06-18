@@ -10,7 +10,7 @@ import {
 } from "#/components/ui/Form";
 import { Textarea } from "#/components/ui/Textarea";
 
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
 import { BaseField } from "../types";
 import isFieldDisabled from "../isFieldDisabled";
 

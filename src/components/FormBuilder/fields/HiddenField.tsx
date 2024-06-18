@@ -1,7 +1,7 @@
 import React from "react";
 import { FormField, FormItem } from "#/components/ui/Form";
 
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
 
 export const HiddenField = withConditional(({ form, field }) => (
   <FormField

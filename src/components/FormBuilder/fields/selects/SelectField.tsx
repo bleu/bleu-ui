@@ -9,7 +9,7 @@ import {
 } from "#/components/ui/Form";
 import * as Select from "#/components/ui/Select";
 
-import { withConditional } from "../../buildForm";
+import { withConditional } from "../../withConditional";
 import { BaseField } from "../../types";
 import isFieldDisabled from "../../isFieldDisabled";
 

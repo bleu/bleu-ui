@@ -8,7 +8,7 @@ import {
 } from "#/components/ui/Form";
 import { Switch } from "#/components/ui/Switch";
 
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
 import { BaseField } from "../types";
 
 export interface SwitchFieldProps extends BaseField {

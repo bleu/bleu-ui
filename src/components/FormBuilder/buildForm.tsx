@@ -46,24 +46,6 @@ export function buildForm(
 
   return formElements.filter((element) => element !== null);
 }
-export function withConditional<T extends BaseField>(
-  Component: React.ComponentType<CommonFieldProps<T>>
-) {
-  return (props: CommonFieldProps<T>) => {
-    const { form, field } = props;
-
-    const shouldRender = evaluateConditions(
-      form,
-      field?.conditions,
-      field?.index
-    );
-
-    if (!shouldRender) return null;
-
-    return <Component {...props} />;
-  };
-}
-
 export const parseFields = (fields, index) => {
   const updatedFields = fields.map((field) => {
     if (field.type === "field_array") {

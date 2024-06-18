@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "#/components/ui/Form";
 
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
 import { SelectFieldProps } from "./selects/SelectField";
 
 export interface MultiSelectCheckboxesFieldProps extends SelectFieldProps {

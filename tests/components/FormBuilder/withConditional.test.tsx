@@ -2,7 +2,7 @@ import * as React from "react";
 import { describe, it, expect } from "vitest";
 import { render, renderHook, screen } from "@testing-library/react";
 import { useForm } from "react-hook-form";
-import { withConditional } from "#/components";
+import { withConditional } from "#/components/FormBuilder/withConditional";
 
 describe("withConditional", () => {
   const TestComponent = () => <div>Test</div>;
@@ -22,7 +22,7 @@ describe("withConditional", () => {
         defaultValues: { test: "value" },
       })
     ).result.current;
-    // @ts-expect-error TS(2345) FIXME: Argument of type 'React.ComponentType<CommonFieldProps<BaseField>>' is not assignable to parameter of type 'React.ComponentType<CommonFieldProps<BaseField>>'.
+    // @ts-ignore
     render(<ConditionalComponent field={field} form={form} />);
     const testElement = screen.getByText("Test");
     expect(testElement).toBeInTheDocument();

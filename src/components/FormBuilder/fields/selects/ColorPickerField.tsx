@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "#/components/ui/Popover";
 
-import { withConditional } from "../../buildForm";
+import { withConditional } from "../../withConditional";
 import { SelectFieldProps } from "./SelectField";
 import { cn } from "#/lib/utils";
 

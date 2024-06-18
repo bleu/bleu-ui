@@ -4,11 +4,19 @@ import React, { Suspense, lazy } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "#/components/ThemeToggle/context";
 
-const JoditEditor = lazy(async () => {
-  // @ts-ignore
-  const obj = await import("jodit-react");
-  return typeof obj.default === "function" ? obj : obj.default;
-});
+const JoditEditor = lazy(() =>
+  // @ts-expect-error
+  import("jodit-react")
+    .then((obj) => (typeof obj.default === "function" ? obj : obj.default))
+    .catch(() => {
+      // eslint-disable-next-line no-console
+      console.error(
+        "You're trying to load jodit-react but it's not installed. Please run `yarn add jodit-react` to install it."
+      );
+      return { default: () => <div>Jodit not installed</div> };
+    })
+);
+
 const EDITOR_BUTTONS = [
   "undo",
   "redo",

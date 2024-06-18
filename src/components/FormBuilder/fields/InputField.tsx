@@ -10,7 +10,7 @@ import {
 } from "#/components/ui/Form";
 import { Input } from "#/components/ui/Input";
 
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
 import { BaseField } from "../types";
 
 export interface InputFieldProps extends BaseField {

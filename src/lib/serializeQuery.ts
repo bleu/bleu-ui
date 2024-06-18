@@ -69,7 +69,7 @@ export function serializeQuery(params?: object | null, prefix = ""): string {
  * @returns {Object} - The deserialized object.
  * @throws {Error} - Throws an error if the input is not a string.
  */
-export function deserializeQuery(queryString: string): object {
+export function deserializeQuery(queryString: string | null): object {
   if (typeof queryString !== "string") {
     throw new Error("Query string must be a string");
   }

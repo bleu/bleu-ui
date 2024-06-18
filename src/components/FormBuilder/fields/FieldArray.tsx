@@ -8,7 +8,8 @@ import { Button } from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
 
 import { FormFieldProps, BaseField } from "../types";
-import { withConditional } from "../buildForm";
+import { withConditional } from "../withConditional";
+import { buildForm } from "../buildForm";
 
 const fieldArrayVariants = cva("w-full", {
   variants: {
@@ -53,7 +54,7 @@ export interface FieldArrayFieldProps extends BaseField {
 }
 
 export const FieldArray = withConditional<FieldArrayFieldProps>(
-  ({ form, field, customComponents, buildForm }) => {
+  ({ form, field, customComponents }) => {
     const { fields, append, remove, move } = useFieldArray({
       control: form.control,
       name: field.name,
