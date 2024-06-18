@@ -112,6 +112,7 @@ describe("Query Serialization and Deserialization", () => {
     // });
 
     it("throws error for invalid input types in deserializeQuery", () => {
+      // @ts-ignore-next-line
       expect(() => deserializeQuery(null)).toThrow();
     });
   });
