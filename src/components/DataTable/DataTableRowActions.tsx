@@ -13,6 +13,8 @@ import { DynamicActionComponent } from "./DynamicActionComponent";
 export const DataTableRowActions = ({ row, column }) => {
   const actions = row.original.actions || column.columnDef.actions;
 
+  if (!actions?.length) return null;
+
   const filteredActions = actions.filter(
     ({ condition_key, condition_value }) => {
       if (!condition_key && !condition_value) return true;
@@ -20,8 +22,6 @@ export const DataTableRowActions = ({ row, column }) => {
       return row.original?.[condition_key] === condition_value;
     }
   );
-
-  if (!actions?.length) return null;
 
   if (filteredActions?.length === 0) return null;
 
