@@ -4,12 +4,10 @@ import React, { Suspense, lazy } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "#/components/ThemeToggle/context";
 
-const JoditEditor = lazy(() =>
-  // @ts-ignore
-  import("jodit-react").then((obj) =>
-    typeof obj.default === "function" ? obj : obj.default
-  )
-);
+const JoditEditor = lazy(async () => {
+  const module = await import("jodit-react");
+  return { default: module.default };
+});
 
 const EDITOR_BUTTONS = [
   "undo",
