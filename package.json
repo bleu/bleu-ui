@@ -218,7 +218,6 @@
     "embla-carousel-react": "^8.1.5",
     "i18next": "^23.11.5",
     "jodit": "^4.2.27",
-    "jodit-react": "^4.1.2",
     "object-to-formdata": "^4.5.1",
     "plotly.js": "^2.33.0",
     "react-beautiful-dnd": "^13.1.1",

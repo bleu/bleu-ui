@@ -2280,7 +2280,6 @@ __metadata:
     i18next: "npm:^23.11.5"
     i18next-parser: "npm:^9.0.0"
     jodit: "npm:^4.2.27"
-    jodit-react: "npm:^4.1.2"
     jsdom: "npm:^24.1.0"
     lint-staged: "npm:15.2.7"
     object-to-formdata: "npm:^4.5.1"
@@ -13769,19 +13768,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jodit-react@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "jodit-react@npm:4.1.2"
-  dependencies:
-    jodit: "npm:^4.2.10"
-  peerDependencies:
-    react: ~0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ~0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/2b762e3481191d30099c50ec8a840e183c6cfabba9c77b192034469df0b4d31488ce1586bb6eddee2a12c0efd016f6ce3f98d45719162c33e7804567eee7a87c
-  languageName: node
-  linkType: hard
-
-"jodit@npm:^4.2.10, jodit@npm:^4.2.27":
+"jodit@npm:^4.2.27":
   version: 4.2.27
   resolution: "jodit@npm:4.2.27"
   dependencies:

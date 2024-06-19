@@ -1,11 +1,10 @@
 import "./styles.css";
 
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "#/components/ThemeToggle/context";
-import { lazy } from "#/lib/lazy";
 
-const JoditEditor = lazy(() => import("jodit-react"));
+const JoditEditor = lazy(() => import("./JoditEditor"));
 
 const EDITOR_BUTTONS = [
   "undo",
