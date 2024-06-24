@@ -26,8 +26,15 @@ const PlotPrimitive = lazy(() =>
 );
 
 interface PlotProps {
+  className?: string;
+  config?: any;
+  data?: any;
+  layout?: any;
+  responsive?: boolean;
+  revision?: number;
   title?: string;
   toolTip?: string;
+  useResizeHandler?: boolean;
 }
 
 export const defaultAxisLayout = {
