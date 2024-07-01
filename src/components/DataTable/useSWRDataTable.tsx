@@ -14,6 +14,15 @@ function formatRequestParams(originalObj) {
   };
 }
 
+class FetchError extends Error {
+  response: Response;
+
+  constructor(message: string, response: Response) {
+    super(message);
+    this.response = response;
+  }
+}
+
 const dataTableFetcher = async ([pathOrUrl, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
 
@@ -25,7 +34,7 @@ const dataTableFetcher = async ([pathOrUrl, paramsObject]) => {
     },
   });
   if (!response.ok) {
-    throw new Error("Failed to fetch.");
+    throw new FetchError("Failed to fetch", response);
   }
   return response.json();
 };
