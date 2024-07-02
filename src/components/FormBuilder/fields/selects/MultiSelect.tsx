@@ -74,7 +74,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                     <Button
                       variant="outline"
                       size="sm"
-                      className="my-4 h-8 border-dashed dark:border-2"
+                      className="my-4 border-dashed dark:border-2"
                     >
                       <PlusCircledIcon className="mr-2 size-4" />
                       {selection?.length > 0 && (
@@ -85,11 +85,18 @@ export const MultiSelect = withConditional<MultiSelectField>(
                           />
                           <Badge
                             color="secondary"
-                            className="rounded-sm px-1 font-normal lg:hidden"
+                            className={cn("rounded-sm px-1 font-normal", {
+                              hidden: selection.length <= 3,
+                            })}
                           >
                             {selection.length}
                           </Badge>
-                          <div className="hidden space-x-1 lg:flex">
+                          <div
+                            className={cn("space-x-1 flex", {
+                              hidden: selection.length > 3,
+                              flex: selection.length <= 3,
+                            })}
+                          >
                             {options
                               ?.filter((option) =>
                                 formField.value?.includes(option.value)
@@ -98,7 +105,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                                 <Badge
                                   color="secondary"
                                   key={option.value}
-                                  className="rounded-sm px-1 font-normal"
+                                  className="rounded-sm px-1 font-normal max-w-[200px] truncate overflow-hidden whitespace-nowrap"
                                 >
                                   {option.label}
                                 </Badge>
@@ -109,7 +116,7 @@ export const MultiSelect = withConditional<MultiSelectField>(
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
+                <PopoverContent className="max-w-[500px] p-0">
                   <Command>
                     <CommandInput placeholder={field.placeholder} />
                     <CommandList>
