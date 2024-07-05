@@ -32,8 +32,19 @@ function Tooltip({
   defaultOpen,
   onOpenChange,
   ...props
-}: TooltipPrimitive.TooltipContentProps & TooltipPrimitive.TooltipProps) {
+}: TooltipPrimitive.TooltipContentProps &
+  TooltipPrimitive.TooltipProps & {
+    content?: React.ReactNode | string;
+  }) {
   if (!content) return children;
+
+  const tooltipContent =
+    typeof content === "string" ? (
+      // eslint-disable-next-line react/no-danger
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    ) : (
+      content
+    );
 
   return (
     <TooltipProvider>
@@ -45,8 +56,7 @@ function Tooltip({
       >
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent side="top" align="center" {...props}>
-          {/* eslint-disable-next-line react/no-danger */}
-          <span dangerouslySetInnerHTML={{ __html: content }} />
+          {tooltipContent}
           {/* <TooltipPrimitive.Arrow color="primary" width={11} height={5} /> */}
         </TooltipContent>
       </TooltipRoot>
