@@ -1,6 +1,12 @@
 // @ts-nocheck
 /* eslint-disable */
-import React, { useEffect, useRef, forwardRef, useLayoutEffect } from "react";
+import React, {
+  useEffect,
+  useRef,
+  forwardRef,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import "jodit/es5/jodit.min.css";
 import { Jodit } from "jodit/es2018/jodit.fat.min";
 
@@ -32,7 +38,7 @@ interface JoditEditorProps {
   value: string;
 }
 
-const JoditEditor = forwardRef<HTMLTextAreaElement, JoditEditorProps>(
+const JoditEditorBase = forwardRef<HTMLTextAreaElement, JoditEditorProps>(
   (
     {
       className,
@@ -97,13 +103,19 @@ const JoditEditor = forwardRef<HTMLTextAreaElement, JoditEditorProps>(
       }
     }, [tabIndex]);
 
+    const onBlurHandler = useCallback(
+      (e) => onBlur && onBlur(textArea.current.value, e),
+      [onBlur, textArea.current]
+    );
+    const onChangeHandler = useCallback(
+      (value: string) => onChange && onChange(value),
+      [onChange]
+    );
+
     useEffect(() => {
       if (!textArea.current.events || (!onBlur && !onChange)) {
         return;
       }
-
-      const onBlurHandler = (e) => onBlur && onBlur(textArea.current.value, e);
-      const onChangeHandler = (value) => onChange && onChange(value);
 
       // adding event handlers
       textArea.current.events
@@ -139,5 +151,7 @@ const JoditEditor = forwardRef<HTMLTextAreaElement, JoditEditorProps>(
     );
   }
 );
+
+const JoditEditor = React.memo(JoditEditorBase);
 
 export default JoditEditor;
