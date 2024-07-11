@@ -1,4 +1,5 @@
 // @ts-nocheck
+/* eslint-disable */
 import React, { useEffect, useRef, useCallback } from "react";
 import Plotly from "plotly.js/dist/plotly";
 
