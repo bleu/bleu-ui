@@ -1,29 +1,11 @@
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { merge } from "lodash";
-import React, { Suspense, lazy } from "react";
+import React, { lazy } from "react";
 import { cn } from "#/lib";
 
-import { ChartSkeleton } from "#/components/Skeletons/ChartSkeleton";
 import { Tooltip, TooltipTrigger } from "#/components/ui/Tooltip";
 
-function PlotlyNotInstalled({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  children: _children,
-}: React.PropsWithChildren<{}>) {
-  return <div>Plotly not installed</div>;
-}
-
-const PlotPrimitive = lazy(() =>
-  // @ts-expect-error
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import("react-plotly.js").catch((_error) => {
-    // eslint-disable-next-line no-console
-    console.error(
-      "You're trying to load react-plotly.js but it's not installed. Please run `yarn add react-plotly.js` to install it."
-    );
-    return { default: PlotlyNotInstalled };
-  })
-);
+const PlotPrimitive = lazy(() => import("./react-plotly"));
 
 interface PlotProps {
   className?: string;
@@ -114,10 +96,7 @@ export function Plot(props: PlotProps) {
         {plotProps.title && (
           <PlotTitle title={plotProps.title} tooltip={plotProps.toolTip} />
         )}
-        {/* @ts-ignore */}
-        <Suspense fallback={<ChartSkeleton />}>
-          <PlotPrimitive {...plotProps} />
-        </Suspense>
+        <PlotPrimitive {...plotProps} />
       </div>
     </div>
   );

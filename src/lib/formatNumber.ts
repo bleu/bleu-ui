@@ -5,10 +5,11 @@ const languageMap = {
   "pt-BR": "pt-BR",
 };
 
+const decimal = "decimal" as const;
 export const formatNumber = (
   number: number | string | bigint,
   decimals = 1,
-  style = "decimal",
+  style = decimal,
   notation: Notation = "compact",
   lessThanThresholdToReplace = 0.001,
   language = "en"
