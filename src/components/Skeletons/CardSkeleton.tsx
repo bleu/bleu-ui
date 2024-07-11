@@ -4,7 +4,6 @@ import { cn } from "#/lib/utils";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -25,9 +24,6 @@ export function CardSkeleton({ className = "" }) {
         <Skeleton className="h-2 w-[85%] mb-2" />
         <Skeleton className="h-2 w-[90%]" />
       </CardContent>
-      <CardDescription>
-        <Skeleton className="h-10 w-full" />
-      </CardDescription>
       <CardFooter>
         <Skeleton className="h-3 w-20" />
         <Skeleton className="h-3 w-20 ml-4" />
