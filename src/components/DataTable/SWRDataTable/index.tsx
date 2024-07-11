@@ -51,6 +51,14 @@ export const formatParamsToDataTable = (params, searchKey) => {
 };
 
 export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
+  if (!column || !column.columnDef) {
+    return null;
+  }
+
+  const { accessorKey } = column.columnDef;
+  if (typeof accessorKey !== "string") {
+    return null;
+  }
   const value = row.getValue(column.columnDef.accessorKey);
   const { i18n } = useTranslation();
 
