@@ -14,7 +14,6 @@ function PlotlyNotInstalled({
 }
 
 const PlotPrimitive = lazy(() =>
-  // @ts-expect-error
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import("react-plotly.js").catch((_error) => {
     // eslint-disable-next-line no-console
