@@ -1,4 +1,5 @@
 type Notation = "compact" | "engineering" | "scientific" | "standard";
+type NumberStyle = "decimal" | "currency" | "percent" | "unit";
 
 const languageMap = {
   en: "en-US",
@@ -8,25 +9,50 @@ const languageMap = {
 export const formatNumber = (
   number: number | string | bigint,
   decimals = 1,
-  style = "decimal",
+  numberStyle: NumberStyle = "decimal",
   notation: Notation = "compact",
   lessThanThresholdToReplace = 0.001,
   language = "en"
 ) => {
-  if (number === 0) return "0";
-  if (!number) return "0";
-  if (Math.abs(Number(number)) < lessThanThresholdToReplace) {
-    return `< ${lessThanThresholdToReplace.toLocaleString(languageMap[language])}`;
+  if (number === undefined || number === null || number === "") return "0";
+
+  let num: number;
+  if (typeof number === "bigint") {
+    num = Number(number.toString());
+  } else {
+    num = Number(number);
   }
-  return Number(number).toLocaleString(languageMap[language], {
+
+  if (Number.isNaN(num)) return "Invalid Number";
+  if (num === 0) return "0";
+
+  const absNum = Math.abs(num);
+  if (absNum > 0 && absNum < lessThanThresholdToReplace) {
+    return `< ${lessThanThresholdToReplace.toLocaleString(
+      languageMap[language] || "en-US",
+      {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      }
+    )}`;
+  }
+
+  const options: Intl.NumberFormatOptions = {
     notation,
+    minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
-    style,
-  });
+    style: numberStyle,
+  };
+
+  if (numberStyle === "currency") {
+    options.currency = "USD";
+  }
+
+  return num.toLocaleString(languageMap[language] || "en-US", options);
 };
 
 export function numberToPercent(value?: number) {
-  if (!value) return undefined;
+  if (value === undefined) return undefined;
   return value * 100;
 }
 
@@ -36,8 +62,10 @@ export function percentToNumber(value: number) {
 
 export function convertStringToNumberAndRoundDown(value: string) {
   const num = parseFloat(value);
-  const integerPartLength = Math.floor(num).toString().length;
+  if (num > Number.MAX_SAFE_INTEGER || num < Number.MIN_SAFE_INTEGER) {
+    return BigInt(Math.floor(num));
+  }
+  const integerPartLength = Math.floor(Math.abs(num)).toString().length;
   const maxDecimalPlaces = Math.max(0, 15 - integerPartLength);
-  const scale = 10 ** maxDecimalPlaces;
-  return Math.floor(num * scale) / scale;
+  return Number(num.toFixed(maxDecimalPlaces));
 }
