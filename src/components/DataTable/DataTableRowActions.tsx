@@ -36,7 +36,7 @@ export const DataTableRowActions = ({ row, column }) => {
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
+      <DropdownMenuContent align="end" className="w-full">
         {/* TODO: here we'd need to filter actions that the user cannot perform, or ideally do this in the BE */}
         {filteredActions.map((action) => (
           <DynamicActionComponent key={action} action={action} row={row} />
