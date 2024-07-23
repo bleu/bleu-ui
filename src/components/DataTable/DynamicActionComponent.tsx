@@ -16,7 +16,9 @@ import {
   AlertDialogTrigger,
 } from "#/components/ui/AlertDialog";
 import { Button } from "#/components/ui/Button";
-import { Form } from "#/components/ui/Form";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/Dialog";
+import { Form } from "../ui/Form";
+import { buildForm } from "../FormBuilder/buildForm";
 
 export const DynamicActionComponent = ({ action, row }) => {
   const renderActionButton = () => {
@@ -54,6 +56,7 @@ export const DynamicActionComponent = ({ action, row }) => {
 
 interface ActionFormProps {
   action: {
+    form?: any;
     method: string;
     name: string;
     trigger_confirmation: boolean;
@@ -75,6 +78,50 @@ export const ActionForm: React.FC<ActionFormProps> = ({
   const form = useForm({});
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  if (action?.form?.fields) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          {children || (
+            <Button variant="ghost" className="w-full">
+              {action.name}
+            </Button>
+          )}
+        </DialogTrigger>
+        <DialogContent className="max-h-[100%] max-w-lg overflow-auto">
+          <div className="px-2 flex flex-col">
+            <span className="text-xl font-semibold text-foreground mb-2">
+              {action.name}
+            </span>
+            <span className="text-sm text-muted-foreground">
+              <Trans>Fill in the fields to confirm the action</Trans>
+            </span>
+          </div>
+          <Form
+            onSubmit={() => setIsSubmitting(true)}
+            action={action.url_path.replace("RESOURCE_ID", row.original.id)}
+            method="post"
+            {...form}
+          >
+            <div className="p-2">
+              {action.method === "delete" && (
+                <input type="hidden" name="_method" value="delete" />
+              )}
+              <div className="flex flex-wrap gap-4">
+                {buildForm(action?.form?.fields, form)}
+              </div>
+              <div className="flex justify-start mt-4">
+                <SubmitButton type="submit" isSubmitting={isSubmitting}>
+                  <Trans>Confirm</Trans>
+                </SubmitButton>
+              </div>
+            </div>
+          </Form>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <>
