@@ -7,7 +7,7 @@ module.exports = {
   // important: "#bleu-ui",
   content: ["src/**/*.{ts,tsx}", "./src/stories/**/*.{js,ts,jsx,tsx,mdx}"],
   corePlugins: {
-    preflight: true,
+    preflight: false,
   },
   theme: {
     container: {
