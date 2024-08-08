@@ -3,7 +3,7 @@ import FormBuilderDemo from "./demo/FormBuilderDemo";
 import { BaseField } from "../components/formBuilder/types";
 
 const meta = {
-  title: "Components/BuildForm",
+  title: "Form Builder",
   component: FormBuilderDemo,
   parameters: {
     layout: "centered",
@@ -31,12 +31,14 @@ export const BuildFormTextInputFields: Story = {
         mode: "number",
         name: "number",
         label: "Number input",
+        required: true,
         description: "This is a number input",
       },
       {
         type: "textarea",
         name: "text",
         label: "Text input",
+        required: true,
         description: "This is a text input",
       },
       {
@@ -44,7 +46,6 @@ export const BuildFormTextInputFields: Story = {
         name: "wysiwyg",
         label: "Wysiwyg / Rich Text input",
         description: "This is a wysiwyg where you can write rich text",
-        required: true,
       },
     ] as BaseField[],
   },
@@ -60,11 +61,13 @@ export const BuildFormWithCheckFields: Story = {
         name: "checkbox",
         label: "Checkbox input",
         description: "This is a checkbox input",
+        required: true,
       },
       {
         type: "radio_item",
         name: "radio_item",
         label: "Radio Item",
+        required: true,
         options: [
           {
             label: "Option 1",
@@ -80,6 +83,7 @@ export const BuildFormWithCheckFields: Story = {
         type: "switch",
         name: "switch",
         label: "Switch input",
+        required: true,
         description: "This is a switch input",
       },
     ] as BaseField[],
@@ -96,6 +100,7 @@ export const BuildFormSelectableFields: Story = {
         label: "Select input type",
         description: "This is a select input where you can choose an option",
         name: "select_fields",
+        required: true,
         options: [
           {
             label: "Option 1",
@@ -112,6 +117,7 @@ export const BuildFormSelectableFields: Story = {
         label: "Multi Select input type",
         description: "This is a select input where you can choose an option",
         name: "select_fields_multi",
+        required: true,
         options: [
           {
             label: "Option 1",
@@ -133,6 +139,7 @@ export const BuildFormSelectableFields: Story = {
         description:
           "This is a searchable select input where you can choose an option",
         name: "select_fields_searchable",
+        required: true,
         options: [
           {
             label: "Option 1",
@@ -156,6 +163,7 @@ export const BuildFormDateFields: Story = {
   args: {
     title: "Demo with date fields",
     description: "This is a demo with date fields",
+    required: true,
     fields: [
       {
         type: "date",

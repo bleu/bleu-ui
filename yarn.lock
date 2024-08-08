@@ -3411,6 +3411,7 @@ __metadata:
     "@storybook/addon-links": "npm:^8.2.7"
     "@storybook/addon-onboarding": "npm:^8.2.7"
     "@storybook/addon-styling-webpack": "npm:^1.0.0"
+    "@storybook/addon-themes": "npm:^8.2.8"
     "@storybook/addon-webpack5-compiler-swc": "npm:^1.0.5"
     "@storybook/blocks": "npm:^8.2.7"
     "@storybook/react": "npm:^8.2.7"
@@ -7065,6 +7066,17 @@ __metadata:
   peerDependencies:
     webpack: ^5.0.0
   checksum: 10c0/34f29998305bfc9778f19d349b3237053e5661e4bbb5b7aadc6cad52b355a1123210445eca839087b3921e0a1a0057d09054adeb2d2114db6ea978f5afc4e5c7
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-themes@npm:^8.2.8":
+  version: 8.2.8
+  resolution: "@storybook/addon-themes@npm:8.2.8"
+  dependencies:
+    ts-dedent: "npm:^2.0.0"
+  peerDependencies:
+    storybook: ^8.2.8
+  checksum: 10c0/3518f37c073d304035d78f80e02316e0d46e0a355c1407e7ddc0831a1555af1db1485394daf6fa58aa564fb12a0b0a776c5587b76ff2be76f028f053108822ae
   languageName: node
   linkType: hard
 
@@ -24208,21 +24220,21 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A^5.0.4#optional!builtin<compat/typescript>":
   version: 5.4.2
-  resolution: "typescript@patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=d69c25"
+  resolution: "typescript@patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=5adc0c"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/22e2f213c3ffe5960c5eaec6c95c04e01858fed57a94be250746f540b935b2c18c3c3fc80d3ab65d28c0aba1eb76284557ba3bf521d28caee811c44ba2b648f9
+  checksum: 10c0/fcf6658073d07283910d9a0e04b1d5d0ebc822c04dbb7abdd74c3151c7aa92fcddbac7d799404e358197222006ccdc4c0db219d223d2ee4ccd9e2b01333b49be
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@npm%3A^5.5.3#optional!builtin<compat/typescript>":
   version: 5.5.3
-  resolution: "typescript@patch:typescript@npm%3A5.5.3#optional!builtin<compat/typescript>::version=5.5.3&hash=d69c25"
+  resolution: "typescript@patch:typescript@npm%3A5.5.3#optional!builtin<compat/typescript>::version=5.5.3&hash=379a07"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/5a437c416251334deeaf29897157032311f3f126547cfdc4b133768b606cb0e62bcee733bb97cf74c42fe7268801aea1392d8e40988cdef112e9546eba4c03c5
+  checksum: 10c0/911c7811d61f57f07df79c4a35f56a0f426a65426a020e5fcd792f66559f399017205f5f10255329ab5a3d8c2d1f1d19530aeceffda70758a521fae1d469432e
   languageName: node
   linkType: hard
 

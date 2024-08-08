@@ -11,6 +11,7 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
     "@storybook/addon-styling-webpack",
+    "@storybook/addon-themes",
     {
       name: "@storybook/addon-styling-webpack",
 
@@ -56,4 +57,5 @@ const config: StorybookConfig = {
     return config;
   },
 };
+
 export default config;
