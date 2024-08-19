@@ -115,8 +115,9 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
     case "actions":
       return <DataTableRowActions row={row} column={column} />;
     case "image":
+      // eslint-disable-next-line no-case-declarations
       const image = row.getValue("image") || value;
-      if (image?.url){
+      if (image?.url) {
         return (
           <img
             className="aspect-ratio-1 size-16 rounded-sm object-contain"
@@ -124,9 +125,9 @@ export const renderDataTableCell = ({ filters, column, row, selectedRows }) => {
             alt={image.alt_text}
           />
         );
-      } else {
-        return <div className="max-w-[400px] truncate">{value}</div>;
       }
+      return <div className="max-w-[400px] truncate">{value}</div>;
+
     case "link":
       // eslint-disable-next-line no-case-declarations
       const url = row.getValue("details_url");
