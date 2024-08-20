@@ -57,7 +57,9 @@ export const InputField = withConditional<InputFieldProps>(
         }
         defaultValue={field.defaultValue}
         render={({ field: formField }) => (
-          <FormItem className={cn( field.mode === "time" ? "w-[240px]": "w-full")}>
+          <FormItem
+            className={cn(field.mode === "time" ? "w-[240px]" : "w-full")}
+          >
             <FormLabel tooltip={field.tooltip}>{field.label}</FormLabel>
             <FormDescription>{field.description}</FormDescription>
             <FormControl>
