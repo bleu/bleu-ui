@@ -160,7 +160,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
     "typescript-transform-paths": "^3.4.7",
-    "vite": "^5.3.3",
+    "vite": "^5.3.6",
     "vitest": "^1.6.0",
     "webpack": "^5.93.0",
     "yalc": "1.0.0-pre.53"
