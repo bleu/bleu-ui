@@ -25,9 +25,7 @@ class FetchError extends Error {
 
 const dataTableFetcher = async ([pathOrUrl, paramsObject]) => {
   const formattedParams = formatRequestParams(paramsObject);
-
   const fullUrl = constructFullUrlWithParams(pathOrUrl, formattedParams);
-
   const response = await fetch(fullUrl, {
     headers: {
       Accept: "application/json",
@@ -41,8 +39,7 @@ const dataTableFetcher = async ([pathOrUrl, paramsObject]) => {
 
 export function useSWRDataTable(path, initialSearch = {}, options = {}) {
   const { tableState, setTableState } = useTableState(initialSearch);
-
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     [
       path,
       {
@@ -63,5 +60,6 @@ export function useSWRDataTable(path, initialSearch = {}, options = {}) {
     isLoading,
     tableState,
     setTableState,
+    mutate,
   };
 }

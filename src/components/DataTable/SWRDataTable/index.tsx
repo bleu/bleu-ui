@@ -191,11 +191,13 @@ export function SWRDataTable({
   action,
   setSelectedData,
   selectedRows,
+  refetchTrigger,
 }: {
   action?: React.ReactNode;
   defaultParams?: Record<string, unknown>;
   fetchPath: string;
   hasDetails?: boolean;
+  refetchTrigger?: any;
   searchKey?: string;
   selectedRows?: any[];
   setSelectedData?: (data: any[]) => void;
@@ -209,10 +211,14 @@ export function SWRDataTable({
     ...defaultParams,
   };
 
-  const { data, error, tableState, setTableState } = useSWRDataTable(
+  const { data, error, tableState, setTableState, mutate } = useSWRDataTable(
     fetchPath,
     initialSearch
   );
+
+  React.useEffect(() => {
+    mutate();
+  }, [refetchTrigger, mutate]);
 
   const buildColumns = (tableColumns, tableFilters) =>
     buildDataTableColumns(tableColumns, tableFilters, selectedRows);
