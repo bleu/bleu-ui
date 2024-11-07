@@ -14,7 +14,7 @@ function Toaster({
   className,
   position = "top-right",
 }: {
-  className: string;
+  className?: string;
   position?: "top-right" | "top-left" | "bottom-right" | "bottom-left";
 }) {
   const { toasts } = useToast();
